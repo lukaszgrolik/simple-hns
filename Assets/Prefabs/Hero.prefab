@@ -82,6 +82,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &7100241729983102152
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5245012633806842369}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5245012633806842369
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7100241729983102152}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8513934410536018439}
+  - {fileID: 8513934410384738987}
+  m_Father: {fileID: 8513934410244259063}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7533027300574254644
 GameObject:
   m_ObjectHideFlags: 0
@@ -175,7 +207,7 @@ GameObject:
   - component: {fileID: 8513934409417788315}
   - component: {fileID: 8513934409417788316}
   m_Layer: 0
-  m_Name: hns-multi_29
+  m_Name: sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -188,9 +220,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8513934409417788314}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.2, y: 1.52, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.31, y: 1.5, z: -0}
+  m_LocalScale: {x: 0.91312456, y: 0.91312456, z: 0.9131247}
   m_Children: []
   m_Father: {fileID: 8513934410244259063}
   m_RootOrder: 2
@@ -236,7 +268,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 4941889759788221986, guid: 54fa77d5c4877db44a7e3c9f95a183b8, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -257,7 +289,7 @@ GameObject:
   - component: {fileID: 8513934410001347852}
   - component: {fileID: 8513934410001347853}
   m_Layer: 0
-  m_Name: hns-multi_31
+  m_Name: shield
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -270,12 +302,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8513934410001347851}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.15, y: 1.65, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.93, y: 1.6, z: -0}
+  m_LocalScale: {x: 0.91312456, y: 0.91312456, z: 0.9131247}
   m_Children: []
   m_Father: {fileID: 8513934410244259063}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8513934410001347853
 SpriteRenderer:
@@ -338,8 +370,10 @@ GameObject:
   m_Component:
   - component: {fileID: 8513934410244259063}
   - component: {fileID: 6855008718432359787}
+  - component: {fileID: 3477687220331639966}
+  - component: {fileID: 585570267989557641}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: HeroModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -356,10 +390,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1775, y: 0.1775, z: 0.1775}
   m_Children:
-  - {fileID: 8513934410384738987}
-  - {fileID: 8513934410536018439}
-  - {fileID: 8513934409417788315}
+  - {fileID: 5245012633806842369}
   - {fileID: 8513934410001347852}
+  - {fileID: 8513934409417788315}
   m_Father: {fileID: 8513934410253812706}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -376,6 +409,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tilt: 1
+--- !u!210 &3477687220331639966
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8513934410244259062}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!95 &585570267989557641
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8513934410244259062}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 593e392147da9b443b2c1fe280b3d328, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8513934410253812705
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,6 +449,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8513934410253812706}
   - component: {fileID: 6157917930455822637}
+  - component: {fileID: 9032583292257459270}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -420,7 +484,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.35
-  m_Speed: 3.5
+  m_Speed: 7
   m_Acceleration: 999
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -432,6 +496,18 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &9032583292257459270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8513934410253812705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30884c77dca81ce4c8ac731d2e5f50f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8513934410384738986
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,7 +519,7 @@ GameObject:
   - component: {fileID: 8513934410384738987}
   - component: {fileID: 8513934410384738988}
   m_Layer: 0
-  m_Name: hns-multi_28
+  m_Name: body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -456,12 +532,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8513934410384738986}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9131247, y: 0.91312444, z: 0.9131247}
   m_Children: []
-  m_Father: {fileID: 8513934410244259063}
-  m_RootOrder: 0
+  m_Father: {fileID: 5245012633806842369}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8513934410384738988
 SpriteRenderer:
@@ -525,7 +601,7 @@ GameObject:
   - component: {fileID: 8513934410536018439}
   - component: {fileID: 8513934410536018440}
   m_Layer: 0
-  m_Name: hns-multi_4
+  m_Name: shirt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -538,12 +614,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8513934410536018438}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.02, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.87, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 8513934410244259063}
-  m_RootOrder: 1
+  m_Father: {fileID: 5245012633806842369}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8513934410536018440
 SpriteRenderer:
