@@ -3,19 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
 public class AgentController : MonoBehaviour {
-    private NavMeshAgent navMeshAgent;
+    private AgentMovement agentMovement;
+    public AgentMovement Movement => agentMovement;
 
-    public void Setup() {
-        navMeshAgent = GetComponent<NavMeshAgent>();
-    }
+    private AgentHealth agentHealth;
+    public AgentHealth Health => agentHealth;
 
-    void Update() {
+    private Combat combat;
+    public Combat Combat => combat;
 
-    }
+    public void Setup(AgentsManager.Party party) {
+        agentMovement = GetComponent<AgentMovement>();
+        agentMovement.Setup();
 
-    public void SetDestination(Vector3 dest) {
-        navMeshAgent.SetDestination(dest);
+        agentHealth = GetComponent<AgentHealth>();
+        agentHealth.Setup();
+
+        combat = GetComponent<Combat>();
+        combat.Setup(this);
+
+        var patrol = GetComponent<Patrol>();
+        if (patrol) patrol.Setup(this);
     }
 }

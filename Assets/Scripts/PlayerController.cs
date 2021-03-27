@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
     private GameplayManager gameplayManager;
@@ -22,9 +23,34 @@ public class PlayerController : MonoBehaviour {
             groundHitFound = false;
         }
 
-        if (Input.GetMouseButton(0)) {
+        var agent = gameplayManager.ControlledAgent;
+
+        if (Input.GetKeyUp(KeyCode.F1)) {
+            SceneManager.LoadScene(0);
+        }
+
+        if (Input.GetKeyUp(KeyCode.A)) {
+            gameplayManager.SaveData.level += 1;
+            gameplayManager.Save();
+        }
+
+        if (Input.GetKeyUp(KeyCode.S)) {
+            gameplayManager.SaveData.health -= 15;
+            gameplayManager.Save();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space)) {
+            Debug.Log($"health: {gameplayManager.SaveData.health}, level: {gameplayManager.SaveData.level}");
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift)) {
+            if (Input.GetMouseButton(0)) {
+                agent.Combat.Attack(groundHitPoint);
+            }
+        }
+        else if (Input.GetMouseButton(0)) {
             if (groundHitFound) {
-                gameplayManager.ControlledAgent.SetDestination(groundHitPoint.With(y: 0));
+                agent.Movement.SetDestination(groundHitPoint.With(y: 0));
             }
         }
     }

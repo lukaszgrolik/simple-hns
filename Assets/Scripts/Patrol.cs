@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(NavMeshAgent))]
 public class Patrol : MonoBehaviour
 {
     private float radius = 5f;
@@ -17,20 +16,15 @@ public class Patrol : MonoBehaviour
     private float lastRemDist;
     private float sameRemDistTime = 0;
 
-    private NavMeshAgent navMeshAgent;
+    private AgentMovement agentMovement;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        navMeshAgent = GetComponent<NavMeshAgent>();
-        navMeshAgent.updateRotation = false;
+    public void Setup(AgentController agentController) {
+        agentMovement = agentController.Movement;
 
         GoToRandomDestination();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         // travelProgress += navMeshAgent.speed * Time.deltaTime / distance;
         remDist = Vector3.Distance(transform.position, nextDestination);
 
@@ -56,7 +50,7 @@ public class Patrol : MonoBehaviour
         nextDestination = GetRandomPos();
         // distance = Vector3.Distance(lastPos, nextDestination);
 
-        navMeshAgent.SetDestination(nextDestination);
+        agentMovement.SetDestination(nextDestination);
     }
 
     Vector3 GetRandomPos()
