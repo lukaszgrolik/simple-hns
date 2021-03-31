@@ -13,7 +13,7 @@ public class AgentsDetection : MonoBehaviour {
 
     void OnTriggerEnter(Collider info) {
         if (agentController.AliveEnemies.TryGetValue(info.gameObject, out var otherAgent)) {
-            Debug.Log($"entered: {otherAgent}");
+            // Debug.Log($"entered: {otherAgent}");
             if (agentController.VisibleEnemies.Contains(otherAgent) == false) {
                 agentController.AddVisibleEnemy(otherAgent);
             }
@@ -22,7 +22,7 @@ public class AgentsDetection : MonoBehaviour {
 
     void OnTriggerExit(Collider info) {
         if (agentController.AliveEnemies.TryGetValue(info.gameObject, out var otherAgent)) {
-            Debug.Log($"exited: {otherAgent}");
+            // Debug.Log($"exited: {otherAgent}");
 
             agentController.RemoveVisibleEnemy(otherAgent);
         }

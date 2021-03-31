@@ -8,12 +8,20 @@ using UnityEditor;
 #endif
 
 public class AgentHealth : MonoBehaviour {
-    private AgentController agentController;
+    AgentController agentController;
 
-    private int healthPoints = 100;
+    int maxPoints = 100;
+    public int MaxPoints => maxPoints;
+
+    int currentPoints = 100;
+    public int CurrentPoints => currentPoints;
+
+    public class HealthChangedEvent : UnityEvent<int, int> {}
+    HealthChangedEvent healthChanged = new HealthChangedEvent();
+    public HealthChangedEvent HealthChanged => healthChanged;
 
     public class DiedEvent : UnityEvent<AgentController> {}
-    private DiedEvent died = new DiedEvent();
+    DiedEvent died = new DiedEvent();
     public DiedEvent Died => died;
 
     public void Setup(AgentController agentController) {
@@ -21,10 +29,12 @@ public class AgentHealth : MonoBehaviour {
     }
 
     public void TakeDamage(int damagePoints) {
-        healthPoints -= damagePoints;
-        if (healthPoints < 0) healthPoints = 0;
+        currentPoints -= damagePoints;
+        if (currentPoints < 0) currentPoints = 0;
 
-        if (healthPoints == 0) {
+        healthChanged.Invoke(currentPoints, maxPoints);
+
+        if (currentPoints == 0) {
             Die();
         }
     }
@@ -35,7 +45,7 @@ public class AgentHealth : MonoBehaviour {
 
 #if UNITY_EDITOR
     void OnDrawGizmos() {
-        Handles.Label(transform.position, healthPoints.ToString());
+        Handles.Label(transform.position, currentPoints.ToString());
     }
 #endif
 }

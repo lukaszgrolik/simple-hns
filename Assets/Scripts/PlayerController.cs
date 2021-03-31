@@ -45,13 +45,18 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetKey(KeyCode.LeftShift)) {
             if (Input.GetMouseButton(0)) {
-                agent.Combat.Attack(groundHitPoint);
+                agent.Combat.SetActiveSkill(agent.Combat.Skills[0]);
+                agent.Combat.Attack(groundHitPoint.With(y: 0));
             }
         }
         else if (Input.GetMouseButton(0)) {
             if (groundHitFound) {
                 agent.Movement.SetDestination(groundHitPoint.With(y: 0));
             }
+        }
+        else if (Input.GetMouseButton(1)) {
+            agent.Combat.SetActiveSkill(agent.Combat.Skills[1]);
+            agent.Combat.Attack(groundHitPoint.With(y: 0));
         }
     }
 }

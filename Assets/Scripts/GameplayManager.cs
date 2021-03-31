@@ -8,6 +8,8 @@ public class GameplayManager : MonoBehaviour {
     private AgentsManager agentsManager;
     public AgentsManager AgentsManager => agentsManager;
 
+    [SerializeField] private GameUI gameUI;
+
     [SerializeField] private Camera cam;
     public Camera Cam => cam;
 
@@ -19,6 +21,12 @@ public class GameplayManager : MonoBehaviour {
 
     [SerializeField] private Transform movementTargetContainer;
     public Transform MovementTargetContainer => movementTargetContainer;
+
+    [SerializeField] private GameObject projectilePrefab;
+    public GameObject ProjectilePrefab => projectilePrefab;
+
+    [SerializeField] private Transform projectilesContainer;
+    public Transform ProjectilesContainer => projectilesContainer;
 
     [SerializeField] private AgentController controlledAgent;
     public AgentController ControlledAgent => controlledAgent;
@@ -54,6 +62,10 @@ public class GameplayManager : MonoBehaviour {
 
             agentsManager.RegisterAgent(agent);
         }
+
+        gameUI.SetPlayerHealth(controlledAgent.Health.CurrentPoints, controlledAgent.Health.MaxPoints);
+
+        controlledAgent.Health.HealthChanged.AddListener(OnControlledAgentHealthPointsChanged);
     }
 
     void Load() {
@@ -63,5 +75,9 @@ public class GameplayManager : MonoBehaviour {
 
     public void Save() {
         serializationManager.Save("character1", saveData);
+    }
+
+    void OnControlledAgentHealthPointsChanged(int currentPoints, int maxPoints) {
+        gameUI.SetPlayerHealth(currentPoints, maxPoints);
     }
 }

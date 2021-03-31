@@ -38,6 +38,7 @@ public class AgentsManager : MonoBehaviour {
     public IndexedList<GameObject, AgentController> Agents => agents;
 
     private IndexedList<GameObject, AgentController> aliveAgents = new IndexedList<GameObject, AgentController>();
+    public IndexedList<GameObject, AgentController> AliveAgents => aliveAgents;
 
     private Dictionary<Party, IndexedList<GameObject, AgentController>> aliveEnemies = new Dictionary<Party, IndexedList<GameObject, AgentController>>();
     public Dictionary<Party, IndexedList<GameObject, AgentController>> AliveEnemies => aliveEnemies;
