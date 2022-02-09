@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4259563530758700094}
   - component: {fileID: 1835564510693437108}
-  - component: {fileID: 3274008859226808681}
-  - component: {fileID: 8393287847111222580}
-  - component: {fileID: 1144287448098311409}
+  - component: {fileID: 4093495664782996362}
+  - component: {fileID: 4440019923833047164}
   m_Layer: 10
   m_Name: MovementTarget
   m_TagString: Untagged
@@ -50,8 +49,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &3274008859226808681
-SphereCollider:
+--- !u!136 &4093495664782996362
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -60,23 +59,11 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 0.05
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &8393287847111222580
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7944165876805180820}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.05
-  m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &1144287448098311409
+  m_Height: 0.6
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.25, z: 0}
+--- !u!114 &4440019923833047164
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
