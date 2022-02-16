@@ -3,20 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace MonoBehaviors
-{
-    public class Combat : MonoBehaviour
-    {
-        AgentController agentController;
-        public AgentController AgentController => agentController;
+// namespace MonoBehaviors
+// {
+//     public class Combat : MonoBehaviour
+//     {
+//         AgentController agentController;
+//         public AgentController AgentController => agentController;
 
-        [SerializeField] Transform projectileSpawnPoint;
-        public Transform ProjectileSpawnPoint => projectileSpawnPoint;
+//         [SerializeField] Transform projectileSpawnPoint;
+//         public Transform ProjectileSpawnPoint => projectileSpawnPoint;
 
-        public void Setup(AgentController agentController)
-        {
-            this.agentController = agentController;
+//         public void Setup(AgentController agentController)
+//         {
+//             this.agentController = agentController;
 
-        }
-    }
-}
+//         }
+//     }
+// }

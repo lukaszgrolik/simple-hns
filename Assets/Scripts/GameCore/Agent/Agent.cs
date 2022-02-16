@@ -5,10 +5,11 @@ using UnityEngine.Events;
 
 namespace GameCore
 {
-    public class Agent
+    public class Agent : ITransformScript
     {
         public readonly AgentHealth health;
         public readonly AgentMovement movement;
+        public readonly AgentPartyMember partyMember;
         public readonly AgentCombat combat;
 
         public readonly DataDefinition.Agent agentData;
@@ -16,13 +17,15 @@ namespace GameCore
         public Agent(
             AgentHealth health,
             AgentMovement movement,
+            AgentPartyMember partyMember,
             AgentCombat combat,
             DataDefinition.Agent agentData
         )
         {
             this.health = health;
             this.movement = movement;
-            this.combat = combat;
+            this.partyMember = partyMember;
+            this.combat = combat; combat.SetAgent(this);
             this.agentData = agentData;
         }
 

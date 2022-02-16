@@ -5,6 +5,29 @@ using UnityEngine.AI;
 
 namespace MonoBehaviors
 {
+    public class Game : GameCore.Game
+    {
+        private GameplayManager gameplayManager;
+
+        public Game(GameplayManager gameplayManager)
+        {
+            this.gameplayManager = gameplayManager;
+        }
+
+        public override Vector3 GetPosition(GameCore.ITransformScript script)
+        {
+            return gameplayManager.Dict_transformScript_object[script].transform.position;
+        }
+
+        public override Vector3 GetProjectileSpawnPosition(GameCore.Agent agent)
+        {
+            var agentCtrl = gameplayManager.Dict_agent_agentController[agent];
+            var projSpawnPoint = agentCtrl.GetComponentInChildren<AgentProjectileSpawnPoint>();
+
+            return projSpawnPoint.transform.position;
+        }
+    }
+
     public class GameplayManager : MonoBehaviour
     {
         public static readonly List<DataDefinition.Agent> enemies = new List<DataDefinition.Agent>()
@@ -35,17 +58,23 @@ namespace MonoBehaviors
         [SerializeField] private Transform movementTargetContainer;
         public Transform MovementTargetContainer => movementTargetContainer;
 
+        [SerializeField] private GameObject agentPrefab;
+        public GameObject AgentPrefab => agentPrefab;
+
         [SerializeField] private GameObject projectilePrefab;
         public GameObject ProjectilePrefab => projectilePrefab;
+
+        [SerializeField] private Transform agentsContainer;
+        public Transform AgentsContainer => agentsContainer;
 
         [SerializeField] private Transform projectilesContainer;
         public Transform ProjectilesContainer => projectilesContainer;
 
-        [SerializeField] private AgentController controlledAgent;
-        public AgentController ControlledAgent => controlledAgent;
+        [SerializeField] private GameObject controlledAgentObject;
+        public GameObject ControlledAgentObject => controlledAgentObject;
 
         [System.Serializable]
-        class AgentPrefab
+        class AgentModelPrefab
         {
             [SerializeField] private AgentType agentType;
             public AgentType AgentType => agentType;
@@ -54,7 +83,7 @@ namespace MonoBehaviors
             public GameObject Prefab => prefab;
         }
 
-        [SerializeField] private List<AgentPrefab> agentPrefabs;
+        [SerializeField] private List<AgentModelPrefab> agentModelPrefabs;
 
         //
         //
@@ -68,43 +97,68 @@ namespace MonoBehaviors
         private SaveData saveData;
         public SaveData SaveData => saveData;
 
-        private readonly List<GameCore.Agent> agents = new List<GameCore.Agent>();
+        // private readonly Dictionary<GameObject, GameCore.ITransformScript> objectScripts = new Dictionary<GameObject, GameCore.ITransformScript>();
+        // public IReadOnlyDictionary<GameObject, GameCore.ITransformScript> ObjectScripts => objectScripts;
 
-        private readonly Dictionary<GameObject, AgentController> agentObjectsControllers = new Dictionary<GameObject, AgentController>();
-        public IReadOnlyDictionary<GameObject, AgentController> AgentObjectsControllers => agentObjectsControllers;
+        private readonly Dictionary<GameCore.ITransformScript, GameObject> dict_transformScript_object = new Dictionary<GameCore.ITransformScript, GameObject>();
+        public IReadOnlyDictionary<GameCore.ITransformScript, GameObject> Dict_transformScript_object => dict_transformScript_object;
+
+        private readonly Dictionary<GameObject, AgentController> dict_object_agentCtrl = new Dictionary<GameObject, AgentController>();
+        public IReadOnlyDictionary<GameObject, AgentController> Dict_object_agentCtrl => dict_object_agentCtrl;
+
+        private readonly Dictionary<GameCore.Agent, AgentController> dict_agent_agentCtrl = new Dictionary<GameCore.Agent, AgentController>();
+        public IReadOnlyDictionary<GameCore.Agent, AgentController> Dict_agent_agentController => dict_agent_agentCtrl;
+
+        private AgentController controlledAgent;
+        public AgentController ControlledAgent => controlledAgent;
+
+        private Game game;
 
         void Start()
         {
-            playerController = GetComponent<PlayerController>();
-            playerController.Setup(this);
-
-            var cameraFollow = GetComponent<CameraFollow>();
-            cameraFollow.Setup(this, controlledAgent.transform);
-
             // agentsManager = GetComponent<AgentsManager>();
             // agentsManager.Setup();
 
             serializationManager.Setup();
             Load();
 
-            var agentMBs = FindObjectsOfType<AgentController>();
-            foreach (var agentMB in agentMBs)
+            this.game = new Game(this);
+            game.agentSpawned.AddListener(OnAgentSpawned);
+            game.projectileSpawned.AddListener(OnProjectileSpawned);
+
+            var sceneAgents = FindObjectsOfType<SceneAgent>();
+            foreach (var sceneAgent in sceneAgents)
             {
-                // if (agent == controlledAgent) {
-                //     agent.Setup(this, agentsManager.Parties[0]);
-                //     // @todo update controlledAgent health from saveData
-                // }
-                // else {
-                //     agent.Setup(this, agentsManager.Parties[1]);
-                // }
+                // // if (agent == controlledAgent) {
+                // //     agent.Setup(this, agentsManager.Parties[0]);
+                // //     // @todo update controlledAgent health from saveData
+                // // }
+                // // else {
+                // //     agent.Setup(this, agentsManager.Parties[1]);
+                // // }
 
-                // agentsManager.RegisterAgent(agent);
+                // // agentsManager.RegisterAgent(agent);
 
-                var (agent, agentObj, agentCtrl) = SetupAgent(agentMB);
+                // var (agent, agentObj, agentCtrl) = SetupAgent(game, sceneAgent);
 
-                agents.Add(agent);
-                agentObjectsControllers.Add(agentObj, agentCtrl);
+                // agents.Add(agent);
+                // agentObjectsControllers.Add(agentObj, agentCtrl);
+                var agent = CreateAgent(game, sceneAgent.AgentType);
+                game.SpawnAgent(agent, sceneAgent.transform.position, Quaternion.identity);
+
+                if (controlledAgentObject == sceneAgent.gameObject)
+                {
+                    controlledAgent = dict_agent_agentCtrl[agent];
+                }
+
+                Destroy(sceneAgent.gameObject);
             }
+
+            playerController = GetComponent<PlayerController>();
+            playerController.Setup(this);
+
+            var cameraFollow = GetComponent<CameraFollow>();
+            cameraFollow.Setup(this, controlledAgent.transform);
 
             var ctrlAgentHealth = controlledAgent.Agent.health;
 
@@ -115,56 +169,156 @@ namespace MonoBehaviors
 
         void Update()
         {
-            for (int i = 0; i < agents.Count; i++)
-                agents[i].OnUpdate(Time.deltaTime);
+            if (game == null) return;
+
+            game.OnUpdate(Time.deltaTime);
         }
 
-        (GameCore.Agent, GameObject, AgentController) SetupAgent(AgentController agentMB)
+        // (GameCore.Agent, GameObject, AgentController) SetupAgent(GameCore.Game game, AgentController agentMB)
+        // {
+        //     DataDefinition.Agent agentData = null;
+        //     if (agentMB.AgentType == AgentType.Hero)
+        //         agentData = DataInstance.Agents.hero;
+        //     else if (agentMB.AgentType == AgentType.Demon)
+        //         agentData = DataInstance.Agents.demon;
+
+        //     var agentMovement = new GameCore.AgentMovement();
+        //     var agent = new GameCore.Agent(
+        //         health: new GameCore.AgentHealth(),
+        //         movement: agentMovement,
+        //         combat: new GameCore.AgentCombat(
+        //             game: game,
+        //             movement: agentMovement
+        //         ),
+        //         agentData: agentData
+        //     );
+
+        //     agentMB.Setup(
+        //         gameplayManager: this,
+        //         agent: agent
+        //     );
+
+        //     var agentPrefab = agentPrefabs.Find(p => p.AgentType == agentMB.AgentType);
+        //     if (agentPrefab == null) throw new System.Exception($"agent prefab not found: {agentMB.AgentType}");
+
+        //     var agentObj = Instantiate(agentPrefab.Prefab, agentMB.transform);
+        //     var agentCtrl = agentObj.GetComponent<AgentController>();
+
+        //     var spriteModel = agentObj.GetComponentInChildren<SpriteModel>();
+        //     if (spriteModel == null) throw new System.Exception($"agent SpriteModel not found: {agentMB.AgentType}");
+
+        //     // @todo magic number
+        //     spriteModel.transform.rotation = Quaternion.Euler(37.5f, 45f, 0f);
+
+        //     // @todo reassign values before removing collider and navMeshAgent
+
+        //     var modelCollider = agentObj.GetComponent<Collider>();
+        //     Destroy(modelCollider);
+
+        //     var modelNavMeshAgent = agentObj.GetComponent<NavMeshAgent>();
+        //     Destroy(modelNavMeshAgent);
+
+        //     Destroy(spriteModel);
+
+        //     return (agent, agentObj, agentCtrl);
+        // }
+
+        GameCore.Agent CreateAgent(GameCore.Game game, AgentType agentType)
         {
             DataDefinition.Agent agentData = null;
-            if (agentMB.AgentType == AgentType.Hero)
+            if (agentType == AgentType.Hero)
                 agentData = DataInstance.Agents.hero;
-            else if (agentMB.AgentType == AgentType.Demon)
+            else if (agentType == AgentType.Demon)
                 agentData = DataInstance.Agents.demon;
 
             var agentMovement = new GameCore.AgentMovement();
             var agent = new GameCore.Agent(
                 health: new GameCore.AgentHealth(),
                 movement: agentMovement,
+                partyMember: new GameCore.AgentPartyMember(
+                    game: game
+                ),
                 combat: new GameCore.AgentCombat(
+                    game: game,
                     movement: agentMovement
                 ),
                 agentData: agentData
             );
 
-            agentMB.Setup(
+            return agent;
+        }
+
+        (GameObject, AgentController) InstantiateAgent(
+            // GameCore.Game game,
+            GameCore.Agent agent,
+            AgentType agentType,
+            Vector3 pos,
+            Quaternion rot
+        )
+        {
+            var agentObj = Instantiate(agentPrefab, pos, rot, agentsContainer);
+            var agentCtrl = agentObj.GetComponent<AgentController>();
+
+            agentCtrl.Setup(
                 gameplayManager: this,
                 agent: agent
             );
 
-            var agentPrefab = agentPrefabs.Find(p => p.AgentType == agentMB.AgentType);
-            if (agentPrefab == null) throw new System.Exception($"agent prefab not found: {agentMB.AgentType}");
+            var agentModelPrefab = agentModelPrefabs.Find(p => p.AgentType == agentType);
+            if (agentModelPrefab == null) throw new System.Exception($"agent prefab not found: {agentType}");
 
-            var agentObj = Instantiate(agentPrefab.Prefab, agentMB.transform);
-            var agentCtrl = agentObj.GetComponent<AgentController>();
+            var agentModelObj = Instantiate(agentModelPrefab.Prefab, agentCtrl.transform);
 
-            var spriteModel = agentObj.GetComponentInChildren<SpriteModel>();
-            if (spriteModel == null) throw new System.Exception($"agent SpriteModel not found: {agentMB.AgentType}");
+            var spriteModel = agentModelObj.GetComponentInChildren<SpriteModel>();
+            if (spriteModel == null) throw new System.Exception($"agent SpriteModel not found: {agentType}");
 
             // @todo magic number
             spriteModel.transform.rotation = Quaternion.Euler(37.5f, 45f, 0f);
 
             // @todo reassign values before removing collider and navMeshAgent
 
-            var modelCollider = agentObj.GetComponent<Collider>();
+            var modelCollider = agentModelObj.GetComponent<Collider>();
             Destroy(modelCollider);
 
-            var modelNavMeshAgent = agentObj.GetComponent<NavMeshAgent>();
+            var modelNavMeshAgent = agentModelObj.GetComponent<NavMeshAgent>();
             Destroy(modelNavMeshAgent);
 
             Destroy(spriteModel);
 
-            return (agent, agentObj, agentCtrl);
+            return (agentModelObj, agentCtrl);
+        }
+
+        void OnAgentSpawned(GameCore.Agent agent, Vector3 pos, Quaternion rot)
+        {
+            AgentType agentType = AgentType.Hero;
+            if (agent.agentData == DataInstance.Agents.hero)
+                agentType = AgentType.Hero;
+            else if (agent.agentData == DataInstance.Agents.demon)
+                agentType = AgentType.Demon;
+
+            // var obj = GameObject.Instantiate(AgentPrefab, pos, rot, agentsContainer);
+            // var projectile = obj.GetComponent<Projectile>();
+            // projectile.Setup(combat.AgentController);
+            var (agentObj, agentCtrl) = InstantiateAgent(agent, agentType, pos, rot);
+
+            //     agents.Add(agent);
+            //     agentObjectsControllers.Add(agentObj, agentCtrl);
+
+            dict_transformScript_object.Add(agent, agentObj);
+            dict_object_agentCtrl.Add(agentObj, agentCtrl);
+            dict_agent_agentCtrl.Add(agent, agentCtrl);
+        }
+
+        void OnProjectileSpawned(GameCore.Projectile projectile, Vector3 pos, Quaternion rot)
+        {
+            var projectileObject = GameObject.Instantiate(ProjectilePrefab, pos, rot, ProjectilesContainer);
+            var projectileMb = projectileObject.GetComponent<Projectile>();
+            projectileMb.Setup(
+                // originatorAgentCtrl: combat.AgentController,
+                projectile: projectile
+            );
+
+            dict_transformScript_object.Add(projectile, projectileObject);
         }
 
         void Load()

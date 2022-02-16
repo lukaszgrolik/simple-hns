@@ -19,6 +19,10 @@ namespace MonoBehaviors
 
         void Update()
         {
+            if (gameplayManager == null) return;
+            if (gameplayManager.Cam == null) return;
+            if (gameplayManager.ControlledAgent == null) return;
+
             var ray = gameplayManager.Cam.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out var hitInfo, 100, gameplayManager.GroundLayerMask))
             {

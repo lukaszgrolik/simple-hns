@@ -11,6 +11,9 @@ namespace GameCore
         int currentPoints = 100;
         public int CurrentPoints => currentPoints;
 
+        public bool isAlive => currentPoints > 0;
+        public bool isDead => isAlive == false;
+
         public class HealthChangedEvent : UnityEvent<int, int> { }
         public readonly HealthChangedEvent healthChanged = new HealthChangedEvent();
 

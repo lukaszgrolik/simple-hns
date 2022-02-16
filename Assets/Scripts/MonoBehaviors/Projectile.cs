@@ -6,11 +6,16 @@ namespace MonoBehaviors
 {
     public class Projectile : MonoBehaviour
     {
-        AgentController agentController;
+        private AgentController originatorAgentCtrl;
+        private GameCore.Projectile projectile;
 
-        public void Setup(AgentController agentController)
+        public void Setup(
+            AgentController originatorAgentCtrl,
+            GameCore.Projectile projectile
+        )
         {
-            this.agentController = agentController;
+            this.originatorAgentCtrl = originatorAgentCtrl;
+            this.projectile = projectile;
 
             var rb = GetComponent<Rigidbody>();
             rb.velocity = transform.forward * 15;
@@ -18,14 +23,20 @@ namespace MonoBehaviors
             Destroy(gameObject, 3);
         }
 
-        void OnTriggerEnter(Collider info)
+        void OnTriggerEnter(Collider coll)
         {
-            // if (agentController.AliveEnemies.TryGetValue(info.gameObject, out var agent))
-            // {
-            //     agent.Health.TakeDamage(10);
+            // disappear/explode on prop and enemy contact (go through allies and other projectiles)
+            // damage enemy
 
-            //     Destroy(gameObject);
-            // }
+            // agent.AliveEnemies.Contains(otherAgent);
+            if (originatorAgentCtrl.AliveEnemies.TryGetValue(coll.gameObject, out var agent))
+            {
+                projectile.OnCollidedWithEnemy(otherAgent);
+
+                Destroy(gameObject);
+            }
+
+            // projectile.OnCollidedWithProp();
         }
     }
 }

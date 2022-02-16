@@ -5,8 +5,14 @@ using UnityEngine.Events;
 
 namespace GameCore
 {
+    // public interface ISkillAgentCombatGame :
+    // {
+
+    // }
+
     public abstract class Skill
     {
+
         protected AgentCombat combat;
 
         public Skill(AgentCombat combat)
@@ -64,26 +70,31 @@ namespace GameCore
         void SpawnProjectile(Vector3 targetPos)
         {
             Debug.Log("SpawnProjectile");
-            // var gm = combat.AgentController.GameplayManager;
+
+            var game = combat.game;
 
             // var origin = combat.transform;
-            // var originPos = origin.position;
-            // // var dir = (targetPos - originPos).normalized;
-            // // var angle = Vector3.Angle(dir, origin.forward);
-            // var angle = 90 - Mathf.Atan2(targetPos.z - originPos.z, targetPos.x - originPos.x) * Mathf.Rad2Deg;
-            // // Debug.Log(angle);
+            var originPos = game.GetPosition(combat.Agent);
+            // var dir = (targetPos - originPos).normalized;
+            // var angle = Vector3.Angle(dir, origin.forward);
+            var angle = 90 - Mathf.Atan2(targetPos.z - originPos.z, targetPos.x - originPos.x) * Mathf.Rad2Deg;
+            // Debug.Log(angle);
 
-            // // var angle = Vector3.Angle(originPos, targetPos);
-            // var rot = Quaternion.Euler(0f, angle, 0f);
-            // var obj = GameObject.Instantiate(gm.ProjectilePrefab, combat.ProjectileSpawnPoint.position, rot, gm.ProjectilesContainer);
-            // var projectile = obj.GetComponent<Projectile>();
-            // projectile.Setup(combat.AgentController);
+            // var angle = Vector3.Angle(originPos, targetPos);
+            var rot = Quaternion.Euler(0f, angle, 0f);
+
+            var projectile = new Projectile();
+
+            // game.SpawnProjectile(combat.ProjectileSpawnPoint.position, rot);
+            game.SpawnProjectile(projectile, game.GetProjectileSpawnPosition(combat.Agent), rot);
         }
     }
 
     public class AgentCombat
     {
-        private AgentMovement movement;
+        public readonly Game game;
+        private Agent agent; public Agent Agent => agent;
+        public readonly AgentMovement movement;
 
         private readonly List<Skill> skills = new List<Skill>();
         public IReadOnlyList<Skill> Skills => skills;
@@ -95,9 +106,11 @@ namespace GameCore
         private float attackInProgressElapsed = 0;
 
         public AgentCombat(
+            Game game,
             AgentMovement movement
         )
         {
+            this.game = game;
             this.movement = movement;
 
             var skills = new List<Skill>(){
@@ -107,6 +120,12 @@ namespace GameCore
             this.skills.AddRange(skills);
 
             activeSkill = skills[0];
+        }
+
+        public void SetAgent(Agent agent)
+        {
+            if (this.agent != null) throw new System.Exception("agent already set");
+            this.agent = agent;
         }
 
         public void OnUpdate(float deltaTime)
