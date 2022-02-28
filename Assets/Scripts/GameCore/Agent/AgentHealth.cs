@@ -1,36 +1,35 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace GameCore
 {
-    public class AgentHealth
+    public class AgentHealth : AgentComponent
     {
+        // @todo magic number
         int maxPoints = 100;
         public int MaxPoints => maxPoints;
 
-        int currentPoints = 100;
+        int currentPoints;
         public int CurrentPoints => currentPoints;
 
         public bool isAlive => currentPoints > 0;
         public bool isDead => isAlive == false;
 
-        public class HealthChangedEvent : UnityEvent<int, int> { }
-        public readonly HealthChangedEvent healthChanged = new HealthChangedEvent();
+        public event System.Action<int, int> healthChanged;
 
-        public class DiedEvent : UnityEvent<AgentHealth> { }
-        public readonly DiedEvent died = new DiedEvent();
+        public event System.Action<Agent> died;
 
         public AgentHealth()
         {
-
+            currentPoints = maxPoints;
         }
 
         public void TakeDamage(int damagePoints)
         {
             currentPoints -= damagePoints;
             if (currentPoints < 0) currentPoints = 0;
+            // Debug.Log($"took damage: {damagePoints} ({currentPoints}/{maxPoints})");
 
-            healthChanged.Invoke(currentPoints, maxPoints);
+            healthChanged?.Invoke(currentPoints, maxPoints);
 
             if (currentPoints == 0)
             {
@@ -40,7 +39,7 @@ namespace GameCore
 
         void Die()
         {
-            died.Invoke(this);
+            died?.Invoke(agent);
         }
     }
 }

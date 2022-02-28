@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Events;
 
 namespace MonoBehaviors
 {
@@ -84,6 +83,12 @@ namespace MonoBehaviors
                 agentController: this,
                 navMeshAgent: navMeshAgent
             );
+
+            var agentDetection = GetComponentInChildren<AgentsDetection>();
+            agentDetection.Setup(
+                gameplayManager: gameplayManager,
+                agent: agent
+            );
         }
 
         public void SetDestination(Vector2 pos) { agent.movement.SetDestination(pos); }
@@ -99,7 +104,7 @@ namespace MonoBehaviors
         //     visibleEnemies.Add(agent);
         //     agent.Health.died.AddListener(OnEnemyDied);
 
-        //     enemyDetected.Invoke();
+        //     enemyDetected?.Invoke();
         // }
 
         // public void RemoveVisibleEnemy(AgentController agent)
@@ -107,7 +112,7 @@ namespace MonoBehaviors
         //     visibleEnemies.Remove(agent);
         //     agent.Health.died.RemoveListener(OnEnemyDied);
 
-        //     enemyLost.Invoke();
+        //     enemyLost?.Invoke();
         // }
 
         // void OnEnemyDied(AgentController agent)

@@ -1,17 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace GameCore
 {
     public class AgentsParty
     {
         public readonly Game game;
-        private DataDefinition.AgentParty agentPartyData; public DataDefinition.AgentParty AgentPartyData => agentPartyData;
 
-        private readonly List<Agent> enemies = new List<Agent>();
-        private readonly List<Agent> aliveEnemies = new List<Agent>();
+        private DataDefinition.AgentParty agentPartyData;
+        public DataDefinition.AgentParty AgentPartyData => agentPartyData;
+
+        public readonly List<Agent> enemies = new List<Agent>();
+        public readonly List<Agent> aliveEnemies = new List<Agent>();
 
         public AgentsParty(
             Game game,
@@ -21,20 +23,20 @@ namespace GameCore
             this.game = game;
             this.agentPartyData = agentPartyData;
 
-            game.agentSpawned.AddListener(OnAgentSpawned);
+            game.agentSpawned += OnAgentSpawned;
         }
 
         void OnAgentSpawned(Agent agent, Vector3 pos, Quaternion rot)
         {
-            if (agent.partyMember.AgentPartyData != agentPartyData)
+            if (agent.partyMember.AgentsParty != this)
             {
                 enemies.Add(agent);
 
                 if (agent.health.isAlive) aliveEnemies.Add(agent);
             }
 
-            agent.partyMember.changedParty.AddListener(OnAgentChangedParty);
-            agent.health.died.AddListener(OnAgentDied);
+            agent.partyMember.changedParty += OnAgentChangedParty;
+            agent.health.died += OnAgentDied;
         }
 
         void OnAgentChangedParty(Agent agent)
@@ -42,13 +44,13 @@ namespace GameCore
             // become enemy
             // become ally
 
-            if (enemies.Contains(agent) == false && agent.partyMember.AgentPartyData != agentPartyData)
+            if (enemies.Contains(agent) == false && agent.partyMember.AgentsParty != this)
             {
                 enemies.Add(agent);
 
                 if (agent.health.isAlive) aliveEnemies.Add(agent);
             }
-            else if (enemies.Contains(agent) && agent.partyMember.AgentPartyData == agentPartyData)
+            else if (enemies.Contains(agent) && agent.partyMember.AgentsParty == this)
             {
                 enemies.Remove(agent);
 

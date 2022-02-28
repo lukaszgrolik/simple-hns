@@ -4,47 +4,55 @@ using UnityEngine;
 
 namespace MonoBehaviors
 {
-    // public class AgentsDetection : MonoBehaviour
-    // {
-    //     private AgentController agentController;
+    public class AgentsDetection : MonoBehaviour
+    {
+        private GameplayManager gameplayManager;
+        private GameCore.Agent agent;
+        //     private AgentController agentController;
 
-    //     public void Setup(AgentController agentController)
-    //     {
-    //         this.agentController = agentController;
+        // public void Setup(AgentController agentController)
+        public void Setup(
+            GameplayManager gameplayManager,
+            GameCore.Agent agent
+        )
+        {
+            this.gameplayManager = gameplayManager;
+            this.agent = agent;
+            // this.agentController = agentController;
 
-    //         agentController.Health.died.AddListener(OnAgentDied);
-    //     }
+            // agentController.Health.died.AddListener(OnAgentDied);
+        }
 
-    //     void OnTriggerEnter(Collider info)
-    //     {
-    //         if (agentController.AliveEnemies.TryGetValue(info.gameObject, out var otherAgent))
-    //         {
-    //             // Debug.Log($"entered: {otherAgent}");
-    //             if (agentController.VisibleEnemies.Contains(otherAgent) == false)
-    //             {
-    //                 agentController.AddVisibleEnemy(otherAgent);
-    //             }
-    //         }
-    //     }
+        void OnTriggerEnter(Collider coll)
+        {
+            var isAgent = gameplayManager.Dict_object_agentCtrl.TryGetValue(coll.gameObject, out var otherAgent);
+            // Debug.Log($"isAgent: {isAgent}");
 
-    //     void OnTriggerExit(Collider info)
-    //     {
-    //         if (agentController.AliveEnemies.TryGetValue(info.gameObject, out var otherAgent))
-    //         {
-    //             // Debug.Log($"exited: {otherAgent}");
+            if (isAgent)
+            {
+                agent.agentDetection.AddDetectedAgent(otherAgent.Agent);
+            }
+        }
 
-    //             agentController.RemoveVisibleEnemy(otherAgent);
-    //         }
-    //     }
+        void OnTriggerExit(Collider coll)
+        {
+            var isAgent = gameplayManager.Dict_object_agentCtrl.TryGetValue(coll.gameObject, out var otherAgent);
+            // Debug.Log($"isAgent: {isAgent}");
 
-    //     void OnAgentDied(AgentController agent)
-    //     {
-    //         var colls = GetComponents<Collider>();
+            if (isAgent)
+            {
+                agent.agentDetection.RemoveDetectedAgent(otherAgent.Agent);
+            }
+        }
 
-    //         for (int i = 0; i < colls.Length; i++)
-    //         {
-    //             colls[i].enabled = false;
-    //         }
-    //     }
-    // }
+        //     void OnAgentDied(AgentController agent)
+        //     {
+        //         var colls = GetComponents<Collider>();
+
+        //         for (int i = 0; i < colls.Length; i++)
+        //         {
+        //             colls[i].enabled = false;
+        //         }
+        //     }
+    }
 }

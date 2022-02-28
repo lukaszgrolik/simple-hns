@@ -3,6 +3,7 @@ namespace GameCore.SM
     public class StateMachine
     {
         private State state;
+        public State State => state;
 
         public void SetState(State nextState)
         {

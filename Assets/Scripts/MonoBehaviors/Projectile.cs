@@ -6,37 +6,53 @@ namespace MonoBehaviors
 {
     public class Projectile : MonoBehaviour
     {
-        private AgentController originatorAgentCtrl;
+        private GameplayManager gameplayManager;
+        // private AgentController originatorAgentCtrl;
         private GameCore.Projectile projectile;
 
         public void Setup(
-            AgentController originatorAgentCtrl,
+            GameplayManager gameplayManager,
+            // AgentController originatorAgentCtrl,
             GameCore.Projectile projectile
         )
         {
-            this.originatorAgentCtrl = originatorAgentCtrl;
+            this.gameplayManager = gameplayManager;
+            // this.originatorAgentCtrl = originatorAgentCtrl;
             this.projectile = projectile;
+
+            // projectile.disappeared += OnProjectileDisappeared;
 
             var rb = GetComponent<Rigidbody>();
             rb.velocity = transform.forward * 15;
 
-            Destroy(gameObject, 3);
         }
 
         void OnTriggerEnter(Collider coll)
         {
+            // Debug.Log($"coll: {coll.name}");
+
             // disappear/explode on prop and enemy contact (go through allies and other projectiles)
             // damage enemy
 
             // agent.AliveEnemies.Contains(otherAgent);
-            if (originatorAgentCtrl.AliveEnemies.TryGetValue(coll.gameObject, out var agent))
-            {
-                projectile.OnCollidedWithEnemy(otherAgent);
+            // if (originatorAgentCtrl.Agent.partyMember.AgentsParty.AliveEnemies.TryGetValue(coll.gameObject, out var agent))
+            var isAgent = gameplayManager.Dict_object_agentCtrl.TryGetValue(coll.gameObject, out var otherAgent);
+            // Debug.Log($"isAgent: {isAgent}");
 
-                Destroy(gameObject);
+            if (isAgent)
+            {
+                if (projectile.IsAliveEnemy(otherAgent.Agent))
+                {
+                    projectile.OnCollidedWithEnemy(otherAgent.Agent);
+                }
             }
 
             // projectile.OnCollidedWithProp();
         }
+
+        // void OnProjectileDisappeared()
+        // {
+
+        // }
     }
 }

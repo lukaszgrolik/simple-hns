@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace GameCore
 {
@@ -23,7 +22,7 @@ namespace GameCore
         public abstract void Trigger(Vector3 targetPos);
     }
 
-    // public class MeleeAttackSkill : Skill
+    // public sealed class MeleeAttackSkill : Skill
     // {
     //     public MeleeAttackSkill(AgentCombat combat) : base(combat)
     //     {
@@ -55,7 +54,7 @@ namespace GameCore
     //     }
     // }
 
-    public class ProjectileSkill : Skill
+    public sealed class ProjectileSkill : Skill
     {
         public ProjectileSkill(AgentCombat combat) : base(combat)
         {
@@ -83,17 +82,19 @@ namespace GameCore
             // var angle = Vector3.Angle(originPos, targetPos);
             var rot = Quaternion.Euler(0f, angle, 0f);
 
-            var projectile = new Projectile();
+            var projectile = new Projectile(
+                game: game,
+                originatorAgent: combat.Agent
+            );
 
             // game.SpawnProjectile(combat.ProjectileSpawnPoint.position, rot);
             game.SpawnProjectile(projectile, game.GetProjectileSpawnPosition(combat.Agent), rot);
         }
     }
 
-    public class AgentCombat
+    public class AgentCombat : AgentComponent
     {
         public readonly Game game;
-        private Agent agent; public Agent Agent => agent;
         public readonly AgentMovement movement;
 
         private readonly List<Skill> skills = new List<Skill>();
@@ -120,12 +121,6 @@ namespace GameCore
             this.skills.AddRange(skills);
 
             activeSkill = skills[0];
-        }
-
-        public void SetAgent(Agent agent)
-        {
-            if (this.agent != null) throw new System.Exception("agent already set");
-            this.agent = agent;
         }
 
         public void OnUpdate(float deltaTime)

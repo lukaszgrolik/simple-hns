@@ -1,32 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace GameCore
 {
-    public class AgentPartyMember
+    public class AgentPartyMember : AgentComponent
     {
         public readonly Game game;
-        private DataDefinition.AgentParty agentPartyData; public DataDefinition.AgentParty AgentPartyData => agentPartyData;
 
-        public class ChangedPartyEvent : UnityEvent<Agent> { }
-        public readonly ChangedPartyEvent changedParty = new ChangedPartyEvent();
+        private AgentsParty agentsParty;
+        public AgentsParty AgentsParty => agentsParty;
+
+        public event System.Action<Agent> changedParty;
 
         public AgentPartyMember(
             Game game,
-            DataDefinition.AgentParty agentPartyData
+            AgentsParty agentsParty
         )
         {
             this.game = game;
-            this.agentPartyData = agentPartyData;
+            this.agentsParty = agentsParty;
         }
 
-        void SetParty(DataDefinition.AgentParty agentPartyData)
+        void SetParty(AgentsParty agentsParty)
         {
-            this.agentPartyData = agentPartyData;
+            this.agentsParty = agentsParty;
 
-            changedParty.Invoke(agent);
+            changedParty?.Invoke(agent);
         }
     }
 }

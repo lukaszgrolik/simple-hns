@@ -100,6 +100,9 @@ namespace MonoBehaviors
         // private readonly Dictionary<GameObject, GameCore.ITransformScript> objectScripts = new Dictionary<GameObject, GameCore.ITransformScript>();
         // public IReadOnlyDictionary<GameObject, GameCore.ITransformScript> ObjectScripts => objectScripts;
 
+        // private readonly Dictionary<GameObject, GameCore.ITransformScript> dict_object_transformScript = new Dictionary<GameObject, GameCore.ITransformScript>();
+        // public IReadOnlyDictionary<GameObject, GameCore.ITransformScript> Dict_object_transformScript => dict_object_transformScript;
+
         private readonly Dictionary<GameCore.ITransformScript, GameObject> dict_transformScript_object = new Dictionary<GameCore.ITransformScript, GameObject>();
         public IReadOnlyDictionary<GameCore.ITransformScript, GameObject> Dict_transformScript_object => dict_transformScript_object;
 
@@ -113,6 +116,10 @@ namespace MonoBehaviors
         public AgentController ControlledAgent => controlledAgent;
 
         private Game game;
+        public Game Game => game;
+
+        private GameCore.AgentsParty heroParty;
+        private GameCore.AgentsParty monsterParty;
 
         void Start()
         {
@@ -123,8 +130,18 @@ namespace MonoBehaviors
             Load();
 
             this.game = new Game(this);
-            game.agentSpawned.AddListener(OnAgentSpawned);
-            game.projectileSpawned.AddListener(OnProjectileSpawned);
+            game.projectileSpawned += OnProjectileSpawned;
+            game.projectileDeleted += OnProjectileDeleted;
+            game.agentSpawned += OnAgentSpawned;
+
+            this.heroParty = new GameCore.AgentsParty(
+                game: game,
+                agentPartyData: new DataDefinition.AgentParty("good party")
+            );
+            this.monsterParty = new GameCore.AgentsParty(
+                game: game,
+                agentPartyData: new DataDefinition.AgentParty("evil party")
+            );
 
             var sceneAgents = FindObjectsOfType<SceneAgent>();
             foreach (var sceneAgent in sceneAgents)
@@ -164,7 +181,7 @@ namespace MonoBehaviors
 
             gameUI.SetPlayerHealth(ctrlAgentHealth.CurrentPoints, ctrlAgentHealth.MaxPoints);
 
-            ctrlAgentHealth.healthChanged.AddListener(OnControlledAgentHealthPointsChanged);
+            ctrlAgentHealth.healthChanged += OnControlledAgentHealthPointsChanged;
         }
 
         void Update()
@@ -226,22 +243,36 @@ namespace MonoBehaviors
         GameCore.Agent CreateAgent(GameCore.Game game, AgentType agentType)
         {
             DataDefinition.Agent agentData = null;
+            GameCore.AgentsParty agentsParty = null;
+            GameCore.AgentControl agentControl = null;
             if (agentType == AgentType.Hero)
+            {
                 agentData = DataInstance.Agents.hero;
+                agentsParty = heroParty;
+                agentControl = new GameCore.AgentPlayerControl();
+            }
             else if (agentType == AgentType.Demon)
+            {
                 agentData = DataInstance.Agents.demon;
+                agentsParty = monsterParty;
+                agentControl = new GameCore.AgentAIControl();
+            }
 
             var agentMovement = new GameCore.AgentMovement();
             var agent = new GameCore.Agent(
+                game: game,
                 health: new GameCore.AgentHealth(),
                 movement: agentMovement,
                 partyMember: new GameCore.AgentPartyMember(
-                    game: game
+                    game: game,
+                    agentsParty: agentsParty
                 ),
+                agentDetection: new GameCore.AgentDetection(),
                 combat: new GameCore.AgentCombat(
                     game: game,
                     movement: agentMovement
                 ),
+                control: agentControl,
                 agentData: agentData
             );
 
@@ -285,7 +316,7 @@ namespace MonoBehaviors
 
             Destroy(spriteModel);
 
-            return (agentModelObj, agentCtrl);
+            return (agentObj, agentCtrl);
         }
 
         void OnAgentSpawned(GameCore.Agent agent, Vector3 pos, Quaternion rot)
@@ -304,9 +335,12 @@ namespace MonoBehaviors
             //     agents.Add(agent);
             //     agentObjectsControllers.Add(agentObj, agentCtrl);
 
+            // dict_object_transformScript.Add(agentObj, agent);
             dict_transformScript_object.Add(agent, agentObj);
             dict_object_agentCtrl.Add(agentObj, agentCtrl);
             dict_agent_agentCtrl.Add(agent, agentCtrl);
+
+            agent.Setup();
         }
 
         void OnProjectileSpawned(GameCore.Projectile projectile, Vector3 pos, Quaternion rot)
@@ -314,11 +348,20 @@ namespace MonoBehaviors
             var projectileObject = GameObject.Instantiate(ProjectilePrefab, pos, rot, ProjectilesContainer);
             var projectileMb = projectileObject.GetComponent<Projectile>();
             projectileMb.Setup(
+                gameplayManager: this,
                 // originatorAgentCtrl: combat.AgentController,
                 projectile: projectile
             );
 
+            // dict_object_transformScript.Add(projectileObject, projectile);
             dict_transformScript_object.Add(projectile, projectileObject);
+        }
+
+        void OnProjectileDeleted(GameCore.Projectile projectile)
+        {
+            var projectileObject = dict_transformScript_object[projectile];
+
+            Destroy(projectileObject);
         }
 
         void Load()

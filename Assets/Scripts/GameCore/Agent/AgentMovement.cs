@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace GameCore
 {
@@ -11,14 +10,9 @@ namespace GameCore
         private Vector2 currentDestination;
         public Vector2 CurrentDestination => currentDestination;
 
-        public class DestinationChangedEvent : UnityEvent<Vector2> { }
-        public readonly DestinationChangedEvent destinationChanged = new DestinationChangedEvent();
-
-        public class CancelledEvent : UnityEvent { }
-        public readonly CancelledEvent cancelled = new CancelledEvent();
-
-        public class ArrivedEvent : UnityEvent { }
-        public readonly ArrivedEvent arrived = new ArrivedEvent();
+        public event System.Action<Vector2> destinationChanged;
+        public event System.Action cancelled;
+        public event System.Action arrived;
 
         public void SetDestination(Vector2 pos)
         {
@@ -32,14 +26,14 @@ namespace GameCore
         {
             isChangingDestination = false;
 
-            cancelled.Invoke();
+            cancelled?.Invoke();
         }
 
         public void MarkArrived()
         {
             isChangingDestination = false;
 
-            arrived.Invoke();
+            arrived?.Invoke();
         }
     }
 }

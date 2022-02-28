@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.AI;
 
 namespace MonoBehaviors
@@ -26,8 +25,8 @@ namespace MonoBehaviors
 
             navMeshAgent.updateRotation = false;
 
-            agentController.Agent.movement.destinationChanged.AddListener(OnDestinationChanged);
-            agentController.Agent.movement.cancelled.AddListener(OnCancelled);
+            agentController.Agent.movement.destinationChanged += OnDestinationChanged;
+            agentController.Agent.movement.cancelled += OnCancelled;
         }
 
         // public void SetDestination(Vector3 dest)
