@@ -41,6 +41,58 @@ namespace MonoBehaviors
         }
     }
 
+    public class GameplayManagerGameUI
+    {
+        private GameUI gameUI;
+        private AgentController controlledAgent;
+
+        public GameplayManagerGameUI(GameUI gameUI)
+        {
+            this.gameUI = gameUI;
+        }
+
+        public void SetControlledAgent(AgentController agentController)
+        {
+            this.controlledAgent = agentController;
+        }
+
+        public void OnControlledAgentHealthPointsChanged(GameCore.Agent agent)
+        {
+            gameUI.SetPlayerHealth(agent.health.CurrentPoints, agent.health.MaxPoints);
+        }
+
+        public void OnPlayerAgentMouseEntered(GameCore.Agent agent)
+        {
+            if (controlledAgent.Agent.partyMember.AgentsParty.IsAliveEnemy(agent))
+            {
+                gameUI.ShowEnemyHealth(agent.agentData.Name, agent.health.CurrentPoints, agent.health.MaxPoints);
+
+                agent.health.healthChanged += OnPlayerHoveredAgentHealthChanged;
+            }
+        }
+
+        public void OnPlayerAgentMouseLeft(GameCore.Agent agent)
+        {
+            gameUI.HideEnemyHealth();
+
+            agent.health.healthChanged -= OnPlayerHoveredAgentHealthChanged;
+        }
+
+        void OnPlayerHoveredAgentHealthChanged(GameCore.Agent agent)
+        {
+            if (agent.health.CurrentPoints == 0)
+            {
+                gameUI.HideEnemyHealth();
+
+                agent.health.healthChanged -= OnPlayerHoveredAgentHealthChanged;
+            }
+            else
+            {
+                gameUI.UpdateEnemyHealth(agent.health.CurrentPoints, agent.health.MaxPoints);
+            }
+        }
+    }
+
     public class GameplayManager : MonoBehaviour
     {
         public static readonly List<DataDefinition.Agent> enemies = new List<DataDefinition.Agent>()
@@ -59,11 +111,16 @@ namespace MonoBehaviors
 
         [SerializeField] private GameUI gameUI;
 
+        private GameplayManagerGameUI gameplayManagerGameUI;
+
         [SerializeField] private Camera cam;
         public Camera Cam => cam;
 
         [SerializeField] private LayerMask groundLayerMask;
         public LayerMask GroundLayerMask => groundLayerMask;
+
+        [SerializeField] private LayerMask agentLayerMask;
+        public LayerMask AgentLayerMask => agentLayerMask;
 
         [SerializeField] private GameObject movementTargetPrefab;
         public GameObject MovementTargetPrefab => movementTargetPrefab;
@@ -139,6 +196,8 @@ namespace MonoBehaviors
             // agentsManager = GetComponent<AgentsManager>();
             // agentsManager.Setup();
 
+            this.gameplayManagerGameUI = new GameplayManagerGameUI(gameUI);
+
             serializationManager.Setup();
             Load();
 
@@ -179,6 +238,7 @@ namespace MonoBehaviors
                 if (controlledAgentObject == sceneAgent.gameObject)
                 {
                     controlledAgent = dict_agent_agentCtrl[agent];
+                    gameplayManagerGameUI.SetControlledAgent(controlledAgent);
                 }
 
                 Destroy(sceneAgent.gameObject);
@@ -187,14 +247,18 @@ namespace MonoBehaviors
             playerController = GetComponent<PlayerController>();
             playerController.Setup(this);
 
+            playerController.MouseHover.agentMouseEntered += gameplayManagerGameUI.OnPlayerAgentMouseEntered;
+            playerController.MouseHover.agentMouseLeft += gameplayManagerGameUI.OnPlayerAgentMouseLeft;
+
             var cameraFollow = GetComponent<CameraFollow>();
             cameraFollow.Setup(this, controlledAgent.transform);
 
             var ctrlAgentHealth = controlledAgent.Agent.health;
 
             gameUI.SetPlayerHealth(ctrlAgentHealth.CurrentPoints, ctrlAgentHealth.MaxPoints);
+            gameUI.HideEnemyHealth();
 
-            ctrlAgentHealth.healthChanged += OnControlledAgentHealthPointsChanged;
+            ctrlAgentHealth.healthChanged += gameplayManagerGameUI.OnControlledAgentHealthPointsChanged;
         }
 
         void Update()
@@ -386,11 +450,6 @@ namespace MonoBehaviors
         public void Save()
         {
             serializationManager.Save("character1", saveData);
-        }
-
-        void OnControlledAgentHealthPointsChanged(int currentPoints, int maxPoints)
-        {
-            gameUI.SetPlayerHealth(currentPoints, maxPoints);
         }
     }
 }

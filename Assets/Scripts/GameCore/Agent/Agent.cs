@@ -43,6 +43,8 @@ namespace GameCore
             this.game = game;
 
             this.health = health;
+            health.SetAgent(this);
+
             this.movement = movement;
 
             this.partyMember = partyMember;

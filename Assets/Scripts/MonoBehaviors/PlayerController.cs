@@ -5,16 +5,73 @@ using UnityEngine.SceneManagement;
 
 namespace MonoBehaviors
 {
-    public class PlayerController : MonoBehaviour
+    public class PlayerControllerMouseHover
     {
         private GameplayManager gameplayManager;
 
         private bool groundHitFound;
+        public bool GroundHitFound => groundHitFound;
+
         private Vector3 groundHitPoint;
+        public Vector3 GroundHitPoint => groundHitPoint;
+
+        private bool agentHitFound;
+        private GameCore.Agent agentHitAgent;
+
+        public event System.Action<GameCore.Agent> agentMouseEntered;
+        public event System.Action<GameCore.Agent> agentMouseLeft;
+
+        public PlayerControllerMouseHover(GameplayManager gameplayManager)
+        {
+            this.gameplayManager = gameplayManager;
+        }
+
+        public void OnUpdate()
+        {
+            var ray = gameplayManager.Cam.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out var groundHitInfo, 100, gameplayManager.GroundLayerMask))
+            {
+                groundHitFound = true;
+                groundHitPoint = groundHitInfo.point;
+            }
+            else
+            {
+                groundHitFound = false;
+            }
+
+            if (Physics.Raycast(ray, out var agentHitInfo, 100, gameplayManager.AgentLayerMask))
+            {
+                if (agentHitFound == false)
+                {
+                    agentHitFound = true;
+                    agentHitAgent = gameplayManager.Dict_object_agentCtrl[agentHitInfo.collider.gameObject].Agent;
+
+                    agentMouseEntered?.Invoke(agentHitAgent);
+                }
+            }
+            else
+            {
+                if (agentHitFound)
+                {
+                    agentMouseLeft?.Invoke(agentHitAgent);
+                }
+
+                agentHitFound = false;
+            }
+        }
+    }
+
+    public class PlayerController : MonoBehaviour
+    {
+        private GameplayManager gameplayManager;
+
+        private PlayerControllerMouseHover mouseHover;
+        public PlayerControllerMouseHover MouseHover => mouseHover;
 
         public void Setup(GameplayManager gameplayManager)
         {
             this.gameplayManager = gameplayManager;
+            this.mouseHover = new PlayerControllerMouseHover(gameplayManager);
         }
 
         void Update()
@@ -23,16 +80,7 @@ namespace MonoBehaviors
             if (gameplayManager.Cam == null) return;
             if (gameplayManager.ControlledAgent == null) return;
 
-            var ray = gameplayManager.Cam.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out var hitInfo, 100, gameplayManager.GroundLayerMask))
-            {
-                groundHitFound = true;
-                groundHitPoint = hitInfo.point;
-            }
-            else
-            {
-                groundHitFound = false;
-            }
+            mouseHover.OnUpdate();
 
             var agentCtrl = gameplayManager.ControlledAgent;
 
@@ -63,21 +111,21 @@ namespace MonoBehaviors
                 if (Input.GetMouseButton(0))
                 {
                     agentCtrl.SetActiveSkill(agentCtrl.skills[0]);
-                    agentCtrl.Attack(groundHitPoint.With(y: 0));
+                    agentCtrl.Attack(mouseHover.GroundHitPoint.With(y: 0));
                 }
             }
             else if (Input.GetMouseButton(0))
             {
-                if (groundHitFound)
+                if (mouseHover.GroundHitFound)
                 {
-                    // agent.Movement.SetDestination(groundHitPoint.With(y: 0));
-                    agentCtrl.SetDestination(new Vector2(groundHitPoint.x, groundHitPoint.z));
+                    // agent.Movement.SetDestination(mouseHover.GroundHitPoint.With(y: 0));
+                    agentCtrl.SetDestination(new Vector2(mouseHover.GroundHitPoint.x, mouseHover.GroundHitPoint.z));
                 }
             }
             else if (Input.GetMouseButton(1))
             {
                 agentCtrl.SetActiveSkill(agentCtrl.skills[1]);
-                agentCtrl.Attack(groundHitPoint.With(y: 0));
+                agentCtrl.Attack(mouseHover.GroundHitPoint.With(y: 0));
             }
         }
     }

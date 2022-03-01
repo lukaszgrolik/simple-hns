@@ -5,16 +5,16 @@ namespace GameCore
     public class AgentHealth : AgentComponent
     {
         // @todo magic number
-        int maxPoints = 100;
+        private int maxPoints = 100;
         public int MaxPoints => maxPoints;
 
-        int currentPoints;
+        private int currentPoints;
         public int CurrentPoints => currentPoints;
 
         public bool isAlive => currentPoints > 0;
         public bool isDead => isAlive == false;
 
-        public event System.Action<int, int> healthChanged;
+        public event System.Action<GameCore.Agent> healthChanged;
 
         public event System.Action<Agent> died;
 
@@ -29,7 +29,7 @@ namespace GameCore
             if (currentPoints < 0) currentPoints = 0;
             // Debug.Log($"took damage: {damagePoints} ({currentPoints}/{maxPoints})");
 
-            healthChanged?.Invoke(currentPoints, maxPoints);
+            healthChanged?.Invoke(agent);
 
             if (currentPoints == 0)
             {
