@@ -26,6 +26,16 @@ namespace GameCore
             game.agentSpawned += OnAgentSpawned;
         }
 
+        public bool IsEnemy(Agent agent)
+        {
+            return enemies.Contains(agent);
+        }
+
+        public bool IsAliveEnemy(Agent agent)
+        {
+            return aliveEnemies.Contains(agent);
+        }
+
         void OnAgentSpawned(Agent agent, Vector3 pos, Quaternion rot)
         {
             if (agent.partyMember.AgentsParty != this)

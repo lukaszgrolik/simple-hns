@@ -41,10 +41,7 @@ namespace MonoBehaviors
 
             if (isAgent)
             {
-                if (projectile.IsAliveEnemy(otherAgent.Agent))
-                {
-                    projectile.OnCollidedWithEnemy(otherAgent.Agent);
-                }
+                projectile.OnCollidedWithAgent(otherAgent.Agent);
             }
 
             // projectile.OnCollidedWithProp();

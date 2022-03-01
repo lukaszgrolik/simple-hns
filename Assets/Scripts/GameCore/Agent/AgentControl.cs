@@ -1,3 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
 namespace GameCore
 {
     public abstract class AgentControl : AgentComponent
@@ -43,6 +47,7 @@ namespace GameCore
 
         void HandleEnemiesNumberChange()
         {
+            // Debug.Log($"aliveEnemies.Count: {agent.agentDetection.aliveEnemies.Count}");
             if (agent.agentDetection.aliveEnemies.Count > 0)
             {
                 sm.SetState(new AgentAI.States.Engage(sm, agent));

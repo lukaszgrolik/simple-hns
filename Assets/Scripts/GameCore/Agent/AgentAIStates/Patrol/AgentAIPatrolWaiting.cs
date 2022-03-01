@@ -7,35 +7,32 @@ namespace GameCore.AgentAI.States.PatrolStates
     class Waiting : SM.State, IAgentAITickableState
     {
         private Agent agent;
+        private EngineTime engineTime;
 
-        private IEnumerator waitCoroutine;
+        private float startTime;
 
         public Waiting(SM.StateMachine stateMachine, Agent agent) : base(stateMachine)
         {
             this.agent = agent;
+            this.engineTime = agent.game.engineTime;
         }
 
         public override void Enter()
         {
-            // waitCoroutine = Wait();
-            // agent.StartCoroutine(waitCoroutine);
+            startTime = engineTime.Time;
         }
 
         public override void Exit()
         {
-            // if (waitCoroutine != null) agent.StopCoroutine(waitCoroutine);
+
         }
 
         public void OnUpdate()
         {
-
+            if (engineTime.SecondsFrom(startTime) >= 1)
+            {
+                stateMachine.SetState(new PatrolStates.Moving(stateMachine, agent));
+            }
         }
-
-        // private IEnumerator Wait()
-        // {
-        //     yield return new WaitForSeconds(1);
-
-        //     stateMachine.SetState(new PatrolStates.Moving(stateMachine, agent));
-        // }
     }
 }

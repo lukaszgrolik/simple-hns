@@ -36,16 +36,15 @@ namespace GameCore
             }
         }
 
-        public bool IsAliveEnemy(Agent enemyAgent)
+        public void OnCollidedWithAgent(Agent otherAgent)
         {
-            return originatorAgent.partyMember.AgentsParty.aliveEnemies.Contains(enemyAgent);
-        }
+            if (originatorAgent.partyMember.AgentsParty.IsAliveEnemy(otherAgent))
+            {
+                otherAgent.health.TakeDamage(10);
+                // Debug.Log($"health: {otherAgent.health.CurrentPoints}");
 
-        public void OnCollidedWithEnemy(Agent enemyAgent)
-        {
-            enemyAgent.health.TakeDamage(10);
-
-            Disappear();
+                Disappear();
+            }
         }
 
         void Disappear()

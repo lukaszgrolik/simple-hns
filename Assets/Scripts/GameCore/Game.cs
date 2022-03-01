@@ -27,8 +27,8 @@ namespace GameCore
     {
         public readonly EngineTime engineTime = new EngineTime();
 
-        private readonly List<GameCore.Agent> agents = new List<GameCore.Agent>();
-        private readonly List<GameCore.Projectile> projectiles = new List<GameCore.Projectile>();
+        private readonly List<Agent> agents = new List<Agent>();
+        private readonly List<Projectile> projectiles = new List<Projectile>();
 
         // public class ProjectileSpawnedEvent : UnityEvent<Projectile, Vector3, Quaternion> {}
         // public readonly ProjectileSpawnedEvent projectileSpawned = new ProjectileSpawnedEvent();
@@ -45,7 +45,8 @@ namespace GameCore
         }
 
         abstract public Vector3 GetPosition(ITransformScript script);
-        abstract public Vector3 GetProjectileSpawnPosition(GameCore.Agent agent);
+        abstract public Vector3 GetProjectileSpawnPosition(Agent agent);
+        abstract public List<Agent> FindAgentsInRadius(Vector3 pos, float radius);
 
         public void OnUpdate(float deltaTime)
         {

@@ -22,37 +22,46 @@ namespace GameCore
         public abstract void Trigger(Vector3 targetPos);
     }
 
-    // public sealed class MeleeAttackSkill : Skill
-    // {
-    //     public MeleeAttackSkill(AgentCombat combat) : base(combat)
-    //     {
+    public sealed class MeleeAttackSkill : Skill
+    {
+        public MeleeAttackSkill(AgentCombat combat) : base(combat)
+        {
 
-    //     }
+        }
 
-    //     public override void Trigger(Vector3 targetPos)
-    //     {
-    //         DealDamage(targetPos);
-    //     }
+        public override void Trigger(Vector3 targetPos)
+        {
+            DealDamage(targetPos);
+        }
 
-    //     void DealDamage(Vector3 targetPos)
-    //     {
-    //         var damageDistance = 5;
-    //         var damageAngle = 90;
-    //         var agentControllers = Utils.FindColliders<AgentController>(combat.transform.position, damageDistance);
+        void DealDamage(Vector3 targetPos)
+        {
+            var game = combat.game;
 
-    //         for (int i = 0; i < agentControllers.Count; i++)
-    //         {
-    //             var agentController = agentControllers[i];
-    //             var dir = (agentController.transform.position - targetPos).normalized;
-    //             var angle = Vector3.Angle(dir, targetPos);
+            var damageDistance = 2;
+            var damageAngle = 90;
+            // var agentControllers = Utils.FindColliders<AgentController>(combat.transform.position, damageDistance);
+            var otherAgents = game.FindAgentsInRadius(game.GetPosition(combat.Agent), damageDistance);
 
-    //             if (angle <= damageAngle)
-    //             {
-    //                 agentController.TakeDamage(5);
-    //             }
-    //         }
-    //     }
-    // }
+
+            for (int i = 0; i < otherAgents.Count; i++)
+            {
+                var otherAgent = otherAgents[i];
+
+                var isAliveEnemy = combat.Agent.partyMember.AgentsParty.IsAliveEnemy(otherAgent);
+                if (!isAliveEnemy) continue;
+
+                // var dir = (agent.transform.position - targetPos).normalized;
+                var dir = (game.GetPosition(otherAgent) - targetPos).normalized;
+                var angle = Vector3.Angle(dir, targetPos);
+
+                if (angle <= damageAngle)
+                {
+                    otherAgent.health.TakeDamage(5);
+                }
+            }
+        }
+    }
 
     public sealed class ProjectileSkill : Skill
     {
@@ -68,7 +77,7 @@ namespace GameCore
 
         void SpawnProjectile(Vector3 targetPos)
         {
-            Debug.Log("SpawnProjectile");
+            // Debug.Log("SpawnProjectile");
 
             var game = combat.game;
 
@@ -115,7 +124,7 @@ namespace GameCore
             this.movement = movement;
 
             var skills = new List<Skill>(){
-                // new MeleeAttackSkill(this),
+                new MeleeAttackSkill(this),
                 new ProjectileSkill(this),
             };
             this.skills.AddRange(skills);
@@ -156,10 +165,10 @@ namespace GameCore
             activeSkill.Trigger(pos);
         }
 
-        // public void Attack(AgentController agentController)
-        // {
-        //     Attack(agentController.transform.position);
-        // }
+        public void Attack(Agent agent)
+        {
+            Attack(game.GetPosition(agent));
+        }
 
         // IEnumerator HandleAttackEnd()
         // {

@@ -68,6 +68,11 @@ namespace GameCore
         public void OnUpdate(float deltaTime)
         {
             combat.OnUpdate(deltaTime);
+
+            if (control is AgentAIControl agentAIControl)
+            {
+                agentAIControl.OnUpdate();
+            }
         }
     }
 }

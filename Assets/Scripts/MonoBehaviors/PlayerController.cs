@@ -76,8 +76,8 @@ namespace MonoBehaviors
             }
             else if (Input.GetMouseButton(1))
             {
-                // agent.Combat.SetActiveSkill(agent.Combat.Skills[1]);
-                // agent.Combat.Attack(groundHitPoint.With(y: 0));
+                agentCtrl.SetActiveSkill(agentCtrl.skills[1]);
+                agentCtrl.Attack(groundHitPoint.With(y: 0));
             }
         }
     }

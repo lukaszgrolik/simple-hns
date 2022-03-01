@@ -26,6 +26,19 @@ namespace MonoBehaviors
 
             return projSpawnPoint.transform.position;
         }
+
+        public override List<GameCore.Agent> FindAgentsInRadius(Vector3 pos, float radius)
+        {
+            var agents = new List<GameCore.Agent>();
+            var agentControllers = Utils.FindColliders<AgentController>(pos, radius);
+
+            for (int i = 0; i < agentControllers.Count; i++)
+            {
+                agents.Add(agentControllers[i].Agent);
+            }
+
+            return agents;
+        }
     }
 
     public class GameplayManager : MonoBehaviour
