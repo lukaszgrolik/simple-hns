@@ -30,6 +30,8 @@ namespace GameCore
         private readonly List<Agent> agents = new List<Agent>();
         private readonly List<Projectile> projectiles = new List<Projectile>();
 
+        public readonly QuestSystem questSystem;
+
         // public class ProjectileSpawnedEvent : UnityEvent<Projectile, Vector3, Quaternion> {}
         // public readonly ProjectileSpawnedEvent projectileSpawned = new ProjectileSpawnedEvent();
         public event System.Action<Projectile, Vector3, Quaternion> projectileSpawned;
@@ -39,9 +41,11 @@ namespace GameCore
         // public readonly AgentSpawnedEvent agentSpawned = new AgentSpawnedEvent();
         public event System.Action<Agent, Vector3, Quaternion> agentSpawned;
 
-        public Game()
+        public Game(List<Quest> quests)
         {
-
+            this.questSystem = new QuestSystem(
+                quests: quests
+            );
         }
 
         abstract public Vector3 GetPosition(ITransformScript script);

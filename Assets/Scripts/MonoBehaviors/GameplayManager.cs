@@ -9,7 +9,7 @@ namespace MonoBehaviors
     {
         private GameplayManager gameplayManager;
 
-        public Game(GameplayManager gameplayManager)
+        public Game(GameplayManager gameplayManager, List<GameCore.Quest> quests) : base(quests)
         {
             this.gameplayManager = gameplayManager;
         }
@@ -201,7 +201,18 @@ namespace MonoBehaviors
             serializationManager.Setup();
             Load();
 
-            this.game = new Game(this);
+            this.game = new Game(
+                gameplayManager: this,
+                quests: new List<GameCore.Quest>(){
+                    new GameCore.Quest(
+                        title: "Bla bla",
+                        description: "some desc",
+                        tasks: new List<GameCore.QuestTask>(){
+                            new GameCore.QuestTaskKillEnemies()
+                        }
+                    )
+                }
+            );
             game.projectileSpawned += OnProjectileSpawned;
             game.projectileDeleted += OnProjectileDeleted;
             game.agentSpawned += OnAgentSpawned;
@@ -259,6 +270,15 @@ namespace MonoBehaviors
             gameUI.HideEnemyHealth();
 
             ctrlAgentHealth.healthChanged += gameplayManagerGameUI.OnControlledAgentHealthPointsChanged;
+
+            //
+            //
+            //
+
+            var firstQuest = game.questSystem.quests[0];
+            var firstTask = firstQuest.tasks[0] as GameCore.QuestTaskKillEnemies;
+            firstTask.AddAgents(controlledAgent.Agent.partyMember.AgentsParty.enemies);
+            firstQuest.Start();
         }
 
         void Update()
