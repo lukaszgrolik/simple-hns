@@ -20,7 +20,9 @@ namespace GameCore
     {
         public readonly Game game;
 
+        public readonly AgentEquipment equipment;
         public readonly AgentHealth health;
+        public readonly AgentDrop drop;
         public readonly AgentMovement movement;
         public readonly AgentPartyMember partyMember;
         public readonly AgentDetection agentDetection;
@@ -31,7 +33,9 @@ namespace GameCore
 
         public Agent(
             Game game,
+            AgentEquipment equipment,
             AgentHealth health,
+            AgentDrop drop,
             AgentMovement movement,
             AgentPartyMember partyMember,
             AgentDetection agentDetection,
@@ -42,8 +46,13 @@ namespace GameCore
         {
             this.game = game;
 
+            this.equipment = equipment;
+            equipment.SetAgent(this);
+
             this.health = health;
             health.SetAgent(this);
+
+            this.drop = drop;
 
             this.movement = movement;
 

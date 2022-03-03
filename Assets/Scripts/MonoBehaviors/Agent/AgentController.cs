@@ -5,13 +5,6 @@ using UnityEngine.AI;
 
 namespace MonoBehaviors
 {
-    [System.Serializable]
-    public enum AgentType
-    {
-        Hero,
-        Demon
-    }
-
     public class AgentController : MonoBehaviour
     {
         private GameplayManager gameplayManager;

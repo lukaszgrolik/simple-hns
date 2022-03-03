@@ -30,19 +30,17 @@ namespace GameCore
         private readonly List<Agent> agents = new List<Agent>();
         private readonly List<Projectile> projectiles = new List<Projectile>();
 
+        public readonly ItemSystem itemSystem;
         public readonly QuestSystem questSystem;
 
-        // public class ProjectileSpawnedEvent : UnityEvent<Projectile, Vector3, Quaternion> {}
-        // public readonly ProjectileSpawnedEvent projectileSpawned = new ProjectileSpawnedEvent();
         public event System.Action<Projectile, Vector3, Quaternion> projectileSpawned;
         public event System.Action<Projectile> projectileDeleted;
 
-        // public class AgentSpawnedEvent : UnityEvent<Agent, Vector3, Quaternion> {}
-        // public readonly AgentSpawnedEvent agentSpawned = new AgentSpawnedEvent();
         public event System.Action<Agent, Vector3, Quaternion> agentSpawned;
 
         public Game(List<Quest> quests)
         {
+            this.itemSystem = new ItemSystem();
             this.questSystem = new QuestSystem(
                 quests: quests
             );
@@ -61,6 +59,38 @@ namespace GameCore
 
             for (int i = 0; i < projectiles.Count; i++)
                 projectiles[i].OnUpdate(deltaTime);
+        }
+
+        public GameCore.Agent CreateAgent(
+            DataDefinition.Agent agentData,
+            GameCore.AgentsParty agentsParty,
+            GameCore.AgentControl agentControl
+        )
+        {
+            var agentHealth = new GameCore.AgentHealth();
+            var agentMovement = new GameCore.AgentMovement();
+            var agent = new GameCore.Agent(
+                game: this,
+                equipment: new GameCore.AgentEquipment(),
+                health: agentHealth,
+                drop: new GameCore.AgentDrop(
+                    health: agentHealth
+                ),
+                movement: agentMovement,
+                partyMember: new GameCore.AgentPartyMember(
+                    game: this,
+                    agentsParty: agentsParty
+                ),
+                agentDetection: new GameCore.AgentDetection(),
+                combat: new GameCore.AgentCombat(
+                    game: this,
+                    movement: agentMovement
+                ),
+                control: agentControl,
+                agentData: agentData
+            );
+
+            return agent;
         }
 
         public void SpawnAgent(Agent agent, Vector3 pos, Quaternion rot)

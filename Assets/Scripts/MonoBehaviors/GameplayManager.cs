@@ -5,6 +5,20 @@ using UnityEngine.AI;
 
 namespace MonoBehaviors
 {
+    [System.Serializable]
+    public enum AgentType
+    {
+        Hero,
+        Demon
+    }
+
+    [System.Serializable]
+    public enum ItemType
+    {
+        Sword, Axe, Staff,
+        Helm, Shield
+    }
+
     public class Game : GameCore.Game
     {
         private GameplayManager gameplayManager;
@@ -122,6 +136,9 @@ namespace MonoBehaviors
         [SerializeField] private LayerMask agentLayerMask;
         public LayerMask AgentLayerMask => agentLayerMask;
 
+        [SerializeField] private LayerMask droppedItemLayerMask;
+        public LayerMask DroppedItemLayerMask => droppedItemLayerMask;
+
         [SerializeField] private GameObject movementTargetPrefab;
         public GameObject MovementTargetPrefab => movementTargetPrefab;
 
@@ -130,6 +147,9 @@ namespace MonoBehaviors
 
         [SerializeField] private GameObject agentPrefab;
         public GameObject AgentPrefab => agentPrefab;
+
+        [SerializeField] private GameObject droppedItemPrefab;
+        public GameObject DroppedItemPrefab => droppedItemPrefab;
 
         [SerializeField] private GameObject projectilePrefab;
         public GameObject ProjectilePrefab => projectilePrefab;
@@ -154,6 +174,18 @@ namespace MonoBehaviors
         }
 
         [SerializeField] private List<AgentModelPrefab> agentModelPrefabs;
+
+        [System.Serializable]
+        class ItemModelPrefab
+        {
+            [SerializeField] private ItemType itemType;
+            public ItemType ItemType => itemType;
+
+            [SerializeField] private GameObject prefab;
+            public GameObject Prefab => prefab;
+        }
+
+        [SerializeField] private List<ItemModelPrefab> itemModelPrefabs;
 
         //
         //
@@ -213,6 +245,8 @@ namespace MonoBehaviors
                     )
                 }
             );
+            game.itemSystem.itemSpawned += OnDroppedItemSpawned;
+            game.itemSystem.itemDeleted += OnDroppedItemDeleted;
             game.projectileSpawned += OnProjectileSpawned;
             game.projectileDeleted += OnProjectileDeleted;
             game.agentSpawned += OnAgentSpawned;
@@ -339,38 +373,29 @@ namespace MonoBehaviors
 
         GameCore.Agent CreateAgent(GameCore.Game game, AgentType agentType)
         {
-            DataDefinition.Agent agentData = null;
+            var dict_agentType_agentData = new Dictionary<AgentType, DataDefinition.Agent>(){
+                [AgentType.Hero] = DataInstance.Agents.hero,
+                [AgentType.Demon] = DataInstance.Agents.demon
+            };
+            var agentData = dict_agentType_agentData[agentType];
+
             GameCore.AgentsParty agentsParty = null;
             GameCore.AgentControl agentControl = null;
             if (agentType == AgentType.Hero)
             {
-                agentData = DataInstance.Agents.hero;
                 agentsParty = heroParty;
                 agentControl = new GameCore.AgentPlayerControl();
             }
-            else if (agentType == AgentType.Demon)
+            else
             {
-                agentData = DataInstance.Agents.demon;
                 agentsParty = monsterParty;
                 agentControl = new GameCore.AgentAIControl();
             }
 
-            var agentMovement = new GameCore.AgentMovement();
-            var agent = new GameCore.Agent(
-                game: game,
-                health: new GameCore.AgentHealth(),
-                movement: agentMovement,
-                partyMember: new GameCore.AgentPartyMember(
-                    game: game,
-                    agentsParty: agentsParty
-                ),
-                agentDetection: new GameCore.AgentDetection(),
-                combat: new GameCore.AgentCombat(
-                    game: game,
-                    movement: agentMovement
-                ),
-                control: agentControl,
-                agentData: agentData
+            var agent = game.CreateAgent(
+                agentData: agentData,
+                agentsParty: agentsParty,
+                agentControl: agentControl
             );
 
             return agent;
@@ -424,7 +449,7 @@ namespace MonoBehaviors
             else if (agent.agentData == DataInstance.Agents.demon)
                 agentType = AgentType.Demon;
 
-            // var obj = GameObject.Instantiate(AgentPrefab, pos, rot, agentsContainer);
+            // var obj = Instantiate(AgentPrefab, pos, rot, agentsContainer);
             // var projectile = obj.GetComponent<Projectile>();
             // projectile.Setup(combat.AgentController);
             var (agentObj, agentCtrl) = InstantiateAgent(agent, agentType, pos, rot);
@@ -442,9 +467,9 @@ namespace MonoBehaviors
 
         void OnProjectileSpawned(GameCore.Projectile projectile, Vector3 pos, Quaternion rot)
         {
-            var projectileObject = GameObject.Instantiate(ProjectilePrefab, pos, rot, ProjectilesContainer);
-            var projectileMb = projectileObject.GetComponent<Projectile>();
-            projectileMb.Setup(
+            var projectileObject = Instantiate(ProjectilePrefab, pos, rot, ProjectilesContainer);
+            var projectileMB = projectileObject.GetComponent<Projectile>();
+            projectileMB.Setup(
                 gameplayManager: this,
                 // originatorAgentCtrl: combat.AgentController,
                 projectile: projectile
@@ -459,6 +484,51 @@ namespace MonoBehaviors
             var projectileObject = dict_transformScript_object[projectile];
 
             Destroy(projectileObject);
+        }
+
+        void OnDroppedItemSpawned(GameCore.DroppedItem droppedItem, Vector3 pos)
+        {
+            var itemTypes = new Dictionary<DataDefinition.Item, ItemType>(){
+                [DataInstance.Items.shortSword] = ItemType.Sword,
+                [DataInstance.Items.handAxe] = ItemType.Axe,
+                [DataInstance.Items.shortStaff] = ItemType.Staff,
+                [DataInstance.Items.skullCap] = ItemType.Helm,
+                [DataInstance.Items.smallShield] = ItemType.Shield,
+            };
+            var itemType = itemTypes[droppedItem.item.itemData];
+            var rot = Quaternion.identity;
+            var (droppedItemObject, droppedItemMB) = InstantiateDroppedItem(droppedItem, itemType, pos, rot);
+
+            dict_transformScript_object.Add(droppedItem, droppedItemObject);
+        }
+
+        (GameObject, DroppedItemMB) InstantiateDroppedItem(
+            GameCore.DroppedItem droppedItem,
+            ItemType itemType,
+            Vector3 pos,
+            Quaternion rot
+        )
+        {
+            var droppedItemObject = Instantiate(DroppedItemPrefab, pos, rot, ProjectilesContainer);
+            var droppedItemMB = droppedItemObject.GetComponent<DroppedItemMB>();
+            droppedItemMB.Setup(
+                gameplayManager: this,
+                droppedItem: droppedItem
+            );
+
+            var droppedItemModelPrefab = itemModelPrefabs.Find(p => p.ItemType == itemType);
+            if (droppedItemModelPrefab == null) throw new System.Exception($"droppedItem prefab not found: {itemType}");
+
+            var droppedItemModelObj = Instantiate(droppedItemModelPrefab.Prefab, droppedItemMB.transform);
+
+            return (droppedItemObject, droppedItemMB);
+        }
+
+        void OnDroppedItemDeleted(GameCore.DroppedItem droppedItem)
+        {
+            var droppedItemObject = dict_transformScript_object[droppedItem];
+
+            Destroy(droppedItemObject);
         }
 
         void Load()

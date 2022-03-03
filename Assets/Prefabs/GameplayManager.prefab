@@ -149,9 +149,13 @@ MonoBehaviour:
   agentLayerMask:
     serializedVersion: 2
     m_Bits: 256
+  droppedItemLayerMask:
+    serializedVersion: 2
+    m_Bits: 4096
   movementTargetPrefab: {fileID: 7944165876805180820, guid: 6409b4cc857b92141aa5be09785d75fb, type: 3}
   movementTargetContainer: {fileID: 1357027790916187759}
   agentPrefab: {fileID: 8915420808062846081, guid: 9903841f7d63ae041928e2187c6cb502, type: 3}
+  droppedItemPrefab: {fileID: 4510162277105832216, guid: 53c892dc452faad4d8a359e1e794eee8, type: 3}
   projectilePrefab: {fileID: 3856364832943531748, guid: 84dd2addaae0fb741a2861878bd51ef2, type: 3}
   agentsContainer: {fileID: 1357027792749416235}
   projectilesContainer: {fileID: 1357027792393686349}
@@ -161,6 +165,17 @@ MonoBehaviour:
     prefab: {fileID: 8513934410253812705, guid: 8fbd32458ee3d7246850a632d7ac741c, type: 3}
   - agentType: 1
     prefab: {fileID: 662457297786407632, guid: e7a8569442e17d54f9563439817e683e, type: 3}
+  itemModelPrefabs:
+  - itemType: 0
+    prefab: {fileID: 7131333464891160427, guid: 2c9440ba6729231449074ec5db622616, type: 3}
+  - itemType: 1
+    prefab: {fileID: 5999999563055658338, guid: 28a7d8bf1be23274d921763295b0655c, type: 3}
+  - itemType: 2
+    prefab: {fileID: 7067698278340174437, guid: 36f8b5fd4f4d27245a94e0011dcc99da, type: 3}
+  - itemType: 3
+    prefab: {fileID: 4156144907651872729, guid: 877dd428d9c7fa847bdded00d4925e0b, type: 3}
+  - itemType: 4
+    prefab: {fileID: 3401431186981487464, guid: 071aea803c09a8643a3d30a8ed46fd6f, type: 3}
 --- !u!114 &1357027792395845137
 MonoBehaviour:
   m_ObjectHideFlags: 0

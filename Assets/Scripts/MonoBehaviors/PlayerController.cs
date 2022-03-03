@@ -106,6 +106,40 @@ namespace MonoBehaviors
                 Debug.Log($"health: {gameplayManager.SaveData.health}, level: {gameplayManager.SaveData.level}");
             }
 
+            if (Input.GetKey(KeyCode.D))
+            {
+                if (Input.GetKeyUp(KeyCode.Alpha1))
+                {
+                    var itemDataList = new List<DataDefinition.Item>(){
+                        DataInstance.Items.handAxe,
+                        DataInstance.Items.shortStaff,
+                        DataInstance.Items.shortSword,
+                        DataInstance.Items.skullCap,
+                        DataInstance.Items.smallShield,
+                    };
+                    var itemData = itemDataList.Random();
+                    var item = new GameCore.Item(
+                        itemData: itemData
+                    );
+
+                    var circlePos = Random.insideUnitCircle * 3;
+                    var pos = agentCtrl.transform.position + new Vector3(circlePos.x, 0, circlePos.y);
+
+                    gameplayManager.Game.itemSystem.Drop(item, pos);
+                }
+            }
+
+            if (Input.GetKeyUp(KeyCode.F))
+            {
+                var droppedItems = Utils.FindColliders<DroppedItemMB>(agentCtrl.transform.position, 2, gameplayManager.DroppedItemLayerMask);
+                if (droppedItems.Count > 0)
+                {
+                    var droppedItems_closest = Utils.SortByProximity(droppedItems, agentCtrl.transform.position);
+
+                    agentCtrl.Agent.equipment.Pick(droppedItems_closest[0].DroppedItem);
+                }
+            }
+
             if (Input.GetKey(KeyCode.LeftShift))
             {
                 if (Input.GetMouseButton(0))
