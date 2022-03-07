@@ -36,9 +36,17 @@ namespace GameCore
             return aliveEnemies.Contains(agent);
         }
 
+        bool IsSpawnedAgentEnemy(Agent agent)
+        {
+            if (game.EnemyParties.Contains(this) == false) return false;
+            if (game.EnemyParties.Contains(agent.partyMember.AgentsParty) == false) return false;
+
+            return agent.partyMember.AgentsParty != this;
+        }
+
         void OnAgentSpawned(Agent agent, Vector3 pos, Quaternion rot)
         {
-            if (agent.partyMember.AgentsParty != this)
+            if (IsSpawnedAgentEnemy(agent))
             {
                 enemies.Add(agent);
 
@@ -54,13 +62,13 @@ namespace GameCore
             // become enemy
             // become ally
 
-            if (enemies.Contains(agent) == false && agent.partyMember.AgentsParty != this)
+            if (enemies.Contains(agent) == false && IsSpawnedAgentEnemy(agent))
             {
                 enemies.Add(agent);
 
                 if (agent.health.isAlive) aliveEnemies.Add(agent);
             }
-            else if (enemies.Contains(agent) && agent.partyMember.AgentsParty == this)
+            else if (enemies.Contains(agent) && IsSpawnedAgentEnemy(agent) == false)
             {
                 enemies.Remove(agent);
 

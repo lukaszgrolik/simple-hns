@@ -60,6 +60,7 @@ Transform:
   - {fileID: 1357027790916187759}
   - {fileID: 1357027792749416235}
   - {fileID: 1357027792393686349}
+  - {fileID: 1530957445345716598}
   m_Father: {fileID: 1357027792395845143}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -153,16 +154,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   movementTargetPrefab: {fileID: 7944165876805180820, guid: 6409b4cc857b92141aa5be09785d75fb, type: 3}
-  movementTargetContainer: {fileID: 1357027790916187759}
   agentPrefab: {fileID: 8915420808062846081, guid: 9903841f7d63ae041928e2187c6cb502, type: 3}
   droppedItemPrefab: {fileID: 4510162277105832216, guid: 53c892dc452faad4d8a359e1e794eee8, type: 3}
   projectilePrefab: {fileID: 3856364832943531748, guid: 84dd2addaae0fb741a2861878bd51ef2, type: 3}
+  movementTargetContainer: {fileID: 1357027790916187759}
   agentsContainer: {fileID: 1357027792749416235}
+  droppedItemsContainer: {fileID: 1530957445345716598}
   projectilesContainer: {fileID: 1357027792393686349}
   controlledAgentObject: {fileID: 0}
   agentModelPrefabs:
   - agentType: 0
     prefab: {fileID: 8513934410253812705, guid: 8fbd32458ee3d7246850a632d7ac741c, type: 3}
+  - agentType: 2
+    prefab: {fileID: 8513934410253812705, guid: d467553556387f34ab66a024ab7cd155, type: 3}
   - agentType: 1
     prefab: {fileID: 662457297786407632, guid: e7a8569442e17d54f9563439817e683e, type: 3}
   itemModelPrefabs:
@@ -345,6 +349,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1357027791398898571}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7107628210914612847
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1530957445345716598}
+  m_Layer: 0
+  m_Name: dropped items
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1530957445345716598
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7107628210914612847}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1357027791398898571}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1701758000937288213
 PrefabInstance:

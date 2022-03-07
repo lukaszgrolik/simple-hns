@@ -80,7 +80,7 @@ namespace GameCore
         {
             combat.OnUpdate(deltaTime);
 
-            if (control is AgentAIControl agentAIControl)
+            if (control is IAgentControlTickable agentAIControl)
             {
                 agentAIControl.OnUpdate();
             }

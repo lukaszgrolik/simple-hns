@@ -33,17 +33,28 @@ namespace GameCore
         public readonly ItemSystem itemSystem;
         public readonly QuestSystem questSystem;
 
+        private List<GameCore.AgentsParty> agentsParties;
+        public List<GameCore.AgentsParty> AgentsParties => agentsParties;
+        private List<GameCore.AgentsParty> enemyParties;
+        public List<GameCore.AgentsParty> EnemyParties => enemyParties;
+
         public event System.Action<Projectile, Vector3, Quaternion> projectileSpawned;
         public event System.Action<Projectile> projectileDeleted;
 
         public event System.Action<Agent, Vector3, Quaternion> agentSpawned;
 
-        public Game(List<Quest> quests)
+        public Game(
+            List<Quest> quests,
+            List<AgentsParty> agentsParties,
+            List<AgentsParty> enemyParties
+        )
         {
             this.itemSystem = new ItemSystem();
             this.questSystem = new QuestSystem(
                 quests: quests
             );
+            this.agentsParties = agentsParties;
+            this.enemyParties = enemyParties;
         }
 
         abstract public Vector3 GetPosition(ITransformScript script);
@@ -112,6 +123,11 @@ namespace GameCore
             projectiles.Remove(projectile);
 
             projectileDeleted?.Invoke(projectile);
+        }
+
+        public void SetEnemyParties()
+        {
+            this.enemyParties = agentsParties;
         }
     }
 }

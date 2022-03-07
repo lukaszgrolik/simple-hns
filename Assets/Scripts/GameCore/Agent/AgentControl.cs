@@ -9,12 +9,17 @@ namespace GameCore
         public abstract void Setup();
     }
 
+    public interface IAgentControlTickable
+    {
+        void OnUpdate();
+    }
+
     public interface IAgentAITickableState
     {
         void OnUpdate();
     }
 
-    public sealed class AgentAIControl : AgentControl
+    public sealed class AgentWarriorAIControl : AgentControl, IAgentControlTickable
     {
         private SM.StateMachine sm = new SM.StateMachine();
 
@@ -64,6 +69,22 @@ namespace GameCore
             this.agent.agentDetection.enemyLost -= OnEnemyLost;
 
             sm.Exit();
+        }
+    }
+
+    public sealed class AgentNpcAIControl : AgentControl, IAgentControlTickable
+    {
+        // WalkingAround, AttendingToPlayer
+        private SM.StateMachine sm = new SM.StateMachine();
+
+        public override void Setup()
+        {
+
+        }
+
+        public void OnUpdate()
+        {
+
         }
     }
 
