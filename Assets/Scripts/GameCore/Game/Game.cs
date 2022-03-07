@@ -44,16 +44,27 @@ namespace GameCore
         public event System.Action<Agent, Vector3, Quaternion> agentSpawned;
 
         public Game(
-            List<Quest> quests,
-            List<AgentsParty> agentsParties,
-            List<AgentsParty> enemyParties
+            List<Quest> quests
         )
         {
             this.itemSystem = new ItemSystem();
             this.questSystem = new QuestSystem(
                 quests: quests
             );
+        }
+
+        public void InitAgentsParties(
+            List<GameCore.AgentsParty> agentsParties,
+            List<GameCore.AgentsParty> enemyParties
+        )
+        {
             this.agentsParties = agentsParties;
+
+            for (int i = 0; i < agentsParties.Count; i++)
+            {
+                agentsParties[i].Setup(this);
+            }
+
             this.enemyParties = enemyParties;
         }
 

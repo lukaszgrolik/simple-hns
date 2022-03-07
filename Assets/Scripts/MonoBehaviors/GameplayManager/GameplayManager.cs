@@ -143,22 +143,17 @@ namespace MonoBehaviors
         private Game game;
         public Game Game => game;
 
-        private GameCore.AgentsParty heroParty;
-        private GameCore.AgentsParty neutralParty;
-        private GameCore.AgentsParty monsterParty;
-
         void Start()
         {
-            this.heroParty = new GameCore.AgentsParty(
-                game: game,
+            this.gameplayManagerGameUI = new GameplayManagerGameUI(this, gameUI);
+
+            var heroParty = new GameCore.AgentsParty(
                 agentPartyData: new DataDefinition.AgentParty("good party")
             );
-            this.neutralParty = new GameCore.AgentsParty(
-                game: game,
+            var neutralParty = new GameCore.AgentsParty(
                 agentPartyData: new DataDefinition.AgentParty("neutral party")
             );
-            this.monsterParty = new GameCore.AgentsParty(
-                game: game,
+            var monsterParty = new GameCore.AgentsParty(
                 agentPartyData: new DataDefinition.AgentParty("evil party")
             );
 
@@ -178,11 +173,10 @@ namespace MonoBehaviors
                 agentPrefab: agentPrefab,
                 agentsContainer: agentsContainer,
                 agentModelPrefabs: agentModelPrefabs,
-                heroParty: this.heroParty,
-                neutralParty: this.neutralParty,
-                monsterParty: this.monsterParty
+                heroParty: heroParty,
+                neutralParty: neutralParty,
+                monsterParty: monsterParty
             );
-            this.gameplayManagerGameUI = new GameplayManagerGameUI(this, gameUI);
 
             serializationManager.Setup();
             Load();
@@ -197,15 +191,6 @@ namespace MonoBehaviors
                             new GameCore.QuestTaskKillEnemies()
                         }
                     )
-                },
-                agentsParties: new List<GameCore.AgentsParty>(){
-                    this.heroParty,
-                    this.neutralParty,
-                    this.monsterParty,
-                },
-                enemyParties: new List<GameCore.AgentsParty>(){
-                    this.heroParty,
-                    this.monsterParty,
                 }
             );
             game.itemSystem.itemSpawned += droppedItemEntities.OnDroppedItemSpawned;
@@ -213,6 +198,18 @@ namespace MonoBehaviors
             game.projectileSpawned += projectileEntities.OnProjectileSpawned;
             game.projectileDeleted += projectileEntities.OnProjectileDeleted;
             game.agentSpawned += agentEntities.OnAgentSpawned;
+
+            this.game.InitAgentsParties(
+                agentsParties: new List<GameCore.AgentsParty>(){
+                    heroParty,
+                    neutralParty,
+                    monsterParty,
+                },
+                enemyParties: new List<GameCore.AgentsParty>(){
+                    heroParty,
+                    monsterParty,
+                }
+            );
 
             var sceneAgents = FindObjectsOfType<SceneAgent>();
             foreach (var sceneAgent in sceneAgents)

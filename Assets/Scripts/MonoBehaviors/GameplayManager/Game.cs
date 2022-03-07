@@ -11,13 +11,9 @@ namespace MonoBehaviors
 
         public Game(
             GameplayManager gameplayManager,
-            List<GameCore.Quest> quests,
-            List<GameCore.AgentsParty> agentsParties,
-            List<GameCore.AgentsParty> enemyParties
+            List<GameCore.Quest> quests
         ) : base(
-            quests,
-            agentsParties,
-            enemyParties
+            quests
         )
         {
             this.gameplayManager = gameplayManager;

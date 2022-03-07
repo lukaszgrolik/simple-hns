@@ -7,7 +7,7 @@ namespace GameCore
 {
     public class AgentsParty
     {
-        public readonly Game game;
+        private Game game;
 
         private DataDefinition.AgentParty agentPartyData;
         public DataDefinition.AgentParty AgentPartyData => agentPartyData;
@@ -16,12 +16,16 @@ namespace GameCore
         public readonly List<Agent> aliveEnemies = new List<Agent>();
 
         public AgentsParty(
-            Game game,
             DataDefinition.AgentParty agentPartyData
         )
         {
-            this.game = game;
             this.agentPartyData = agentPartyData;
+        }
+
+        public void Setup(Game game)
+        {
+            if (this.game != null) throw new System.Exception("game already assigned");
+            this.game = game;
 
             game.agentSpawned += OnAgentSpawned;
         }
