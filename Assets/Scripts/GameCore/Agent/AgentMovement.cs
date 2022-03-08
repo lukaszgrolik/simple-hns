@@ -13,6 +13,7 @@ namespace GameCore
         public event System.Action<Vector2> destinationChanged;
         public event System.Action cancelled;
         public event System.Action arrived;
+        public event System.Action stopped;
 
         public void SetDestination(Vector2 pos)
         {
@@ -24,9 +25,12 @@ namespace GameCore
 
         public void Cancel()
         {
+            if (!isChangingDestination) return;
+
             isChangingDestination = false;
 
             cancelled?.Invoke();
+            stopped?.Invoke();
         }
 
         public void MarkArrived()
@@ -34,6 +38,7 @@ namespace GameCore
             isChangingDestination = false;
 
             arrived?.Invoke();
+            stopped?.Invoke();
         }
     }
 }

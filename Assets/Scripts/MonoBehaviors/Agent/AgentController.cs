@@ -16,6 +16,8 @@ namespace MonoBehaviors
         private GameCore.Agent agent;
         public GameCore.Agent Agent => agent;
 
+        private AgentAnimation agentAnimation;
+
         // private AgentMovement agentMovement;
         // public AgentMovement Movement => agentMovement;
 
@@ -71,6 +73,10 @@ namespace MonoBehaviors
             this.gameplayManager = gameplayManager;
             this.agent = agent;
 
+            this.agentAnimation = new AgentAnimation(
+                agentController: this
+            );
+
             var navMeshAgent = GetComponent<NavMeshAgent>();
             var agentMovement = new AgentMovement(
                 agentController: this,
@@ -82,6 +88,14 @@ namespace MonoBehaviors
                 gameplayManager: gameplayManager,
                 agent: agent
             );
+        }
+
+        public void OnSpawned(SpriteModel spriteModel)
+        {
+            if (spriteModel.Animator != null)
+            {
+                agentAnimation.OnSpawned(spriteModel);
+            }
         }
 
         public void SetDestination(Vector2 pos) { agent.movement.SetDestination(pos); }

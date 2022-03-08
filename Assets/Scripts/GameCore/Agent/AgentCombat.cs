@@ -11,7 +11,6 @@ namespace GameCore
 
     public abstract class Skill
     {
-
         protected AgentCombat combat;
 
         public Skill(AgentCombat combat)
@@ -43,6 +42,7 @@ namespace GameCore
             // var agentControllers = Utils.FindColliders<AgentController>(combat.transform.position, damageDistance);
             var otherAgents = game.FindAgentsInRadius(game.GetPosition(combat.Agent), damageDistance);
 
+            combat.InvokeMeleeAttackStarted();
 
             for (int i = 0; i < otherAgents.Count; i++)
             {
@@ -96,6 +96,8 @@ namespace GameCore
                 originatorAgent: combat.Agent
             );
 
+            combat.InvokeCastingStarted();
+
             // game.SpawnProjectile(combat.ProjectileSpawnPoint.position, rot);
             game.SpawnProjectile(projectile, game.GetProjectileSpawnPosition(combat.Agent), rot);
         }
@@ -114,6 +116,9 @@ namespace GameCore
         private Skill activeSkill;
         private bool attackInProgress = false;
         private float attackInProgressElapsed = 0;
+
+        public event System.Action meleeAttackStarted;
+        public event System.Action castingStarted;
 
         public AgentCombat(
             Game game,
@@ -143,6 +148,16 @@ namespace GameCore
                     attackInProgress = false;
                 }
             }
+        }
+
+        public void InvokeMeleeAttackStarted()
+        {
+            meleeAttackStarted?.Invoke();
+        }
+
+        public void InvokeCastingStarted()
+        {
+            castingStarted?.Invoke();
         }
 
         public void SetActiveSkill(Skill skill)

@@ -87,7 +87,7 @@ namespace MonoBehaviors
             // var obj = Instantiate(AgentPrefab, pos, rot, agentsContainer);
             // var projectile = obj.GetComponent<Projectile>();
             // projectile.Setup(combat.AgentController);
-            var (agentObj, agentCtrl) = InstantiateAgent(agent, agentType, pos, rot);
+            var (agentObj, agentCtrl, spriteModel) = InstantiateAgent(agent, agentType, pos, rot);
 
             //     agents.Add(agent);
             //     agentObjectsControllers.Add(agentObj, agentCtrl);
@@ -98,9 +98,10 @@ namespace MonoBehaviors
             gameplayManager.dict_agent_agentCtrl.Add(agent, agentCtrl);
 
             agent.Setup();
+            agentCtrl.OnSpawned(spriteModel);
         }
 
-        (GameObject, AgentController) InstantiateAgent(
+        (GameObject, AgentController, SpriteModel) InstantiateAgent(
             // GameCore.Game game,
             GameCore.Agent agent,
             AgentType agentType,
@@ -135,9 +136,9 @@ namespace MonoBehaviors
             var modelNavMeshAgent = agentModelObj.GetComponent<NavMeshAgent>();
             GameObject.Destroy(modelNavMeshAgent);
 
-            GameObject.Destroy(spriteModel);
+            // GameObject.Destroy(spriteModel);
 
-            return (agentObj, agentCtrl);
+            return (agentObj, agentCtrl, spriteModel);
         }
     }
 }
