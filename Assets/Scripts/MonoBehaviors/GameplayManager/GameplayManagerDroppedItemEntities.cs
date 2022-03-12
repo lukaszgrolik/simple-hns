@@ -43,11 +43,15 @@ namespace MonoBehaviors
             var (droppedItemObject, droppedItemMB) = InstantiateDroppedItem(droppedItem, itemType, pos, rot);
 
             gameplayManager.dict_transformScript_object.Add(droppedItem, droppedItemObject);
+            gameplayManager.dict_object_droppedItemMB.Add(droppedItemObject, droppedItemMB);
         }
 
         public void OnDroppedItemDeleted(GameCore.DroppedItem droppedItem)
         {
             var droppedItemObject = gameplayManager.dict_transformScript_object[droppedItem];
+
+            gameplayManager.dict_object_droppedItemMB.Remove(droppedItemObject);
+            gameplayManager.dict_transformScript_object.Remove(droppedItem);
 
             GameObject.Destroy(droppedItemObject);
         }

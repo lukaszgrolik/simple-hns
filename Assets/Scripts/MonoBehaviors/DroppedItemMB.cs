@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace MonoBehaviors
 {
-    class DroppedItemMB : MonoBehaviour
+    public class DroppedItemMB : MonoBehaviour
     {
         private GameplayManager gameplayManager;
 

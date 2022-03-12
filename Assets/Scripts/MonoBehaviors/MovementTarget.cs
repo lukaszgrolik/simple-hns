@@ -15,7 +15,7 @@ namespace MonoBehaviors
 
         void OnTriggerEnter(Collider info)
         {
-            if (agent.GameplayManager.Dict_object_agentCtrl.TryGetValue(info.gameObject, out var otherAgent))
+            if (agent.GameplayManager.dict_object_agentCtrl.TryGetValue(info.gameObject, out var otherAgent))
             {
                 if (agent == otherAgent)
                 {

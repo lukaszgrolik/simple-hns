@@ -16,92 +16,6 @@ namespace MonoBehaviors
 
     }
 
-    public class QuestsUI
-    {
-        private GameObject questItemPrefab;
-        private Transform questsContainer;
-
-        public QuestsUI(
-            GameObject questItemPrefab,
-            Transform questsContainer
-        )
-        {
-            this.questItemPrefab = questItemPrefab;
-            this.questsContainer = questsContainer;
-        }
-
-        public void SetQuests(List<GameCore.Quest> quests)
-        {
-            foreach (var quest in quests)
-            {
-                var questItemObj = Object.Instantiate(questItemPrefab, questsContainer);
-                var questItemMB = questItemObj.GetComponent<QuestsListItemUI>();
-
-                questItemMB.Setup(quest);
-            }
-        }
-    }
-
-    public class EquipmentUI
-    {
-        private GameObject wornItemPrefab;
-        private GameObject unwornItemPrefab;
-        private Image helmImage;
-        private Image handRightImage;
-        private Image handLeftImage;
-        private Transform unwornItemsContainer;
-
-        public EquipmentUI(
-            GameObject wornItemPrefab,
-            GameObject unwornItemPrefab,
-            Image helmImage,
-            Image handRightImage,
-            Image handLeftImage,
-            Transform unwornItemsContainer
-        )
-        {
-            this.wornItemPrefab = wornItemPrefab;
-            this.unwornItemPrefab = unwornItemPrefab;
-            this.helmImage = helmImage;
-            this.handRightImage = handRightImage;
-            this.handLeftImage = handLeftImage;
-            this.unwornItemsContainer = unwornItemsContainer;
-        }
-
-        public void Setup()
-        {
-            SetHelmImage(null);
-            SetHandRightImage(null);
-            SetHandLeftImage(null);
-        }
-
-        public void SetHelmImage(Image image)
-        {
-
-        }
-
-        public void SetHandRightImage(Image image)
-        {
-
-
-        }
-
-        public void SetHandLeftImage(Image image)
-        {
-
-        }
-
-        public void AddUnwornItem()
-        {
-
-        }
-
-        public void RemoveUnwornItem(int index)
-        {
-
-        }
-    }
-
     public class GameUI : MonoBehaviour
     {
         private GameplayManager gameplayManager;
@@ -141,6 +55,7 @@ namespace MonoBehaviors
                 questsContainer
             );
             this.equipmentUI = new EquipmentUI(
+                gameplayManager,
                 wornItemPrefab,
                 unwornItemPrefab,
                 helmImage,
@@ -198,6 +113,9 @@ namespace MonoBehaviors
             if (equipmentPanel.activeSelf)
             {
                 unwornItemsContainer.DestroyChildren();
+
+                equipmentUI.SetWornItems(gameplayManager.ControlledAgent.Agent.equipment.wornItems);
+                equipmentUI.SetCarriedItems(gameplayManager.ControlledAgent.Agent.equipment.carriedItems);
             }
         }
     }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7282082614403637310}
   - component: {fileID: 7844871523098273004}
   - component: {fileID: 4712160862850731206}
+  - component: {fileID: 4990532430914192405}
   m_Layer: 5
   m_Name: EquipmentUnwornItem
   m_TagString: Untagged
@@ -36,7 +37,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7844871523098273004
 CanvasRenderer:
@@ -76,6 +77,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4990532430914192405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2380530348567196735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 046abac4950a714468fc90d866649a02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7875458308692143048
 GameObject:
   m_ObjectHideFlags: 0
@@ -141,7 +154,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 6807744782362413827, guid: c375b0e9cf7fd644594a2a3d8f4c61ca, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

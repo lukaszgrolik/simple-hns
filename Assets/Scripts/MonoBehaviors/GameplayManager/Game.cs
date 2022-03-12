@@ -21,12 +21,12 @@ namespace MonoBehaviors
 
         public override Vector3 GetPosition(GameCore.ITransformScript script)
         {
-            return gameplayManager.Dict_transformScript_object[script].transform.position;
+            return gameplayManager.dict_transformScript_object[script].transform.position;
         }
 
         public override Vector3 GetProjectileSpawnPosition(GameCore.Agent agent)
         {
-            var agentCtrl = gameplayManager.Dict_agent_agentController[agent];
+            var agentCtrl = gameplayManager.dict_agent_agentCtrl[agent];
             var projSpawnPoint = agentCtrl.GetComponentInChildren<AgentProjectileSpawnPoint>();
 
             return projSpawnPoint.transform.position;

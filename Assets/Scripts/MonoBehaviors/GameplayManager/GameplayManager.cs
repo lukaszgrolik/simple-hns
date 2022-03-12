@@ -130,13 +130,16 @@ namespace MonoBehaviors
         // public IReadOnlyDictionary<GameObject, GameCore.ITransformScript> Dict_object_transformScript => dict_object_transformScript;
 
         public readonly Dictionary<GameCore.ITransformScript, GameObject> dict_transformScript_object = new Dictionary<GameCore.ITransformScript, GameObject>();
-        public IReadOnlyDictionary<GameCore.ITransformScript, GameObject> Dict_transformScript_object => dict_transformScript_object;
+        // public IReadOnlyDictionary<GameCore.ITransformScript, GameObject> Dict_transformScript_object => dict_transformScript_object;
 
         public readonly Dictionary<GameObject, AgentController> dict_object_agentCtrl = new Dictionary<GameObject, AgentController>();
-        public IReadOnlyDictionary<GameObject, AgentController> Dict_object_agentCtrl => dict_object_agentCtrl;
+        // public IReadOnlyDictionary<GameObject, AgentController> Dict_object_agentCtrl => dict_object_agentCtrl;
 
         public readonly Dictionary<GameCore.Agent, AgentController> dict_agent_agentCtrl = new Dictionary<GameCore.Agent, AgentController>();
-        public IReadOnlyDictionary<GameCore.Agent, AgentController> Dict_agent_agentController => dict_agent_agentCtrl;
+        // public IReadOnlyDictionary<GameCore.Agent, AgentController> Dict_agent_agentCtrl => dict_agent_agentCtrl;
+
+        public readonly Dictionary<GameObject, DroppedItemMB> dict_object_droppedItemMB = new Dictionary<GameObject, DroppedItemMB>();
+        // public IReadOnlyDictionary<GameObject, DroppedItemMB> Dict_object_droppedItemMB => dict_object_droppedItemMB;
 
         private AgentController controlledAgent;
         public AgentController ControlledAgent => controlledAgent;

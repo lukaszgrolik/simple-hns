@@ -25,7 +25,7 @@ namespace MonoBehaviors
 
         void OnTriggerEnter(Collider coll)
         {
-            var isAgent = gameplayManager.Dict_object_agentCtrl.TryGetValue(coll.gameObject, out var otherAgent);
+            var isAgent = gameplayManager.dict_object_agentCtrl.TryGetValue(coll.gameObject, out var otherAgent);
             // Debug.Log($"isAgent: {isAgent}");
 
             if (isAgent)
@@ -36,7 +36,7 @@ namespace MonoBehaviors
 
         void OnTriggerExit(Collider coll)
         {
-            var isAgent = gameplayManager.Dict_object_agentCtrl.TryGetValue(coll.gameObject, out var otherAgent);
+            var isAgent = gameplayManager.dict_object_agentCtrl.TryGetValue(coll.gameObject, out var otherAgent);
             // Debug.Log($"isAgent: {isAgent}");
 
             if (isAgent)
