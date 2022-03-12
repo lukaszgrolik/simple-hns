@@ -36,6 +36,7 @@ namespace MonoBehaviors
         private GameplayManagerAgentEntities agentEntities;
 
         [SerializeField] private GameUI gameUI;
+        public GameUI GameUI => gameUI;
 
         private GameplayManagerGameUI gameplayManagerGameUI;
 
@@ -147,6 +148,8 @@ namespace MonoBehaviors
         {
             this.gameplayManagerGameUI = new GameplayManagerGameUI(this, gameUI);
 
+            this.gameplayManagerGameUI.Setup();
+
             var heroParty = new GameCore.AgentsParty(
                 agentPartyData: new DataDefinition.AgentParty("good party")
             );
@@ -185,7 +188,21 @@ namespace MonoBehaviors
                 gameplayManager: this,
                 quests: new List<GameCore.Quest>(){
                     new GameCore.Quest(
-                        title: "Bla bla",
+                        title: "First quest",
+                        description: "some desc",
+                        tasks: new List<GameCore.QuestTask>(){
+                            new GameCore.QuestTaskKillEnemies()
+                        }
+                    ),
+                    new GameCore.Quest(
+                        title: "Second quest",
+                        description: "some desc",
+                        tasks: new List<GameCore.QuestTask>(){
+                            new GameCore.QuestTaskKillEnemies()
+                        }
+                    ),
+                    new GameCore.Quest(
+                        title: "Third quest",
                         description: "some desc",
                         tasks: new List<GameCore.QuestTask>(){
                             new GameCore.QuestTaskKillEnemies()

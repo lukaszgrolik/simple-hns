@@ -91,10 +91,18 @@ namespace GameCore
     public class Quest
     {
         private string title;
+        public string Title => title;
+
         private string description;
+        public string Description => description;
+
         public readonly List<QuestTask> tasks;
+
         private QuestStatus status = QuestStatus.Unstarted;
+        public QuestStatus Status => status;
+
         private QuestTask activeTask;
+        public QuestTask ActiveTask => activeTask;
 
         public event System.Action statusChanged;
         public event System.Action activeTaskChanged;
@@ -105,6 +113,8 @@ namespace GameCore
             List<QuestTask> tasks
         )
         {
+            this.title = title;
+            this.description = description;
             this.tasks = tasks;
 
             for (int i = 0; i < tasks.Count; i++)

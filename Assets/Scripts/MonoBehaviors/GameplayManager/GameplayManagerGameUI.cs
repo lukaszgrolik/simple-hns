@@ -27,6 +27,11 @@ namespace MonoBehaviors
             this.controlledAgent = agentController;
         }
 
+        public void Setup()
+        {
+            this.gameUI.Setup(gameplayManager);
+        }
+
         // can only be called after controlledAgent is set
         public void Init()
         {

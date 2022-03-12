@@ -139,6 +139,14 @@ namespace MonoBehaviors
                     agentCtrl.Agent.equipment.Pick(droppedItems_closest[0].DroppedItem);
                 }
             }
+            else if (Input.GetKeyUp(KeyCode.U))
+            {
+                gameplayManager.GameUI.ToggleQuestsPanel();
+            }
+            else if (Input.GetKeyUp(KeyCode.I))
+            {
+                gameplayManager.GameUI.ToggleEquipmentPanel();
+            }
 
             if (Input.GetKey(KeyCode.LeftShift))
             {
