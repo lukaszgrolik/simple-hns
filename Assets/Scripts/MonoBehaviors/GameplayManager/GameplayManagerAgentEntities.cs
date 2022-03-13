@@ -37,7 +37,7 @@ namespace MonoBehaviors
 
             this.heroParty = heroParty;
             this.neutralParty = neutralParty;
-            this.monsterParty = heroParty;
+            this.monsterParty = monsterParty;
         }
 
         public GameCore.Agent CreateAgent(GameCore.Game game, AgentType agentType)
