@@ -10,8 +10,8 @@ namespace MonoBehaviors
         private GameplayManager gameplayManager;
         public GameplayManager GameplayManager => gameplayManager;
 
-        [SerializeField] private AgentType agentType;
-        public AgentType AgentType => agentType;
+        // [SerializeField] private AgentType agentType;
+        // public AgentType AgentType => agentType;
 
         private GameCore.Agent agent;
         public GameCore.Agent Agent => agent;

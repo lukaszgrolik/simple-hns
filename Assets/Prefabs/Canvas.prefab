@@ -123,6 +123,8 @@ MonoBehaviour:
   enemyHealthObject: {fileID: 4892050093285313488}
   enemyNameText: {fileID: 287272024644895397}
   enemyHealthImage: {fileID: 1111990088360470494}
+  playerDeathPanel: {fileID: 7835921603231817916}
+  restartButton: {fileID: 3877322983285805734}
   questsPanel: {fileID: 3220800906337075226}
   questItemPrefab: {fileID: 5456702040076997380, guid: ca5c5328ce7cb0c44960e46d2634ebfa, type: 3}
   questsContainer: {fileID: 58434420751702518}

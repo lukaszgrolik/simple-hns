@@ -90,7 +90,7 @@ namespace GameCore
         )
         {
             var agentHealth = new GameCore.AgentHealth();
-            var agentMovement = new GameCore.AgentMovement();
+            var agentMovement = new GameCore.AgentMovement(agentHealth);
             var agent = new GameCore.Agent(
                 game: this,
                 equipment: new GameCore.AgentEquipment(),
@@ -136,9 +136,9 @@ namespace GameCore
             projectileDeleted?.Invoke(projectile);
         }
 
-        public void SetEnemyParties()
-        {
-            this.enemyParties = agentsParties;
-        }
+        // public void SetEnemyParties()
+        // {
+        //     this.enemyParties = agentsParties;
+        // }
     }
 }

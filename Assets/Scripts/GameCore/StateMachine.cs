@@ -16,6 +16,8 @@ namespace GameCore.SM
         public virtual void Exit()
         {
             if (state != null) state.Exit();
+
+            state = null;
         }
     }
 

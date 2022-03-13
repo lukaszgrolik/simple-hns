@@ -6,6 +6,11 @@ namespace GameCore
 {
     public abstract class AgentControl : AgentComponent
     {
+        public AgentControl()
+        {
+
+        }
+
         public abstract void Setup();
     }
 
@@ -34,7 +39,7 @@ namespace GameCore
 
         public void OnUpdate()
         {
-            if (sm.State is IAgentAITickableState state)
+            if (sm.State != null && sm.State is IAgentAITickableState state)
             {
                 state.OnUpdate();
             }

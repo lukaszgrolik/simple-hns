@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -8,18 +9,87 @@ namespace MonoBehaviors
 {
     public class PlayerHealthUI
     {
+        private Image playerHealthImage;
+        private TMP_Text playerHealthText;
 
+        public PlayerHealthUI(
+            Image playerHealthImage,
+            TMP_Text playerHealthText
+        )
+        {
+            this.playerHealthImage = playerHealthImage;
+            this.playerHealthText = playerHealthText;
+        }
+
+        public void SetPlayerHealth(int currentPoints, int maxPoints)
+        {
+            playerHealthImage.fillAmount = (float)currentPoints / maxPoints;
+            playerHealthText.text = $"{currentPoints}/{maxPoints}";
+        }
     }
 
     public class EnemyHealthUI
     {
+        private GameObject enemyHealthObject;
+        private TMP_Text enemyNameText;
+        private Image enemyHealthImage;
 
+        public EnemyHealthUI(
+            GameObject enemyHealthObject,
+            TMP_Text enemyNameText,
+            Image enemyHealthImage
+        )
+        {
+            this.enemyHealthObject = enemyHealthObject;
+            this.enemyNameText = enemyNameText;
+            this.enemyHealthImage = enemyHealthImage;
+        }
+
+        public void ShowEnemyHealth(string name, int currentPoints, int maxPoints)
+        {
+            enemyNameText.text = name;
+            UpdateEnemyHealth(currentPoints, maxPoints);
+
+            enemyHealthObject.SetActive(true);
+        }
+
+        public void HideEnemyHealth()
+        {
+            enemyHealthObject.SetActive(false);
+        }
+
+        public void UpdateEnemyHealth(int currentPoints, int maxPoints)
+        {
+            enemyHealthImage.fillAmount = (float)currentPoints / maxPoints;
+        }
+    }
+
+    public class PlayerDeathUI
+    {
+        public PlayerDeathUI(
+            Button restartButton
+        )
+        {
+            restartButton.onClick.AddListener(OnRestartButtonClick);
+        }
+
+        void OnRestartButtonClick()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
     public class GameUI : MonoBehaviour
     {
         private GameplayManager gameplayManager;
 
+        private PlayerHealthUI playerHealthUI;
+        public PlayerHealthUI PlayerHealthUI => playerHealthUI;
+
+        private EnemyHealthUI enemyHealthUI;
+        public EnemyHealthUI EnemyHealthUI => enemyHealthUI;
+
+        private PlayerDeathUI playerDeathUI;
         private QuestsUI questsUI;
         private EquipmentUI equipmentUI;
 
@@ -31,6 +101,10 @@ namespace MonoBehaviors
         [SerializeField] private GameObject enemyHealthObject;
         [SerializeField] private TMP_Text enemyNameText;
         [SerializeField] private Image enemyHealthImage;
+
+        [Header("Player death")]
+        [SerializeField] private GameObject playerDeathPanel;
+        [SerializeField] private Button restartButton;
 
         [Header("Quests")]
         [SerializeField] private GameObject questsPanel;
@@ -50,6 +124,18 @@ namespace MonoBehaviors
         {
             this.gameplayManager = gameplayManager;
 
+            this.playerHealthUI = new PlayerHealthUI(
+                playerHealthImage,
+                playerHealthText
+            );
+            this.enemyHealthUI = new EnemyHealthUI(
+                enemyHealthObject,
+                enemyNameText,
+                enemyHealthImage
+            );
+            this.playerDeathUI = new PlayerDeathUI(
+                restartButton
+            );
             this.questsUI = new QuestsUI(
                 questItemPrefab,
                 questsContainer
@@ -70,28 +156,9 @@ namespace MonoBehaviors
             equipmentPanel.SetActive(false);
         }
 
-        public void SetPlayerHealth(int currentPoints, int maxPoints)
+        public void ShowPlayerDeathPanel()
         {
-            playerHealthImage.fillAmount = (float)currentPoints / maxPoints;
-            playerHealthText.text = $"{currentPoints}/{maxPoints}";
-        }
-
-        public void ShowEnemyHealth(string name, int currentPoints, int maxPoints)
-        {
-            enemyNameText.text = name;
-            UpdateEnemyHealth(currentPoints, maxPoints);
-
-            enemyHealthObject.SetActive(true);
-        }
-
-        public void HideEnemyHealth()
-        {
-            enemyHealthObject.SetActive(false);
-        }
-
-        public void UpdateEnemyHealth(int currentPoints, int maxPoints)
-        {
-            enemyHealthImage.fillAmount = (float)currentPoints / maxPoints;
+            playerDeathPanel.SetActive(true);
         }
 
         public void ToggleQuestsPanel()

@@ -46,22 +46,28 @@ namespace MonoBehaviors
 
             var ctrlAgentHealth = controlledAgent.Agent.health;
 
-            gameUI.SetPlayerHealth(ctrlAgentHealth.CurrentPoints, ctrlAgentHealth.MaxPoints);
-            gameUI.HideEnemyHealth();
+            gameUI.PlayerHealthUI.SetPlayerHealth(ctrlAgentHealth.CurrentPoints, ctrlAgentHealth.MaxPoints);
+            gameUI.EnemyHealthUI.HideEnemyHealth();
 
             ctrlAgentHealth.healthChanged += OnControlledAgentHealthPointsChanged;
+            ctrlAgentHealth.died += OnControlledAgentDied;
         }
 
         void OnControlledAgentHealthPointsChanged(GameCore.Agent agent)
         {
-            gameUI.SetPlayerHealth(agent.health.CurrentPoints, agent.health.MaxPoints);
+            gameUI.PlayerHealthUI.SetPlayerHealth(agent.health.CurrentPoints, agent.health.MaxPoints);
+        }
+
+        void OnControlledAgentDied(GameCore.Agent agent)
+        {
+            gameUI.ShowPlayerDeathPanel();
         }
 
         void OnPlayerAgentMouseEntered(GameCore.Agent agent)
         {
             if (controlledAgent.Agent.partyMember.AgentsParty.IsAliveEnemy(agent))
             {
-                gameUI.ShowEnemyHealth(agent.agentData.Name, agent.health.CurrentPoints, agent.health.MaxPoints);
+                gameUI.EnemyHealthUI.ShowEnemyHealth(agent.agentData.Name, agent.health.CurrentPoints, agent.health.MaxPoints);
 
                 agent.health.healthChanged += OnPlayerHoveredAgentHealthChanged;
             }
@@ -69,7 +75,7 @@ namespace MonoBehaviors
 
         void OnPlayerAgentMouseLeft(GameCore.Agent agent)
         {
-            gameUI.HideEnemyHealth();
+            gameUI.EnemyHealthUI.HideEnemyHealth();
 
             agent.health.healthChanged -= OnPlayerHoveredAgentHealthChanged;
         }
@@ -78,13 +84,13 @@ namespace MonoBehaviors
         {
             if (agent.health.CurrentPoints == 0)
             {
-                gameUI.HideEnemyHealth();
+                gameUI.EnemyHealthUI.HideEnemyHealth();
 
                 agent.health.healthChanged -= OnPlayerHoveredAgentHealthChanged;
             }
             else
             {
-                gameUI.UpdateEnemyHealth(agent.health.CurrentPoints, agent.health.MaxPoints);
+                gameUI.EnemyHealthUI.UpdateEnemyHealth(agent.health.CurrentPoints, agent.health.MaxPoints);
             }
         }
     }

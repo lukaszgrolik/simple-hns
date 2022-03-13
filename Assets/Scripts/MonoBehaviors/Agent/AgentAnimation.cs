@@ -16,6 +16,7 @@ namespace MonoBehaviors
             Movement,
             Attack,
             Casting,
+            Death,
         }
 
         private IEnumerator waitCoroutine;
@@ -33,6 +34,8 @@ namespace MonoBehaviors
 
             spriteModel.Animator.Play(AnimState.Idle.ToString());
 
+            agent.health.died += OnAgentDied;
+
             agent.movement.destinationChanged += OnAgentDestinationChanged;
             agent.movement.stopped += OnAgentStopped;
 
@@ -44,22 +47,27 @@ namespace MonoBehaviors
             // spriteModel.Animator.
         }
 
+        void OnAgentDied(GameCore.Agent agent)
+        {
+            PlayClip(AnimState.Death);
+        }
+
         void OnAgentDestinationChanged(Vector2 pos)
         {
             // Debug.Log("OnAgentDestinationChanged");
-            PlayClip(AnimState.Movement.ToString());
+            PlayClip(AnimState.Movement);
         }
 
         void OnAgentStopped()
         {
             // Debug.Log("OnAgentStopped");
-            PlayClip(AnimState.Idle.ToString());
+            PlayClip(AnimState.Idle);
         }
 
         void OnAgentMeleeAttackStarted()
         {
             // Debug.Log("OnAgentMeleeAttackStarted");
-            PlayClip(AnimState.Attack.ToString());
+            PlayClip(AnimState.Attack);
 
             Wait(1 / 2f);
         }
@@ -67,12 +75,12 @@ namespace MonoBehaviors
         void OnAgentCastingStarted()
         {
             // Debug.Log("OnAgentCastingStarted");
-            PlayClip(AnimState.Casting.ToString());
+            PlayClip(AnimState.Casting);
 
             Wait(1 / 2f);
         }
 
-        void PlayClip(string clipName)
+        void PlayClip(AnimState animState)
         {
             if (waitCoroutine != null)
             {
@@ -81,7 +89,7 @@ namespace MonoBehaviors
                 // Debug.Log("existing corout stopped");
             }
 
-            spriteModel.Animator.Play(clipName);
+            spriteModel.Animator.Play(animState.ToString());
         }
 
         void Wait(float val)

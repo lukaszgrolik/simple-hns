@@ -27,6 +27,7 @@ namespace MonoBehaviors
 
             agentController.Agent.movement.destinationChanged += OnDestinationChanged;
             agentController.Agent.movement.cancelled += OnCancelled;
+            agentController.Agent.movement.disabled += OnDisabled;
         }
 
         // public void SetDestination(Vector3 dest)
@@ -53,6 +54,11 @@ namespace MonoBehaviors
             if (movementTargetObj) Object.Destroy(movementTargetObj);
 
             navMeshAgent.ResetPath();
+        }
+
+        void OnDisabled()
+        {
+            navMeshAgent.enabled = false;
         }
 
         GameObject InstantiateMovementTarget(Vector3 dest)

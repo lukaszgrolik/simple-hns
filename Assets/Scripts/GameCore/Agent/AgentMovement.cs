@@ -4,6 +4,8 @@ namespace GameCore
 {
     public class AgentMovement
     {
+        private AgentHealth agentHealth;
+
         private bool isChangingDestination = false;
         public bool IsChangingDestination => isChangingDestination;
 
@@ -14,6 +16,14 @@ namespace GameCore
         public event System.Action cancelled;
         public event System.Action arrived;
         public event System.Action stopped;
+        public event System.Action disabled;
+
+        public AgentMovement(AgentHealth agentHealth)
+        {
+            this.agentHealth = agentHealth;
+
+            agentHealth.died += OnAgentDied;
+        }
 
         public void SetDestination(Vector2 pos)
         {
@@ -39,6 +49,13 @@ namespace GameCore
 
             arrived?.Invoke();
             stopped?.Invoke();
+        }
+
+        void OnAgentDied(Agent agent)
+        {
+            Cancel();
+
+            disabled?.Invoke();
         }
     }
 }
