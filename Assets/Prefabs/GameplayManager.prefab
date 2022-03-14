@@ -169,6 +169,8 @@ MonoBehaviour:
     prefab: {fileID: 8513934410253812705, guid: d467553556387f34ab66a024ab7cd155, type: 3}
   - agentType: 1
     prefab: {fileID: 662457297786407632, guid: e7a8569442e17d54f9563439817e683e, type: 3}
+  - agentType: 3
+    prefab: {fileID: 662457297786407632, guid: c99f0791bb7fb4741bac435aa4af0b8e, type: 3}
   itemModelPrefabs:
   - itemType: 0
     prefab: {fileID: 7131333464891160427, guid: 2c9440ba6729231449074ec5db622616, type: 3}

@@ -46,7 +46,8 @@ namespace MonoBehaviors
             {
                 [AgentType.Hero] = DataInstance.Agents.hero,
                 [AgentType.Warden] = DataInstance.Agents.warden,
-                [AgentType.Demon] = DataInstance.Agents.demon
+                [AgentType.Demon] = DataInstance.Agents.demon,
+                [AgentType.HoodedWarrior] = DataInstance.Agents.hoodedWarrior,
             };
             var agentData = dict_agentType_agentData[agentType];
 
@@ -83,6 +84,7 @@ namespace MonoBehaviors
             if (agent.agentData == DataInstance.Agents.hero) agentType = AgentType.Hero;
             else if (agent.agentData == DataInstance.Agents.warden) agentType = AgentType.Warden;
             else if (agent.agentData == DataInstance.Agents.demon) agentType = AgentType.Demon;
+            else if (agent.agentData == DataInstance.Agents.hoodedWarrior) agentType = AgentType.HoodedWarrior;
 
             // var obj = Instantiate(AgentPrefab, pos, rot, agentsContainer);
             // var projectile = obj.GetComponent<Projectile>();

@@ -11,6 +11,7 @@ namespace MonoBehaviors
         Hero,
         Demon,
         Warden,
+        HoodedWarrior,
     }
 
     [System.Serializable]

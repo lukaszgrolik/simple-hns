@@ -10,6 +10,7 @@ namespace DataInstance
         public static readonly DataDefinition.Agent smith = new DataDefinition.Agent("Smith");
 
         public static readonly DataDefinition.Agent demon = new DataDefinition.Agent("Demon");
+        public static readonly DataDefinition.Agent hoodedWarrior = new DataDefinition.Agent("Hooded Warrior");
         public static readonly DataDefinition.Agent zombie = new DataDefinition.Agent("Zombie");
         public static readonly DataDefinition.Agent skeleton = new DataDefinition.Agent("Skeleton");
         public static readonly DataDefinition.Agent skeletonArcher = new DataDefinition.Agent("Skeleton Archer");
