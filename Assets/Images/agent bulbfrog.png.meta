@@ -1,0 +1,720 @@
+fileFormatVersion: 2
+guid: 7315eb495daf7a7459075fecf6282102
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7712771869942589758
+    second: agent bulbfrog_0
+  - first:
+      213: 587492747281044430
+    second: agent bulbfrog_2
+  - first:
+      213: -43956184654564631
+    second: agent bulbfrog_3
+  - first:
+      213: -6359992429653322180
+    second: agent bulbfrog_4
+  - first:
+      213: -7859838272137198929
+    second: agent bulbfrog_5
+  - first:
+      213: -2936047167617754125
+    second: agent bulbfrog_6
+  - first:
+      213: 4259081889922293378
+    second: agent bulbfrog_7
+  - first:
+      213: 4399132700580912862
+    second: agent bulbfrog_8
+  - first:
+      213: 2741797263501692815
+    second: agent bulbfrog_9
+  - first:
+      213: 7868243369086206859
+    second: agent bulbfrog_10
+  - first:
+      213: -3081366739995659554
+    second: agent bulbfrog_11
+  - first:
+      213: -8061260098019526224
+    second: agent bulbfrog_12
+  - first:
+      213: -1869513989742559990
+    second: agent bulbfrog_13
+  - first:
+      213: 8840825866447112992
+    second: agent bulbfrog_14
+  - first:
+      213: -4767386585867579319
+    second: agent bulbfrog_15
+  - first:
+      213: 407597553898210475
+    second: agent bulbfrog_16
+  - first:
+      213: -812170207350391741
+    second: agent bulbfrog_17
+  - first:
+      213: 1906908335367602767
+    second: agent bulbfrog_18
+  - first:
+      213: 5264682940819841036
+    second: agent bulbfrog_19
+  - first:
+      213: -1202635680737000023
+    second: agent bulbfrog_20
+  - first:
+      213: -4282769600512208140
+    second: agent bulbfrog_21
+  - first:
+      213: 5234133567006390564
+    second: agent bulbfrog_22
+  - first:
+      213: -3272100266690077202
+    second: agent bulbfrog_23
+  - first:
+      213: -6084142756596552346
+    second: agent bulbfrog_24
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: 2
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: agent bulbfrog_0
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 624
+        width: 80
+        height: 98
+      alignment: 9
+      pivot: {x: 0.53217757, y: 0.4307855}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e39ad85d625490b60800000000000000
+      internalID: 7712771869942589758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent bulbfrog_2
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 624
+        width: 95
+        height: 91
+      alignment: 9
+      pivot: {x: 0.5, y: 0.45260787}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec31ecd7a81372800800000000000000
+      internalID: 587492747281044430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent bulbfrog_3
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 624
+        width: 81
+        height: 79
+      alignment: 9
+      pivot: {x: 0.5254242, y: 0.44967148}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e2bbfb3516d36ff0800000000000000
+      internalID: -43956184654564631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent bulbfrog_4
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 511
+        width: 91
+        height: 106
+      alignment: 9
+      pivot: {x: 0.528288, y: 0.43712977}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c361758f494ccb7a0800000000000000
+      internalID: -6359992429653322180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent bulbfrog_5
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 512
+        width: 104
+        height: 102
+      alignment: 9
+      pivot: {x: 0.48019835, y: 0.46436682}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fa20e351cbe3ce290800000000000000
+      internalID: -7859838272137198929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent bulbfrog_6
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 520
+        width: 90
+        height: 88
+      alignment: 9
+      pivot: {x: 0.51144105, y: 0.4387852}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fb1a5a28a01147d0800000000000000
+      internalID: -2936047167617754125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent bulbfrog_7
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 419
+        width: 70
+        height: 80
+      alignment: 9
+      pivot: {x: 0.9452449, y: 0.039396666}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 28e1e1ec96c4b1b30800000000000000
+      internalID: 4259081889922293378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent bulbfrog_8
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 395
+        width: 26
+        height: 105
+      alignment: 9
+      pivot: {x: 0.35184127, y: 0.020010812}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ede1ee132ebdc0d30800000000000000
+      internalID: 4399132700580912862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent bulbfrog_9
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 403
+        width: 81
+        height: 103
+      alignment: 9
+      pivot: {x: 0.08063328, y: 0.023799267}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8f0821a512dc0620800000000000000
+      internalID: 2741797263501692815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent bulbfrog_10
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 286
+        width: 94
+        height: 111
+      alignment: 9
+      pivot: {x: 0.67995065, y: 0.10522241}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b83c4bc08ad913d60800000000000000
+      internalID: 7868243369086206859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent bulbfrog_11
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 287
+        width: 63
+        height: 87
+      alignment: 9
+      pivot: {x: 0.4105009, y: 0.16202484}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed2fad79649cc35d0800000000000000
+      internalID: -3081366739995659554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent bulbfrog_12
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 279
+        width: 68
+        height: 98
+      alignment: 9
+      pivot: {x: 0.28085887, y: 0.0452065}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b9f387b6a6a02090800000000000000
+      internalID: -8061260098019526224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent bulbfrog_13
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 217
+        width: 60
+        height: 56
+      alignment: 9
+      pivot: {x: 0.62082416, y: 0.12226268}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0d75c27ee62e06e0800000000000000
+      internalID: -1869513989742559990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent bulbfrog_14
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 224
+        width: 40
+        height: 42
+      alignment: 9
+      pivot: {x: 0.3590393, y: 0.12466031}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02b4aaae84ce0ba70800000000000000
+      internalID: 8840825866447112992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent bulbfrog_15
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 144
+        width: 78
+        height: 61
+      alignment: 9
+      pivot: {x: 0.86660266, y: 0.5810114}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 940966aa827d6ddb0800000000000000
+      internalID: -4767386585867579319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent bulbfrog_16
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 148
+        width: 59
+        height: 58
+      alignment: 9
+      pivot: {x: 0.40443343, y: 0.75688595}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba4cb63d0d318a500800000000000000
+      internalID: 407597553898210475
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent bulbfrog_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 25
+        width: 108
+        height: 107
+      alignment: 9
+      pivot: {x: 0.54824424, y: 0.36708662}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 34c79bddf779ab4f0800000000000000
+      internalID: -812170207350391741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent bulbfrog_18
+      rect:
+        serializedVersion: 2
+        x: 132
+        y: 44
+        width: 120
+        height: 75
+      alignment: 9
+      pivot: {x: 0.48998007, y: 0.48095846}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4241dc1703b67a10800000000000000
+      internalID: 1906908335367602767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent bulbfrog_19
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 48
+        width: 44
+        height: 62
+      alignment: 9
+      pivot: {x: 0.5196769, y: 0.91697776}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0020aebd39ef0940800000000000000
+      internalID: 5264682940819841036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent bulbfrog_20
+      rect:
+        serializedVersion: 2
+        x: 330
+        y: 34
+        width: 47
+        height: 68
+      alignment: 9
+      pivot: {x: 0.5061399, y: 0.92519164}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a5067f58316f4fe0800000000000000
+      internalID: -1202635680737000023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent bulbfrog_21
+      rect:
+        serializedVersion: 2
+        x: 401
+        y: 37
+        width: 48
+        height: 68
+      alignment: 9
+      pivot: {x: 0.3015925, y: 0.91245997}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f2d0aa4dbb8094c0800000000000000
+      internalID: -4282769600512208140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent bulbfrog_22
+      rect:
+        serializedVersion: 2
+        x: 278
+        y: 13
+        width: 27
+        height: 18
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4293d506fb063a840800000000000000
+      internalID: 5234133567006390564
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent bulbfrog_23
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 0
+        width: 32
+        height: 17
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eed1a7ec42a2792d0800000000000000
+      internalID: -3272100266690077202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent bulbfrog_24
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 4
+        width: 29
+        height: 18
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66deb46e568c09ba0800000000000000
+      internalID: -6084142756596552346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: fea2a2e8ddecba34c85dfc06ca61703a
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

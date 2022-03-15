@@ -1,0 +1,456 @@
+fileFormatVersion: 2
+guid: 58f28d83825c29c459f20ccad70e3197
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8121691629104530932
+    second: agent crab_0
+  - first:
+      213: -8325336699365675137
+    second: agent crab_1
+  - first:
+      213: 5615356215417505825
+    second: agent crab_2
+  - first:
+      213: -6134376800235834489
+    second: agent crab_3
+  - first:
+      213: -5416449403083811262
+    second: agent crab_4
+  - first:
+      213: -237844494176892589
+    second: agent crab_5
+  - first:
+      213: 5052065564876600143
+    second: agent crab_6
+  - first:
+      213: 8070989017333361808
+    second: agent crab_7
+  - first:
+      213: 988350470059767690
+    second: agent crab_8
+  - first:
+      213: 2199716371547897455
+    second: agent crab_9
+  - first:
+      213: -2283391422759660591
+    second: agent crab_10
+  - first:
+      213: -6555468864249293556
+    second: agent crab_11
+  - first:
+      213: -8928429984370830766
+    second: agent crab_12
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: 2
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: agent crab_0
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 637
+        width: 97
+        height: 152
+      alignment: 9
+      pivot: {x: 0.917213, y: 0.3644558}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f50a00918b06b070800000000000000
+      internalID: 8121691629104530932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent crab_1
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 713
+        width: 41
+        height: 76
+      alignment: 9
+      pivot: {x: 0.052570622, y: 0.16518764}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7f29c6a166767c80800000000000000
+      internalID: -8325336699365675137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent crab_2
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 714
+        width: 23
+        height: 90
+      alignment: 9
+      pivot: {x: 0.64657193, y: 0.06656765}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1280e3bf9b0cded40800000000000000
+      internalID: 5615356215417505825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent crab_3
+      rect:
+        serializedVersion: 2
+        x: 634
+        y: 735
+        width: 27
+        height: 41
+      alignment: 9
+      pivot: {x: 0.46314156, y: 0.5647226}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 783bb8f2dc05edaa0800000000000000
+      internalID: -6134376800235834489
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent crab_4
+      rect:
+        serializedVersion: 2
+        x: 667
+        y: 719
+        width: 26
+        height: 95
+      alignment: 9
+      pivot: {x: 0.2869873, y: 0.053894043}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 246105927f7e4d4b0800000000000000
+      internalID: -5416449403083811262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent crab_5
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 740
+        width: 27
+        height: 41
+      alignment: 9
+      pivot: {x: 0.46314156, y: 0.48381674}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 359cdc451b103bcf0800000000000000
+      internalID: -237844494176892589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent crab_6
+      rect:
+        serializedVersion: 2
+        x: 741
+        y: 746
+        width: 42
+        height: 58
+      alignment: 9
+      pivot: {x: 0.55809677, y: 0.13815098}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f43f3704dda8c1640800000000000000
+      internalID: 5052065564876600143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent crab_7
+      rect:
+        serializedVersion: 2
+        x: 837
+        y: 770
+        width: 60
+        height: 20
+      alignment: 9
+      pivot: {x: 0.094966635, y: 0.62601316}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09ceb34dfb9e10070800000000000000
+      internalID: 8070989017333361808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent crab_8
+      rect:
+        serializedVersion: 2
+        x: 743
+        y: 658
+        width: 78
+        height: 79
+      alignment: 9
+      pivot: {x: 0.047192696, y: 0.33234724}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a87b089148357bd00800000000000000
+      internalID: 988350470059767690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent crab_9
+      rect:
+        serializedVersion: 2
+        x: 839
+        y: 733
+        width: 72
+        height: 22
+      alignment: 9
+      pivot: {x: 0.025553385, y: 0.47828257}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6e39b4a266f68e10800000000000000
+      internalID: 2199716371547897455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent crab_10
+      rect:
+        serializedVersion: 2
+        x: 578
+        y: 641
+        width: 135
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5000005, y: 0.39716625}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d39c335993cf40e0800000000000000
+      internalID: -2283391422759660591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent crab_11
+      rect:
+        serializedVersion: 2
+        x: 842
+        y: 702
+        width: 67
+        height: 17
+      alignment: 9
+      pivot: {x: 0.029379774, y: 0.67121077}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c059942eccb4605a0800000000000000
+      internalID: -6555468864249293556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent crab_12
+      rect:
+        serializedVersion: 2
+        x: 614
+        y: 603
+        width: 66
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25251abeb38d71480800000000000000
+      internalID: -8928429984370830766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 4625e57aa75315e40b796864e9ec889b
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

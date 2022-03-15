@@ -1,0 +1,432 @@
+fileFormatVersion: 2
+guid: ba4bd6deb507f5a4b9a72fdee232499e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8569714107070855801
+    second: agent ent_0
+  - first:
+      213: -1296221553436853093
+    second: agent ent_1
+  - first:
+      213: -7674882435708717080
+    second: agent ent_2
+  - first:
+      213: 1669517381636130402
+    second: agent ent_3
+  - first:
+      213: -764152388333873041
+    second: agent ent_4
+  - first:
+      213: 4927463149311390863
+    second: agent ent_5
+  - first:
+      213: -3050812937686292599
+    second: agent ent_6
+  - first:
+      213: -5491435747831333784
+    second: agent ent_7
+  - first:
+      213: -4620470136836709542
+    second: agent ent_8
+  - first:
+      213: -5890493569373144017
+    second: agent ent_9
+  - first:
+      213: 9132082462640841350
+    second: agent ent_10
+  - first:
+      213: 7272378166253702428
+    second: agent ent_11
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: 2
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: agent ent_0
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 270
+        width: 80
+        height: 117
+      alignment: 9
+      pivot: {x: 0.42933902, y: 0.027997922}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97abc9a739dbde670800000000000000
+      internalID: 8569714107070855801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent ent_1
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 314
+        width: 113
+        height: 117
+      alignment: 9
+      pivot: {x: 0.3949458, y: 0.26975816}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9cf0356d55e20ee0800000000000000
+      internalID: -1296221553436853093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent ent_2
+      rect:
+        serializedVersion: 2
+        x: 297
+        y: 257
+        width: 105
+        height: 128
+      alignment: 9
+      pivot: {x: 0.47825783, y: 0.22177052}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e772b686175d7590800000000000000
+      internalID: -7674882435708717080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent ent_3
+      rect:
+        serializedVersion: 2
+        x: 69
+        y: 180
+        width: 59
+        height: 61
+      alignment: 9
+      pivot: {x: 0.56393784, y: 0.34258658}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26603ce86315b2710800000000000000
+      internalID: 1669517381636130402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent ent_4
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 240
+        width: 69
+        height: 68
+      alignment: 9
+      pivot: {x: 0.48676553, y: 0.3589971}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f68d713937f2565f0800000000000000
+      internalID: -764152388333873041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent ent_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 163
+        width: 62
+        height: 68
+      alignment: 9
+      pivot: {x: 0.5553127, y: 0.37896392}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f847882a0add16440800000000000000
+      internalID: 4927463149311390863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent ent_6
+      rect:
+        serializedVersion: 2
+        x: 151
+        y: 181
+        width: 45
+        height: 54
+      alignment: 9
+      pivot: {x: 0.84293854, y: 0.042749193}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 987ea0d0cc559a5d0800000000000000
+      internalID: -3050812937686292599
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent ent_7
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 121
+        width: 88
+        height: 96
+      alignment: 9
+      pivot: {x: 0.3147434, y: 0.08166615}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86cb1af38408ac3b0800000000000000
+      internalID: -5491435747831333784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent ent_8
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 96
+        width: 85
+        height: 125
+      alignment: 9
+      pivot: {x: 0.032206815, y: 0.9580635}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a532c8e04eac0efb0800000000000000
+      internalID: -4620470136836709542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent ent_9
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 35
+        width: 111
+        height: 122
+      alignment: 9
+      pivot: {x: 0.954248, y: 0.95745987}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2c7acdce43c04ea0800000000000000
+      internalID: -5890493569373144017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent ent_10
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 0
+        width: 49
+        height: 111
+      alignment: 9
+      pivot: {x: 0.9257943, y: 0.97104055}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 682284dad9cabbe70800000000000000
+      internalID: 9132082462640841350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent ent_11
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 6
+        width: 54
+        height: 94
+      alignment: 9
+      pivot: {x: 0.16737479, y: 0.9601573}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1dcbd7596dace460800000000000000
+      internalID: 7272378166253702428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 4d9eebc228f8ef847bde42172b4bd5ee
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

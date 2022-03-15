@@ -7,6 +7,25 @@ namespace MonoBehaviors
 {
     class GameplayManagerAgentEntities
     {
+        private Dictionary<AgentType, DataDefinition.Agent> dict_agentType_agentData = new Dictionary<AgentType, DataDefinition.Agent>()
+        {
+            [AgentType.Hero] = DataInstance.Agents.hero,
+            [AgentType.Warden] = DataInstance.Agents.warden,
+            [AgentType.Demon] = DataInstance.Agents.demon,
+            [AgentType.Warrior] = DataInstance.Agents.Warrior,
+            [AgentType.HoodedWarrior] = DataInstance.Agents.HoodedWarrior,
+            [AgentType.Bulbfrog] = DataInstance.Agents.Bulbfrog,
+            [AgentType.Ent] = DataInstance.Agents.Ent,
+            [AgentType.Skeleton] = DataInstance.Agents.Skeleton,
+            [AgentType.SkeletonArcher] = DataInstance.Agents.SkeletonArcher,
+            [AgentType.SkeletonMage] = DataInstance.Agents.SkeletonMage,
+            [AgentType.Zombie] = DataInstance.Agents.Zombie,
+            [AgentType.Butterfly] = DataInstance.Agents.Butterfly,
+            [AgentType.Crab] = DataInstance.Agents.Crab,
+            [AgentType.WalkingShroom] = DataInstance.Agents.WalkingShroom,
+        };
+        private Dictionary<DataDefinition.Agent, AgentType> dict_agentData_agentType = new Dictionary<DataDefinition.Agent, AgentType>();
+
         private GameplayManager gameplayManager;
 
         private GameObject agentPrefab;
@@ -29,6 +48,11 @@ namespace MonoBehaviors
             GameCore.AgentsParty monsterParty
         )
         {
+            foreach (var item in dict_agentType_agentData)
+            {
+                dict_agentData_agentType.Add(item.Value, item.Key);
+            }
+
             this.gameplayManager = gameplayManager;
 
             this.agentPrefab = agentPrefab;
@@ -42,13 +66,7 @@ namespace MonoBehaviors
 
         public GameCore.Agent CreateAgent(GameCore.Game game, AgentType agentType)
         {
-            var dict_agentType_agentData = new Dictionary<AgentType, DataDefinition.Agent>()
-            {
-                [AgentType.Hero] = DataInstance.Agents.hero,
-                [AgentType.Warden] = DataInstance.Agents.warden,
-                [AgentType.Demon] = DataInstance.Agents.demon,
-                [AgentType.HoodedWarrior] = DataInstance.Agents.hoodedWarrior,
-            };
+
             var agentData = dict_agentType_agentData[agentType];
 
             GameCore.AgentsParty agentsParty = null;
@@ -80,11 +98,7 @@ namespace MonoBehaviors
 
         public void OnAgentSpawned(GameCore.Agent agent, Vector3 pos, Quaternion rot)
         {
-            AgentType agentType = AgentType.Hero;
-            if (agent.agentData == DataInstance.Agents.hero) agentType = AgentType.Hero;
-            else if (agent.agentData == DataInstance.Agents.warden) agentType = AgentType.Warden;
-            else if (agent.agentData == DataInstance.Agents.demon) agentType = AgentType.Demon;
-            else if (agent.agentData == DataInstance.Agents.hoodedWarrior) agentType = AgentType.HoodedWarrior;
+            var agentType = dict_agentData_agentType[agent.agentData];
 
             // var obj = Instantiate(AgentPrefab, pos, rot, agentsContainer);
             // var projectile = obj.GetComponent<Projectile>();

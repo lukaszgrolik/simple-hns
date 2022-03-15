@@ -11,7 +11,17 @@ namespace MonoBehaviors
         Hero,
         Demon,
         Warden,
+        Warrior,
         HoodedWarrior,
+        Bulbfrog,
+        Ent,
+        Skeleton,
+        SkeletonArcher,
+        SkeletonMage,
+        Zombie,
+        Butterfly,
+        Crab,
+        WalkingShroom,
     }
 
     [System.Serializable]

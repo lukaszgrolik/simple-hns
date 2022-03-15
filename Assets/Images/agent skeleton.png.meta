@@ -1,0 +1,408 @@
+fileFormatVersion: 2
+guid: c6142881a32a3ec43aae0a1a27262aa4
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3641800442565220036
+    second: agent skeleton_0
+  - first:
+      213: -2053665702002410376
+    second: agent skeleton_1
+  - first:
+      213: -4320177599690968177
+    second: agent skeleton_3
+  - first:
+      213: 3371426108530950181
+    second: agent skeleton_4
+  - first:
+      213: -2061102862068280496
+    second: agent skeleton_6
+  - first:
+      213: 7124028038997866721
+    second: agent skeleton_7
+  - first:
+      213: 1081278626134990136
+    second: agent skeleton_8
+  - first:
+      213: -794415303351511945
+    second: agent skeleton_9
+  - first:
+      213: -2079954007289115616
+    second: agent skeleton_10
+  - first:
+      213: 3170033167443359596
+    second: agent skeleton_11
+  - first:
+      213: -1231307835318670004
+    second: agent skeleton_12
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: 2
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: agent skeleton_0
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 287
+        width: 66
+        height: 79
+      alignment: 9
+      pivot: {x: 0.46953472, y: 0.34365112}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c6d5f915364a8230800000000000000
+      internalID: 3641800442565220036
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent skeleton_1
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 325
+        width: 37
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87c3eb0cce9ef73e0800000000000000
+      internalID: -2053665702002410376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent skeleton_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 187
+        width: 62
+        height: 89
+      alignment: 9
+      pivot: {x: 0.55964154, y: 0.06997715}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f83f1d3cc55ab04c0800000000000000
+      internalID: -4320177599690968177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent skeleton_4
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 215
+        width: 10
+        height: 52
+      alignment: 9
+      pivot: {x: 0.6660789, y: 0.96629864}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5200771ee26b9ce20800000000000000
+      internalID: 3371426108530950181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent skeleton_6
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 193
+        width: 15
+        height: 17
+      alignment: 9
+      pivot: {x: 0.51370037, y: 0.548356}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 05311ecfddd7563e0800000000000000
+      internalID: -2061102862068280496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent skeleton_7
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 106
+        width: 20
+        height: 73
+      alignment: 9
+      pivot: {x: 0.4537653, y: 0.92223495}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e8f36ab1c1add260800000000000000
+      internalID: 7124028038997866721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent skeleton_8
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 130
+        width: 9
+        height: 56
+      alignment: 9
+      pivot: {x: 0.4314982, y: 0.94771385}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83d9ffd7e29710f00800000000000000
+      internalID: 1081278626134990136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent skeleton_9
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 85
+        width: 21
+        height: 20
+      alignment: 9
+      pivot: {x: 0.52201664, y: 0.5231174}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77459979d7ba9f4f0800000000000000
+      internalID: -794415303351511945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent skeleton_10
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 103
+        width: 26
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.53574103}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02cc166b9d48223e0800000000000000
+      internalID: -2079954007289115616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent skeleton_11
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 21
+        width: 11
+        height: 59
+      alignment: 9
+      pivot: {x: 0.5000007, y: 0.94969666}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c67faa7ce583efb20800000000000000
+      internalID: 3170033167443359596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent skeleton_12
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 0
+        width: 31
+        height: 17
+      alignment: 9
+      pivot: {x: 0.5682218, y: 0.5904755}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4decaa2c0489eee0800000000000000
+      internalID: -1231307835318670004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: fee5d163d5eb034408eee80a58f966b5
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

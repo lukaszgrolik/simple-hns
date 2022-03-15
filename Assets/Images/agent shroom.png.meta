@@ -1,0 +1,600 @@
+fileFormatVersion: 2
+guid: 3033c5c0e2766a943bc54a25185cd83c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8517582918514267740
+    second: agent shroom_0
+  - first:
+      213: 5071094602475721695
+    second: agent shroom_1
+  - first:
+      213: 5908343087194860274
+    second: agent shroom_2
+  - first:
+      213: 918277808779110476
+    second: agent shroom_3
+  - first:
+      213: -5694251375746253367
+    second: agent shroom_4
+  - first:
+      213: -3552101102315734693
+    second: agent shroom_5
+  - first:
+      213: -1928879040636854862
+    second: agent shroom_6
+  - first:
+      213: -6967661613356534322
+    second: agent shroom_7
+  - first:
+      213: 3536178344928919374
+    second: agent shroom_8
+  - first:
+      213: 3682387258923474702
+    second: agent shroom_9
+  - first:
+      213: 422224511723372247
+    second: agent shroom_10
+  - first:
+      213: -9156660709214348667
+    second: agent shroom_11
+  - first:
+      213: -900487973662894004
+    second: agent shroom_12
+  - first:
+      213: 3625204526796522332
+    second: agent shroom_13
+  - first:
+      213: 3307955095743412842
+    second: agent shroom_14
+  - first:
+      213: 647004202018184194
+    second: agent shroom_15
+  - first:
+      213: 547134064649396537
+    second: agent shroom_16
+  - first:
+      213: -4783518079754101326
+    second: agent shroom_17
+  - first:
+      213: -1007018594415758870
+    second: agent shroom_18
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: 2
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: agent shroom_0
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 481
+        width: 39
+        height: 44
+      alignment: 9
+      pivot: {x: 0.5191786, y: 0.14868511}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c565afa4988843670800000000000000
+      internalID: 8517582918514267740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent shroom_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 484
+        width: 51
+        height: 38
+      alignment: 9
+      pivot: {x: 0.48533422, y: 0.20475288}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd357f25ca5206640800000000000000
+      internalID: 5071094602475721695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent shroom_2
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 488
+        width: 30
+        height: 25
+      alignment: 9
+      pivot: {x: 0.49169007, y: 0.30054566}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2fa626bebb6aef150800000000000000
+      internalID: 5908343087194860274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent shroom_3
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 485
+        width: 43
+        height: 34
+      alignment: 9
+      pivot: {x: 0.4652114, y: 0.25801444}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4827654dc06ebc00800000000000000
+      internalID: 918277808779110476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent shroom_4
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 485
+        width: 34
+        height: 27
+      alignment: 9
+      pivot: {x: 0.4266712, y: 0.29685238}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cd7dde0b84f9f0b0800000000000000
+      internalID: -5694251375746253367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent shroom_5
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 487
+        width: 39
+        height: 38
+      alignment: 9
+      pivot: {x: 0.5343878, y: 0.24790633}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5972360ed664bec0800000000000000
+      internalID: -3552101102315734693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent shroom_6
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 289
+        width: 226
+        height: 64
+      alignment: 9
+      pivot: {x: 0.5014952, y: 0.36272287}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bdd4207bbe3b35e0800000000000000
+      internalID: -1928879040636854862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent shroom_7
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 349
+        width: 225
+        height: 119
+      alignment: 9
+      pivot: {x: 0.4900352, y: 0.10433935}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec532cccda4ed4f90800000000000000
+      internalID: -6967661613356534322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent shroom_8
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 194
+        width: 62
+        height: 91
+      alignment: 9
+      pivot: {x: 0.53432363, y: 0.18262708}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e4fbaef1877031130800000000000000
+      internalID: 3536178344928919374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent shroom_9
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 211
+        width: 45
+        height: 30
+      alignment: 9
+      pivot: {x: 0.55837977, y: 0.3832433}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0fde8da3b77a1330800000000000000
+      internalID: 3682387258923474702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent shroom_10
+      rect:
+        serializedVersion: 2
+        x: 261
+        y: 212
+        width: 46
+        height: 31
+      alignment: 9
+      pivot: {x: 0.32867032, y: 0.29284915}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7defbb4d4fa0cd500800000000000000
+      internalID: 422224511723372247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent shroom_11
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 91
+        width: 75
+        height: 100
+      alignment: 9
+      pivot: {x: 0.4675358, y: 0.06173378}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58a908a59910de080800000000000000
+      internalID: -9156660709214348667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent shroom_12
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 166
+        width: 60
+        height: 23
+      alignment: 9
+      pivot: {x: 0.4659457, y: 0.50000066}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c48df4d75f2d083f0800000000000000
+      internalID: -900487973662894004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent shroom_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 102
+        width: 53
+        height: 45
+      alignment: 9
+      pivot: {x: 0.66625816, y: 0.44560632}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5348d95f405f4230800000000000000
+      internalID: 3625204526796522332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent shroom_14
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 108
+        width: 40
+        height: 20
+      alignment: 9
+      pivot: {x: 0.89713365, y: 0.45417672}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6ababe12a738ed20800000000000000
+      internalID: 3307955095743412842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent shroom_15
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 114
+        width: 36
+        height: 20
+      alignment: 9
+      pivot: {x: 0.084198, y: 0.43890268}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20c9a7dc4ee9af800800000000000000
+      internalID: 647004202018184194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent shroom_16
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 107
+        width: 51
+        height: 38
+      alignment: 9
+      pivot: {x: 0.3752154, y: 0.47423452}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93161ff688fc79700800000000000000
+      internalID: 547134064649396537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent shroom_17
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 1
+        width: 45
+        height: 75
+      alignment: 9
+      pivot: {x: 0.60821396, y: 0.93015003}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bd199f86a78d9db0800000000000000
+      internalID: -4783518079754101326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: agent shroom_18
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 0
+        width: 48
+        height: 80
+      alignment: 9
+      pivot: {x: 0.3985494, y: 0.90326595}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae1b2ad7ce95602f0800000000000000
+      internalID: -1007018594415758870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 70d645f10abf80049b1fa5f5f0a0beed
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

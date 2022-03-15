@@ -10,11 +10,17 @@ namespace DataInstance
         public static readonly DataDefinition.Agent smith = new DataDefinition.Agent("Smith");
 
         public static readonly DataDefinition.Agent demon = new DataDefinition.Agent("Demon");
-        public static readonly DataDefinition.Agent hoodedWarrior = new DataDefinition.Agent("Hooded Warrior");
-        public static readonly DataDefinition.Agent zombie = new DataDefinition.Agent("Zombie");
-        public static readonly DataDefinition.Agent skeleton = new DataDefinition.Agent("Skeleton");
-        public static readonly DataDefinition.Agent skeletonArcher = new DataDefinition.Agent("Skeleton Archer");
-        public static readonly DataDefinition.Agent skeletonMage = new DataDefinition.Agent("Skeleton Mage");
+        public static readonly DataDefinition.Agent Warrior = new DataDefinition.Agent("Warrior");
+        public static readonly DataDefinition.Agent HoodedWarrior = new DataDefinition.Agent("Hooded Warrior");
+        public static readonly DataDefinition.Agent Zombie = new DataDefinition.Agent("Zombie");
+        public static readonly DataDefinition.Agent Skeleton = new DataDefinition.Agent("Skeleton");
+        public static readonly DataDefinition.Agent SkeletonArcher = new DataDefinition.Agent("Skeleton Archer");
+        public static readonly DataDefinition.Agent SkeletonMage = new DataDefinition.Agent("Skeleton Mage");
+        public static readonly DataDefinition.Agent Bulbfrog = new DataDefinition.Agent("Bulbfrog");
+        public static readonly DataDefinition.Agent Ent = new DataDefinition.Agent("Ent");
+        public static readonly DataDefinition.Agent Butterfly = new DataDefinition.Agent("Butterfly");
+        public static readonly DataDefinition.Agent Crab = new DataDefinition.Agent("Crab");
+        public static readonly DataDefinition.Agent WalkingShroom = new DataDefinition.Agent("Walking Shroom");
     }
 
     class ItemCategories
