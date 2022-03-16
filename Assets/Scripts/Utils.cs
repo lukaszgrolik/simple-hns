@@ -22,6 +22,15 @@ public static class Utils {
         return foundList;
     }
 
+    public static float RandomValueWithDeviation(float value, float deviation)
+    {
+        if (deviation == 0) return value;
+
+        var portion = value * deviation;
+
+        return value + Random.Range(-portion, portion);
+    }
+
     public static List<T> FindColliders<T>(Vector3 pos, float radius)
     {
         var colls = Physics.OverlapSphere(pos, radius);

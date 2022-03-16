@@ -10,6 +10,8 @@ namespace MonoBehaviors
         private GameCore.Agent agent;
         //     private AgentController agentController;
 
+        [SerializeField] private SphereCollider sphereCollider;
+
         // public void Setup(AgentController agentController)
         public void Setup(
             GameplayManager gameplayManager,
@@ -21,6 +23,8 @@ namespace MonoBehaviors
             // this.agentController = agentController;
 
             // agentController.Health.died.AddListener(OnAgentDied);
+
+            sphereCollider.radius = agent.agentDetection.SightRadius;
         }
 
         void OnTriggerEnter(Collider coll)

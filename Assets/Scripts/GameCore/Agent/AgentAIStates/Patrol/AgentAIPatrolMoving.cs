@@ -8,7 +8,8 @@ namespace GameCore.AgentAI.States.PatrolStates
     {
         private Agent agent;
 
-        private float radius = 5f;
+        private float radiusMin = 3f;
+        private float radiusMax = 6f;
 
         public Moving(SM.StateMachine stateMachine, Agent agent) : base(stateMachine)
         {
@@ -28,14 +29,12 @@ namespace GameCore.AgentAI.States.PatrolStates
 
         Vector3 GetRandomPos()
         {
-            var randomPos = Random.insideUnitCircle * radius;
+            // var currentPos = agent.game.GetPosition(agent);
+            var originPos = agent.groupMember.AgentsGroup.GetCenter();
+            var circlePos = Random.insideUnitCircle.normalized * Random.Range(radiusMin, radiusMax);
+            var endPos = originPos + new Vector3(circlePos.x, 0, circlePos.y);
 
-            // return agent.transform.position + new Vector3(randomPos.x, 0, randomPos.y);
-            // Debug.Log($"game: {agent.game}");
-            var pos = agent.game.GetPosition(agent);
-            // Debug.Log($"pos: {pos}");
-
-            return pos + new Vector3(randomPos.x, 0, randomPos.y);
+            return endPos;
         }
 
         void OnAgentArrived()

@@ -4,12 +4,11 @@ namespace GameCore
 {
     public class AgentHealth : AgentComponent
     {
-        // @todo magic number
-        private int maxPoints = 100;
-        public int MaxPoints => maxPoints;
+        private float maxPoints;
+        public float MaxPoints => maxPoints;
 
-        private int currentPoints;
-        public int CurrentPoints => currentPoints;
+        private float currentPoints;
+        public float CurrentPoints => currentPoints;
 
         public bool isAlive => currentPoints > 0;
         public bool isDead => isAlive == false;
@@ -18,12 +17,14 @@ namespace GameCore
 
         public event System.Action<Agent> died;
 
-        public AgentHealth()
+        public AgentHealth(float maxPoints)
         {
+            this.maxPoints = maxPoints;
+
             currentPoints = maxPoints;
         }
 
-        public void TakeDamage(int damagePoints)
+        public void TakeDamage(float damagePoints)
         {
             currentPoints -= damagePoints;
             if (currentPoints < 0) currentPoints = 0;

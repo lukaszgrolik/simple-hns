@@ -69,6 +69,16 @@ namespace MonoBehaviors
             {
                 gameplayManager.GameUI.ToggleEquipmentPanel();
             }
+            else if (Input.GetKeyUp(KeyCode.Q))
+            {
+                agentCtrl.SetActiveSkill(agentCtrl.skills[2]);
+                agentCtrl.Attack(mouseHover.GroundHitPoint.With(y: 0));
+            }
+            else if (Input.GetKeyUp(KeyCode.W))
+            {
+                agentCtrl.SetActiveSkill(agentCtrl.skills[3]);
+                agentCtrl.Attack(mouseHover.GroundHitPoint.With(y: 0));
+            }
             else if (Input.GetKey(KeyCode.LeftShift))
             {
                 if (Input.GetMouseButton(0))
@@ -86,7 +96,7 @@ namespace MonoBehaviors
                 else if (mouseHover.GroundHitFound)
                 {
                     // agent.Movement.SetDestination(mouseHover.GroundHitPoint.With(y: 0));
-                    agentCtrl.SetDestination(new Vector2(mouseHover.GroundHitPoint.x, mouseHover.GroundHitPoint.z));
+                    agentCtrl.SetDestination(new Vector3(mouseHover.GroundHitPoint.x, 0, mouseHover.GroundHitPoint.z));
                 }
             }
             else if (Input.GetMouseButton(1))

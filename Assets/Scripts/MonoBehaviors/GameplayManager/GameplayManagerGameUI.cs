@@ -67,7 +67,7 @@ namespace MonoBehaviors
         {
             if (controlledAgent.Agent.partyMember.AgentsParty.IsAliveEnemy(agent))
             {
-                gameUI.EnemyHealthUI.ShowEnemyHealth(agent.agentData.Name, agent.health.CurrentPoints, agent.health.MaxPoints);
+                gameUI.EnemyHealthUI.ShowEnemyHealth(agent.agentData.name, agent.health.CurrentPoints, agent.health.MaxPoints);
 
                 agent.health.healthChanged += OnPlayerHoveredAgentHealthChanged;
             }

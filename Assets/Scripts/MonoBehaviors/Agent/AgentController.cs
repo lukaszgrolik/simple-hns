@@ -98,7 +98,7 @@ namespace MonoBehaviors
             }
         }
 
-        public void SetDestination(Vector2 pos) { agent.movement.SetDestination(pos); }
+        public void SetDestination(Vector3 pos) { agent.movement.SetDestination(pos); }
         public void CancelMovement() {}
         public void MarkArrived() { agent.movement.MarkArrived(); }
 

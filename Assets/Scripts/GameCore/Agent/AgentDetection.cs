@@ -6,6 +6,9 @@ namespace GameCore
 {
     public class AgentDetection : AgentComponent
     {
+        private float sightRadius;
+        public float SightRadius => sightRadius;
+
         public readonly List<Agent> agents = new List<Agent>();
 
         public readonly List<Agent> enemies = new List<Agent>();
@@ -15,6 +18,11 @@ namespace GameCore
 
         public event System.Action<Agent> enemyDetected;
         public event System.Action<Agent> enemyLost;
+
+        public AgentDetection(float sightRadius)
+        {
+            this.sightRadius = sightRadius;
+        }
 
         public void AddDetectedAgent(Agent otherAgent)
         {

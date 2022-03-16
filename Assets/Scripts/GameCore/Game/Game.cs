@@ -27,6 +27,8 @@ namespace GameCore
     {
         public readonly EngineTime engineTime = new EngineTime();
 
+        private readonly List<AgentsGroup> agentsGroups = new List<AgentsGroup>();
+
         private readonly List<Agent> agents = new List<Agent>();
         private readonly List<Projectile> projectiles = new List<Projectile>();
 
@@ -83,16 +85,59 @@ namespace GameCore
                 projectiles[i].OnUpdate(deltaTime);
         }
 
+        public GameCore.AgentsGroup CreateAgentsGroup()
+        {
+            return new AgentsGroup(this);
+        }
+
         public GameCore.Agent CreateAgent(
             DataDefinition.Agent agentData,
+            AgentsGroup agentsGroup,
             GameCore.AgentsParty agentsParty,
             GameCore.AgentControl agentControl
         )
         {
-            var agentHealth = new GameCore.AgentHealth();
-            var agentMovement = new GameCore.AgentMovement(agentHealth);
+            var agentHealth = new GameCore.AgentHealth(
+                maxPoints: Utils.RandomValueWithDeviation(agentData.health, agentData.healthDeviation)
+            );
+            var agentMovement = new GameCore.AgentMovement(
+                agentHealth: agentHealth,
+                walkingSpeed: Utils.RandomValueWithDeviation(agentData.walkingSpeed, agentData.speedDeviation),
+                runningSpeed: Utils.RandomValueWithDeviation(agentData.runningSpeed, agentData.speedDeviation)
+            );
+
+            var combat = new GameCore.AgentCombat(
+                game: this,
+                movement: agentMovement
+            );
+            var combatSkills = new List<Skill>();
+
+            // Debug.Log($"agentData: {agentData.name} | agentData.skills.Count: {agentData.skills.Count}");
+            for (int i = 0; i < agentData.skills.Count; i++)
+            {
+                var skill = agentData.skills[i];
+
+                // Debug.Log($"skill: {skill}");
+                // Debug.Log($"skill.name: {skill.name}");
+                // Debug.Log($"skill.GetType(): {skill.GetType()}");
+                // Debug.Log($"typeof(DataDefinition.Skill_Melee): {typeof(DataDefinition.Skill_Melee)}");
+                if (skill.GetType() == typeof(DataDefinition.Skill_Melee))
+                    combatSkills.Add(new MeleeAttackSkill(combat, skill as DataDefinition.Skill_Melee));
+                else if (skill.GetType() == typeof(DataDefinition.Skill_Custom))
+                    combatSkills.Add(new CustomSkill(combat, skill as DataDefinition.Skill_Custom));
+                else if (skill.GetType() == typeof(DataDefinition.Skill_Bow))
+                    combatSkills.Add(new BowSkill(combat, skill as DataDefinition.Skill_Bow));
+                else if (skill.GetType() == typeof(DataDefinition.Skill_CastProjectile))
+                    combatSkills.Add(new ProjectileSkill(combat, skill as DataDefinition.Skill_CastProjectile));
+                else if (skill.GetType() == typeof(DataDefinition.Skill_SummonAgent))
+                    combatSkills.Add(new SummonSkill(combat, skill as DataDefinition.Skill_SummonAgent));
+            }
+
             var agent = new GameCore.Agent(
                 game: this,
+                groupMember: new AgentGroupMember(
+                    agentsGroup: agentsGroup
+                ),
                 equipment: new GameCore.AgentEquipment(),
                 health: agentHealth,
                 drop: new GameCore.AgentDrop(
@@ -103,14 +148,15 @@ namespace GameCore
                     game: this,
                     agentsParty: agentsParty
                 ),
-                agentDetection: new GameCore.AgentDetection(),
-                combat: new GameCore.AgentCombat(
-                    game: this,
-                    movement: agentMovement
+                agentDetection: new GameCore.AgentDetection(
+                    sightRadius: Utils.RandomValueWithDeviation(agentData.sightRadius, agentData.sightRadiusDeviation)
                 ),
+                combat: combat,
                 control: agentControl,
                 agentData: agentData
             );
+
+            combat.SetSkills(combatSkills);
 
             return agent;
         }

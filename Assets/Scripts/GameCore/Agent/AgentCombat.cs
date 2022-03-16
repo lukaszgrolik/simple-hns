@@ -23,7 +23,7 @@ namespace GameCore
 
     public sealed class MeleeAttackSkill : Skill
     {
-        public MeleeAttackSkill(AgentCombat combat) : base(combat)
+        public MeleeAttackSkill(AgentCombat combat, DataDefinition.Skill_Melee skillData) : base(combat)
         {
 
         }
@@ -37,7 +37,7 @@ namespace GameCore
         {
             var game = combat.game;
 
-            var damageDistance = 2;
+            var damageDistance = .5f;
             var damageAngle = 90;
             // var agentControllers = Utils.FindColliders<AgentController>(combat.transform.position, damageDistance);
             var otherAgents = game.FindAgentsInRadius(game.GetPosition(combat.Agent), damageDistance);
@@ -63,11 +63,39 @@ namespace GameCore
         }
     }
 
-    public sealed class ProjectileSkill : Skill
+    public sealed class CustomSkill : Skill
     {
-        public ProjectileSkill(AgentCombat combat) : base(combat)
+        public CustomSkill(AgentCombat combat, DataDefinition.Skill_Custom skillData) : base(combat)
         {
 
+        }
+
+        public override void Trigger(Vector3 targetPos)
+        {
+            Debug.Log("custom skill unimplemented");
+        }
+    }
+
+    public sealed class BowSkill : Skill
+    {
+        public BowSkill(AgentCombat combat, DataDefinition.Skill_Bow skillData) : base(combat)
+        {
+
+        }
+
+        public override void Trigger(Vector3 targetPos)
+        {
+            Debug.Log("bow skill unimplemented");
+        }
+    }
+
+    public sealed class ProjectileSkill : Skill
+    {
+        private DataDefinition.Skill_CastProjectile skillData;
+
+        public ProjectileSkill(AgentCombat combat, DataDefinition.Skill_CastProjectile skillData) : base(combat)
+        {
+            this.skillData = skillData;
         }
 
         public override void Trigger(Vector3 targetPos)
@@ -93,7 +121,8 @@ namespace GameCore
 
             var projectile = new Projectile(
                 game: game,
-                originatorAgent: combat.Agent
+                originatorAgent: combat.Agent,
+                projectileSkillData: skillData
             );
 
             combat.InvokeCastingStarted();
@@ -103,12 +132,25 @@ namespace GameCore
         }
     }
 
+    public sealed class SummonSkill : Skill
+    {
+        public SummonSkill(AgentCombat combat, DataDefinition.Skill_SummonAgent skillData) : base(combat)
+        {
+
+        }
+
+        public override void Trigger(Vector3 targetPos)
+        {
+            Debug.Log("summon skill unimplemented");
+        }
+    }
+
     public class AgentCombat : AgentComponent
     {
         public readonly Game game;
         public readonly AgentMovement movement;
 
-        private readonly List<Skill> skills = new List<Skill>();
+        private List<Skill> skills = new List<Skill>();
         public IReadOnlyList<Skill> Skills => skills;
 
         private float attackRate = 5f;
@@ -128,10 +170,16 @@ namespace GameCore
             this.game = game;
             this.movement = movement;
 
-            var skills = new List<Skill>(){
-                new MeleeAttackSkill(this),
-                new ProjectileSkill(this),
-            };
+            // var skills = new List<Skill>(){
+            //     new MeleeAttackSkill(this),
+            //     new ProjectileSkill(this),
+            // };
+        }
+
+        public void SetSkills(List<Skill> skills)
+        {
+            if (this.skills.Count > 0) throw new System.Exception("skills already set");
+
             this.skills.AddRange(skills);
 
             activeSkill = skills[0];

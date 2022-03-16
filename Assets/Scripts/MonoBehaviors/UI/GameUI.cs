@@ -21,9 +21,9 @@ namespace MonoBehaviors
             this.playerHealthText = playerHealthText;
         }
 
-        public void SetPlayerHealth(int currentPoints, int maxPoints)
+        public void SetPlayerHealth(float currentPoints, float maxPoints)
         {
-            playerHealthImage.fillAmount = (float)currentPoints / maxPoints;
+            playerHealthImage.fillAmount = currentPoints / maxPoints;
             playerHealthText.text = $"{currentPoints}/{maxPoints}";
         }
     }
@@ -45,7 +45,7 @@ namespace MonoBehaviors
             this.enemyHealthImage = enemyHealthImage;
         }
 
-        public void ShowEnemyHealth(string name, int currentPoints, int maxPoints)
+        public void ShowEnemyHealth(string name, float currentPoints, float maxPoints)
         {
             enemyNameText.text = name;
             UpdateEnemyHealth(currentPoints, maxPoints);
@@ -58,9 +58,9 @@ namespace MonoBehaviors
             enemyHealthObject.SetActive(false);
         }
 
-        public void UpdateEnemyHealth(int currentPoints, int maxPoints)
+        public void UpdateEnemyHealth(float currentPoints, float maxPoints)
         {
-            enemyHealthImage.fillAmount = (float)currentPoints / maxPoints;
+            enemyHealthImage.fillAmount = currentPoints / maxPoints;
         }
     }
 

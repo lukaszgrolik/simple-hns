@@ -4,28 +4,69 @@ namespace GameCore
 {
     public class AgentMovement
     {
+        public enum MovementMode
+        {
+            Walking,
+            Running
+        }
+
         private AgentHealth agentHealth;
+
+        private float walkingSpeed;
+        private float runningSpeed;
+
+        private MovementMode currentMovementMode;
+        public MovementMode CurrentMovementMode => currentMovementMode;
+
+        private float currentSpeed;
+        public float CurrentSpeed => currentSpeed;
 
         private bool isChangingDestination = false;
         public bool IsChangingDestination => isChangingDestination;
 
-        private Vector2 currentDestination;
-        public Vector2 CurrentDestination => currentDestination;
+        private Vector3 currentDestination;
+        public Vector3 CurrentDestination => currentDestination;
 
-        public event System.Action<Vector2> destinationChanged;
+        public event System.Action<float> speedChanged;
+        public event System.Action<Vector3> destinationChanged;
         public event System.Action cancelled;
         public event System.Action arrived;
         public event System.Action stopped;
         public event System.Action disabled;
 
-        public AgentMovement(AgentHealth agentHealth)
+        public AgentMovement(
+            AgentHealth agentHealth,
+            float walkingSpeed,
+            float runningSpeed
+        )
         {
             this.agentHealth = agentHealth;
+            this.walkingSpeed = walkingSpeed;
+            this.runningSpeed = runningSpeed;
 
             agentHealth.died += OnAgentDied;
+
+            currentMovementMode = MovementMode.Walking;
+            currentSpeed = walkingSpeed;
         }
 
-        public void SetDestination(Vector2 pos)
+        public void SetWalkingMode()
+        {
+            currentMovementMode = MovementMode.Walking;
+            currentSpeed = walkingSpeed;
+
+            speedChanged.Invoke(currentSpeed);
+        }
+
+        public void SetRunningMode()
+        {
+            currentMovementMode = MovementMode.Running;
+            currentSpeed = runningSpeed;
+
+            speedChanged.Invoke(currentSpeed);
+        }
+
+        public void SetDestination(Vector3 pos)
         {
             currentDestination = pos;
             isChangingDestination = true;

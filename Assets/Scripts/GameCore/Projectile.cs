@@ -6,8 +6,10 @@ namespace GameCore
 {
     public class Projectile : ITransformScript
     {
-        private Game game;
-        private Agent originatorAgent;
+        public readonly Game game;
+        public readonly Agent originatorAgent;
+
+        public readonly DataDefinition.Skill_CastProjectile projectileSkillData;
 
         // public event System.Action disappeared;
 
@@ -15,11 +17,15 @@ namespace GameCore
 
         public Projectile(
             Game game,
-            Agent originatorAgent
+            Agent originatorAgent,
+
+            DataDefinition.Skill_CastProjectile projectileSkillData
         )
         {
             this.game = game;
             this.originatorAgent = originatorAgent;
+
+            this.projectileSkillData = projectileSkillData;
         }
 
         public void OnUpdate(float deltaTime)
@@ -40,9 +46,26 @@ namespace GameCore
         {
             if (originatorAgent.partyMember.AgentsParty.IsAliveEnemy(otherAgent))
             {
-                otherAgent.health.TakeDamage(10);
+
+                if (projectileSkillData.splashRadius > 0)
+                {
+                    DamageRadius();
+                }
+                else
+                {
+                    DamageTarget(otherAgent);
+                }
                 // Debug.Log($"health: {otherAgent.health.CurrentPoints}");
 
+                Disappear();
+            }
+        }
+
+        public void OnCollidedWithProp()
+        {
+            if (projectileSkillData.splashRadius > 0)
+            {
+                DamageRadius();
                 Disappear();
             }
         }
@@ -53,9 +76,27 @@ namespace GameCore
             game.DeleteProjectile(this);
         }
 
-        void Explode()
+        void DamageTarget(Agent otherAgent)
         {
+            var damage = Utils.RandomValueWithDeviation(projectileSkillData.damage, projectileSkillData.damageDeviation);
 
+            otherAgent.health.TakeDamage(damage);
+        }
+
+        void DamageRadius()
+        {
+            var damage = Utils.RandomValueWithDeviation(projectileSkillData.damage, projectileSkillData.damageDeviation);
+            var agents = game.FindAgentsInRadius(game.GetPosition(this), projectileSkillData.splashRadius);
+
+            for (int i = 0; i < agents.Count; i++)
+            {
+                var otherAgent = agents[i];
+
+                if (originatorAgent.partyMember.AgentsParty.IsAliveEnemy(otherAgent))
+                {
+                    agents[i].health.TakeDamage(damage);
+                }
+            }
         }
     }
 }

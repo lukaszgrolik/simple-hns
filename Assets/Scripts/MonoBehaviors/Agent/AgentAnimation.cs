@@ -52,7 +52,7 @@ namespace MonoBehaviors
             PlayClip(AnimState.Death);
         }
 
-        void OnAgentDestinationChanged(Vector2 pos)
+        void OnAgentDestinationChanged(Vector3 pos)
         {
             // Debug.Log("OnAgentDestinationChanged");
             PlayClip(AnimState.Movement);

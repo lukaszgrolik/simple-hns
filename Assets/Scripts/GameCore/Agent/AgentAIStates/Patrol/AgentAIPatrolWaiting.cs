@@ -9,6 +9,10 @@ namespace GameCore.AgentAI.States.PatrolStates
         private Agent agent;
         private EngineTime engineTime;
 
+        private float waitingTimeMin = 1f;
+        private float waitingTimeMax = 3f;
+
+        private float waitingTime;
         private float startTime;
 
         public Waiting(SM.StateMachine stateMachine, Agent agent) : base(stateMachine)
@@ -19,6 +23,7 @@ namespace GameCore.AgentAI.States.PatrolStates
 
         public override void Enter()
         {
+            waitingTime = Random.Range(waitingTimeMin, waitingTimeMax);
             startTime = engineTime.Time;
         }
 
@@ -29,7 +34,7 @@ namespace GameCore.AgentAI.States.PatrolStates
 
         public void OnUpdate()
         {
-            if (engineTime.SecondsFrom(startTime) >= 1)
+            if (engineTime.SecondsFrom(startTime) >= waitingTime)
             {
                 stateMachine.SetState(new PatrolStates.Moving(stateMachine, agent));
             }

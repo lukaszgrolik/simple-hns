@@ -16,10 +16,60 @@ namespace GameCore
         }
     }
 
+    // @todo join two groups if they have small amount of members?
+    public class AgentsGroup
+    {
+        private Game game;
+
+        public readonly List<Agent> members = new List<Agent>();
+
+        public AgentsGroup(Game game)
+        {
+            this.game = game;
+        }
+
+        public void AddMember(Agent agent)
+        {
+            members.Add(agent);
+        }
+
+        public Vector3 GetCenter()
+        {
+            var x = 0f;
+            var z = 0f;
+
+            for (int i = 0; i < members.Count; i++)
+            {
+                var pos = game.GetPosition(members[i]);
+                x += pos.x / members.Count;
+                z += pos.z / members.Count;
+            }
+
+            return new Vector3(x, 0, z);
+        }
+    }
+
+    public class AgentGroupMember
+    {
+        private AgentsGroup agentsGroup;
+        public AgentsGroup AgentsGroup => agentsGroup;
+
+        public AgentGroupMember(AgentsGroup agentsGroup)
+        {
+            this.agentsGroup = agentsGroup;
+        }
+
+        // public void SetAgentsGroup(AgentsGroup agentsGroup)
+        // {
+        //     this.agentsGroup = agentsGroup;
+        // }
+    }
+
     public class Agent : ITransformScript
     {
         public readonly Game game;
 
+        public readonly AgentGroupMember groupMember;
         public readonly AgentEquipment equipment;
         public readonly AgentHealth health;
         public readonly AgentDrop drop;
@@ -33,6 +83,7 @@ namespace GameCore
 
         public Agent(
             Game game,
+            AgentGroupMember groupMember,
             AgentEquipment equipment,
             AgentHealth health,
             AgentDrop drop,
@@ -45,6 +96,8 @@ namespace GameCore
         )
         {
             this.game = game;
+
+            this.groupMember = groupMember;
 
             this.equipment = equipment;
             equipment.SetAgent(this);

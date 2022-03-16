@@ -1,27 +1,236 @@
 using System.Collections;
 using System.Collections.Generic;
 
+namespace MonoBehaviors
+{
+    public enum SkillType
+    {
+        DefaultMelee,
+        FireBolt,
+        FireBall,
+        EnergyBolt,
+        TreeWall,
+        SummonButterflies
+    }
+
+    public class DataStore
+    {
+        public readonly Dictionary<SkillType, DataDefinition.Skill> skills = new Dictionary<SkillType, DataDefinition.Skill>()
+        {
+            [SkillType.DefaultMelee] = new DataDefinition.Skill_Melee(
+                name: "Default melee"
+            ),
+            [SkillType.FireBolt] = new DataDefinition.Skill_CastProjectile(
+                name: "Fire bolt",
+                speed: 20,
+                damage: 20,
+                damageDeviation: .25f
+            ),
+            [SkillType.FireBall] = new DataDefinition.Skill_CastProjectile(
+                name: "Fire ball",
+                speed: 30,
+                damage: 32,
+                damageDeviation: .25f,
+                splashRadius: 2
+            ),
+            [SkillType.EnergyBolt] = new DataDefinition.Skill_CastProjectile(
+                name: "Energy bolt",
+                speed: 25,
+                damage: 20,
+                damageDeviation: .25f
+            ),
+
+            [SkillType.TreeWall] = new DataDefinition.Skill_Custom(
+                name: "Tree wall"
+            ),
+
+
+        };
+
+        public readonly Dictionary<ProjectileType, DataDefinition.Skill_CastProjectile> projectiles = new Dictionary<ProjectileType, DataDefinition.Skill_CastProjectile>();
+
+        public readonly Dictionary<AgentType, DataDefinition.Agent> agents = new Dictionary<AgentType, DataDefinition.Agent>();
+
+        public Dictionary<DataDefinition.Skill, SkillType> skillTypes = new Dictionary<DataDefinition.Skill, SkillType>();
+        public Dictionary<DataDefinition.Skill_CastProjectile, ProjectileType> projectileTypes = new Dictionary<DataDefinition.Skill_CastProjectile, ProjectileType>();
+        public Dictionary<DataDefinition.Agent, AgentType> agentTypes = new Dictionary<DataDefinition.Agent, AgentType>();
+
+        public DataStore()
+        {
+            projectiles.Add(ProjectileType.FireBolt, skills[SkillType.FireBolt] as DataDefinition.Skill_CastProjectile);
+            projectiles.Add(ProjectileType.FireBall, skills[SkillType.FireBall] as DataDefinition.Skill_CastProjectile);
+            projectiles.Add(ProjectileType.EnergyBolt, skills[SkillType.EnergyBolt] as DataDefinition.Skill_CastProjectile);
+
+            agents.Add(AgentType.Butterfly, new DataDefinition.Agent(
+                name: "Butterfly",
+                skills: new List<DataDefinition.Skill>()
+                {
+                    skills[SkillType.DefaultMelee],
+                    skills[SkillType.FireBolt],
+                }
+            ));
+
+            skills.Add(SkillType.SummonButterflies, new DataDefinition.Skill_SummonAgent(
+                name: "Summon butterflies",
+                agent: agents[AgentType.Butterfly],
+                amount: 3
+            ));
+
+            agents.Add(AgentType.Hero, new DataDefinition.Agent(
+                name: "Hero",
+                skills: new List<DataDefinition.Skill>()
+                {
+                    skills[SkillType.DefaultMelee],
+                    skills[SkillType.FireBolt],
+                    skills[SkillType.FireBall],
+                    skills[SkillType.EnergyBolt],
+                }
+            ));
+
+            agents.Add(AgentType.Warden, new DataDefinition.Agent(
+                name: "Warden",
+                skills: new List<DataDefinition.Skill>()
+                {
+                    skills[SkillType.DefaultMelee],
+                    skills[SkillType.FireBolt],
+                }
+            ));
+            // agents.Add(AgentType.Smith, new DataDefinition.Agent("Smith");
+
+            agents.Add(AgentType.Demon, new DataDefinition.Agent(
+                name: "Demon",
+                skills: new List<DataDefinition.Skill>()
+                {
+                    skills[SkillType.DefaultMelee],
+                }
+            ));
+            agents.Add(AgentType.Warrior, new DataDefinition.Agent("Warrior"));
+            agents.Add(AgentType.HoodedWarrior, new DataDefinition.Agent(
+                name: "Hooded Warrior",
+                skills: new List<DataDefinition.Skill>()
+                {
+                    skills[SkillType.DefaultMelee],
+                    skills[SkillType.FireBolt],
+                }
+            ));
+            agents.Add(AgentType.Zombie, new DataDefinition.Agent(
+                name: "Zombie",
+                health: 10,
+                healthDeviation: .3f,
+                walkingSpeed: 3,
+                runningSpeed: 5,
+                speedDeviation: .15f,
+                sightRadius: 5,
+                sightRadiusDeviation: .15f,
+                skills: new List<DataDefinition.Skill>()
+                {
+                    skills[SkillType.DefaultMelee],
+                }
+            ));
+            agents.Add(AgentType.Skeleton, new DataDefinition.Agent(
+                name: "Skeleton",
+                skills: new List<DataDefinition.Skill>()
+                {
+                    skills[SkillType.DefaultMelee],
+                }
+            ));
+            agents.Add(AgentType.SkeletonArcher, new DataDefinition.Agent(
+                name: "Skeleton Archer",
+                skills: new List<DataDefinition.Skill>()
+                {
+                    skills[SkillType.DefaultMelee],
+                    skills[SkillType.FireBolt],
+                }
+            ));
+            agents.Add(AgentType.SkeletonMage, new DataDefinition.Agent(
+                name: "Skeleton Mage",
+                skills: new List<DataDefinition.Skill>()
+                {
+                    skills[SkillType.FireBolt],
+                }
+            ));
+            agents.Add(AgentType.Bulbfrog, new DataDefinition.Agent("Bulbfrog"));
+            agents.Add(AgentType.Ent, new DataDefinition.Agent(
+                name: "Ent",
+                skills: new List<DataDefinition.Skill>()
+                {
+                    skills[SkillType.DefaultMelee],
+                    skills[SkillType.EnergyBolt],
+                    skills[SkillType.TreeWall],
+                    skills[SkillType.SummonButterflies],
+                }
+            ));
+
+            agents.Add(AgentType.Crab, new DataDefinition.Agent("Crab"));
+            agents.Add(AgentType.WalkingShroom, new DataDefinition.Agent("Walking Shroom"));
+
+            //
+            //
+            //
+
+            foreach (var item in skills)
+            {
+                skillTypes.Add(item.Value, item.Key);
+            }
+
+            foreach (var item in projectiles)
+            {
+                projectileTypes.Add(item.Value, item.Key);
+            }
+
+            foreach (var item in agents)
+            {
+                agentTypes.Add(item.Value, item.Key);
+            }
+
+        }
+    }
+}
+
 namespace DataInstance
 {
-    class Agents
-    {
-        public static readonly DataDefinition.Agent hero = new DataDefinition.Agent("Hero");
-        public static readonly DataDefinition.Agent warden = new DataDefinition.Agent("Warden");
-        public static readonly DataDefinition.Agent smith = new DataDefinition.Agent("Smith");
 
-        public static readonly DataDefinition.Agent demon = new DataDefinition.Agent("Demon");
-        public static readonly DataDefinition.Agent Warrior = new DataDefinition.Agent("Warrior");
-        public static readonly DataDefinition.Agent HoodedWarrior = new DataDefinition.Agent("Hooded Warrior");
-        public static readonly DataDefinition.Agent Zombie = new DataDefinition.Agent("Zombie");
-        public static readonly DataDefinition.Agent Skeleton = new DataDefinition.Agent("Skeleton");
-        public static readonly DataDefinition.Agent SkeletonArcher = new DataDefinition.Agent("Skeleton Archer");
-        public static readonly DataDefinition.Agent SkeletonMage = new DataDefinition.Agent("Skeleton Mage");
-        public static readonly DataDefinition.Agent Bulbfrog = new DataDefinition.Agent("Bulbfrog");
-        public static readonly DataDefinition.Agent Ent = new DataDefinition.Agent("Ent");
-        public static readonly DataDefinition.Agent Butterfly = new DataDefinition.Agent("Butterfly");
-        public static readonly DataDefinition.Agent Crab = new DataDefinition.Agent("Crab");
-        public static readonly DataDefinition.Agent WalkingShroom = new DataDefinition.Agent("Walking Shroom");
-    }
+    // class Skills
+    // {
+    //     public static readonly DataDefinition.Skill_Melee DefaultMelee = new DataDefinition.Skill_Melee(
+    //         name: "Default melee"
+    //     );
+
+    //     public static readonly DataDefinition.Skill_CastProjectile FireBolt = new DataDefinition.Skill_CastProjectile(
+    //         name: "Fire bolt",
+    //         speed: 8,
+    //         damage: 20,
+    //         damageDeviation: .25f
+    //     );
+    //     public static readonly DataDefinition.Skill_CastProjectile FireBall = new DataDefinition.Skill_CastProjectile(
+    //         name: "Fire ball",
+    //         speed: 11,
+    //         damage: 32,
+    //         damageDeviation: .25f,
+    //         splashRadius: 2
+    //     );
+    //     public static readonly DataDefinition.Skill_CastProjectile EnergyBolt = new DataDefinition.Skill_CastProjectile(
+    //         name: "Energy bolt",
+    //         speed: 8,
+    //         damage: 20,
+    //         damageDeviation: .25f
+    //     );
+
+    //     public static readonly DataDefinition.Skill_Custom TreeWall = new DataDefinition.Skill_Custom(
+    //         name: "Tree wall"
+    //     );
+
+    //     public static readonly DataDefinition.Skill_SummonAgent SummonButterflies = new DataDefinition.Skill_SummonAgent(
+    //         name: "Summon butterflies",
+    //         agent: Agents.Butterfly,
+    //         amount: 3
+    //     );
+    // }
+
+    // class Agents
+    // {
+
+    // }
 
     class ItemCategories
     {

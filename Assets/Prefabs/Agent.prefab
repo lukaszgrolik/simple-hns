@@ -74,6 +74,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8582e760886a8f54e92cc15a003aa540, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sphereCollider: {fileID: 6969923680345780509}
 --- !u!1 &8915420808062846081
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,9 +157,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 416eaa13e9a3e8342a59a6b77541788b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agentType: 0
-  animationCtrl: {fileID: 0}
-  idleClip: {fileID: 0}
-  movementClip: {fileID: 0}
-  attackClip: {fileID: 0}
-  castingClip: {fileID: 0}

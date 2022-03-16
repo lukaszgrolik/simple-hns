@@ -6,6 +6,14 @@ using UnityEngine.AI;
 namespace MonoBehaviors
 {
     [System.Serializable]
+    public enum ProjectileType
+    {
+        FireBolt,
+        FireBall,
+        EnergyBolt,
+    }
+
+    [System.Serializable]
     public enum AgentType
     {
         Hero,
@@ -99,6 +107,18 @@ namespace MonoBehaviors
         public GameObject ControlledAgentObject => controlledAgentObject;
 
         [System.Serializable]
+        public class ProjectileModelPrefab
+        {
+            [SerializeField] private ProjectileType projectileType;
+            public ProjectileType ProjectileType => projectileType;
+
+            [SerializeField] private GameObject prefab;
+            public GameObject Prefab => prefab;
+        }
+
+        [SerializeField] private List<ProjectileModelPrefab> projectileModelPrefabs;
+
+        [System.Serializable]
         public class AgentModelPrefab
         {
             [SerializeField] private AgentType agentType;
@@ -155,11 +175,27 @@ namespace MonoBehaviors
         private AgentController controlledAgent;
         public AgentController ControlledAgent => controlledAgent;
 
+        private DataStore dataStore = new DataStore();
+        public DataStore DataStore => dataStore;
+
         private Game game;
         public Game Game => game;
 
         void Start()
         {
+            // Debug.Log($"DataInstance.Skills.EnergyBolt: {DataInstance.Skills.EnergyBolt}");
+            // Debug.Log($"DataInstance.Agents.SkeletonMage: {DataInstance.Agents.SkeletonMage}");
+            // Debug.Log($"DataInstance.Agents.SkeletonMage.skills.Count: {DataInstance.Agents.SkeletonMage.skills.Count}");
+            // Debug.Log($"DataInstance.Agents.SkeletonMage.skills[0]: {DataInstance.Agents.SkeletonMage.skills[0]}");
+            // Debug.Log($"DataInstance.Agents.SkeletonMage.skills[0].name: {DataInstance.Agents.SkeletonMage.skills[0].name}");
+
+            // var dataStore = new DataStore();
+            // var hero = dataStore.agents[AgentType.Hero];
+            // Debug.Log($"agent.name: {hero.name}");
+            // Debug.Log($"agent.skills.Count: {hero.skills.Count}");
+            // Debug.Log($"agent.skills[0]: {hero.skills[0]}");
+            // Debug.Log($"agent.skills[0].name: {hero.skills[0].name}");
+
             this.gameplayManagerGameUI = new GameplayManagerGameUI(this, gameUI);
 
             this.gameplayManagerGameUI.Setup();
@@ -242,10 +278,25 @@ namespace MonoBehaviors
                 }
             );
 
+            var agentSpawners = FindObjectsOfType<AgentSpawner>();
+            foreach (var agentSpawner in agentSpawners)
+            {
+                agentSpawner.SpawnAgents(
+                    game: game,
+                    agentEntities: agentEntities
+                );
+
+                Destroy(agentSpawner.gameObject);
+            }
+
             var sceneAgents = FindObjectsOfType<SceneAgent>();
             foreach (var sceneAgent in sceneAgents)
             {
-                var agent = agentEntities.CreateAgent(game, sceneAgent.AgentType);
+                var agent = agentEntities.CreateAgent(
+                    game: game,
+                    agentType: sceneAgent.AgentType,
+                    agentsGroup: game.CreateAgentsGroup()
+                );
                 game.SpawnAgent(agent, sceneAgent.transform.position, Quaternion.identity);
 
                 if (controlledAgentObject == sceneAgent.gameObject)
@@ -274,6 +325,22 @@ namespace MonoBehaviors
             if (game == null) return;
 
             game.OnUpdate(Time.deltaTime);
+        }
+
+        public GameObject FindAgentModelPrefab(AgentType agentType)
+        {
+            var agentModelPrefab = agentModelPrefabs.Find(p => p.AgentType == agentType);
+            if (agentModelPrefab == null) throw new System.Exception($"agent prefab not found: {agentType}");
+
+            return agentModelPrefab.Prefab;
+        }
+
+        public GameObject FindProjectileModelPrefab(ProjectileType projectileType)
+        {
+            var projectileModelPrefab = projectileModelPrefabs.Find(p => p.ProjectileType == projectileType);
+            if (projectileModelPrefab == null) throw new System.Exception($"projectile prefab not found: {projectileType}");
+
+            return projectileModelPrefab.Prefab;
         }
 
         void Load()

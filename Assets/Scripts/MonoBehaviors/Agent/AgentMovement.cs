@@ -7,6 +7,8 @@ namespace MonoBehaviors
 {
     public class AgentMovement
     {
+
+
         private AgentController agentController;
         private NavMeshAgent navMeshAgent;
 
@@ -24,7 +26,9 @@ namespace MonoBehaviors
             this.navMeshAgent = navMeshAgent;
 
             navMeshAgent.updateRotation = false;
+            navMeshAgent.speed = agentController.Agent.movement.CurrentSpeed;
 
+            agentController.Agent.movement.speedChanged += OnSpeedChanged;
             agentController.Agent.movement.destinationChanged += OnDestinationChanged;
             agentController.Agent.movement.cancelled += OnCancelled;
             agentController.Agent.movement.disabled += OnDisabled;
@@ -39,14 +43,18 @@ namespace MonoBehaviors
         //     navMeshAgent.SetDestination(dest);
         // }
 
-        void OnDestinationChanged(Vector2 pos)
+        void OnSpeedChanged(float speed)
         {
-            var dest = new Vector3(pos.x, 0, pos.y);
+            navMeshAgent.speed = speed;
+        }
+
+        void OnDestinationChanged(Vector3 pos)
+        {
             if (movementTargetObj) Object.Destroy(movementTargetObj);
 
-            movementTargetObj = InstantiateMovementTarget(dest);
+            movementTargetObj = InstantiateMovementTarget(pos);
 
-            navMeshAgent.SetDestination(dest);
+            navMeshAgent.SetDestination(pos);
         }
 
         void OnCancelled()

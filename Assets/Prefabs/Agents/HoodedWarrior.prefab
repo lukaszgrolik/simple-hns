@@ -147,7 +147,6 @@ GameObject:
   - component: {fileID: 5174742346496284182}
   - component: {fileID: 8726829978115120847}
   - component: {fileID: 5825739395179540360}
-  - component: {fileID: 4456909590414172074}
   m_Layer: 8
   m_Name: HoodedWarrior
   m_TagString: Untagged
@@ -206,19 +205,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &4456909590414172074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 662457297786407632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6604c4856e61b4d4badda15f402742ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agentType: 3
 --- !u!1 &2343018415652214220
 GameObject:
   m_ObjectHideFlags: 0

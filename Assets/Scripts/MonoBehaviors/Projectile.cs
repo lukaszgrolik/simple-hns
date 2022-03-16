@@ -23,7 +23,7 @@ namespace MonoBehaviors
             // projectile.disappeared += OnProjectileDisappeared;
 
             var rb = GetComponent<Rigidbody>();
-            rb.velocity = transform.forward * 15;
+            rb.velocity = transform.forward * projectile.projectileSkillData.speed;
 
         }
 

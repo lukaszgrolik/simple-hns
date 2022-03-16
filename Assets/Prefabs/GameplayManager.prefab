@@ -162,6 +162,13 @@ MonoBehaviour:
   droppedItemsContainer: {fileID: 1530957445345716598}
   projectilesContainer: {fileID: 1357027792393686349}
   controlledAgentObject: {fileID: 0}
+  projectileModelPrefabs:
+  - projectileType: 0
+    prefab: {fileID: 1381819029475718378, guid: b9ed7d9870bf5534292e6850772720b0, type: 3}
+  - projectileType: 1
+    prefab: {fileID: 1381819029475718378, guid: 1f3eab1a345aa2c4fa3001fc393a0e92, type: 3}
+  - projectileType: 2
+    prefab: {fileID: 1381819029475718378, guid: ae80c6f13d3819b4e836527a8f56d96d, type: 3}
   agentModelPrefabs:
   - agentType: 0
     prefab: {fileID: 8513934410253812705, guid: 8fbd32458ee3d7246850a632d7ac741c, type: 3}
@@ -169,8 +176,14 @@ MonoBehaviour:
     prefab: {fileID: 8513934410253812705, guid: d467553556387f34ab66a024ab7cd155, type: 3}
   - agentType: 1
     prefab: {fileID: 662457297786407632, guid: e7a8569442e17d54f9563439817e683e, type: 3}
-  - agentType: 3
+  - agentType: 4
     prefab: {fileID: 662457297786407632, guid: c99f0791bb7fb4741bac435aa4af0b8e, type: 3}
+  - agentType: 10
+    prefab: {fileID: 662457297786407632, guid: 8594d4466100d754482efd75eb13a9af, type: 3}
+  - agentType: 7
+    prefab: {fileID: 662457297786407632, guid: ffbf2e3311f02ea499097c42254ee4f0, type: 3}
+  - agentType: 9
+    prefab: {fileID: 662457297786407632, guid: ffbf2e3311f02ea499097c42254ee4f0, type: 3}
   itemModelPrefabs:
   - itemType: 0
     prefab: {fileID: 7131333464891160427, guid: 2c9440ba6729231449074ec5db622616, type: 3}
