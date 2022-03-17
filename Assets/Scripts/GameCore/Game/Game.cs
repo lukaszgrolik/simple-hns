@@ -6,7 +6,7 @@ namespace GameCore
 {
     public interface ITransformScript
     {
-
+        Vector3 GetPosition();
     }
 
     // public interface IGameGetPosition

@@ -11,7 +11,7 @@ namespace GameCore.AgentAI.States.PatrolStates
         private float radiusMin = 3f;
         private float radiusMax = 6f;
 
-        public Moving(SM.StateMachine stateMachine, Agent agent) : base(stateMachine)
+        public Moving(Agent agent)
         {
             this.agent = agent;
         }
@@ -39,7 +39,7 @@ namespace GameCore.AgentAI.States.PatrolStates
 
         void OnAgentArrived()
         {
-            stateMachine.SetState(new PatrolStates.Waiting(stateMachine, agent));
+            stateMachine.SetState(new PatrolStates.Waiting(agent));
         }
     }
 }

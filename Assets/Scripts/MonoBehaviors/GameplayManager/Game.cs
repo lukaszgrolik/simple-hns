@@ -35,7 +35,7 @@ namespace MonoBehaviors
         public override List<GameCore.Agent> FindAgentsInRadius(Vector3 pos, float radius)
         {
             var agents = new List<GameCore.Agent>();
-            var agentControllers = Utils.FindColliders<AgentController>(pos, radius);
+            var agentControllers = Utils.FindColliders<AgentController>(pos, radius, gameplayManager.AgentLayerMask);
 
             for (int i = 0; i < agentControllers.Count; i++)
             {

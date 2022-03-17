@@ -1,6 +1,6 @@
 namespace GameCore.SM
 {
-    public class StateMachine
+    public sealed class StateMachine
     {
         private State state;
         public State State => state;
@@ -10,10 +10,11 @@ namespace GameCore.SM
             if (state != null) state.Exit();
 
             state = nextState;
+            state.SetStateMachine(this);
             nextState.Enter();
         }
 
-        public virtual void Exit()
+        public void Exit()
         {
             if (state != null) state.Exit();
 
@@ -25,19 +26,12 @@ namespace GameCore.SM
     {
         protected StateMachine stateMachine;
 
-        public State(StateMachine stateMachine)
+        public void SetStateMachine(StateMachine stateMachine)
         {
             this.stateMachine = stateMachine;
         }
 
-        public virtual void Enter()
-        {
-
-        }
-
-        public virtual void Exit()
-        {
-
-        }
+        public virtual void Enter() {}
+        public virtual void Exit() {}
     }
 }

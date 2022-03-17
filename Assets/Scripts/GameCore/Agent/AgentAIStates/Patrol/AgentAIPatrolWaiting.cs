@@ -15,7 +15,7 @@ namespace GameCore.AgentAI.States.PatrolStates
         private float waitingTime;
         private float startTime;
 
-        public Waiting(SM.StateMachine stateMachine, Agent agent) : base(stateMachine)
+        public Waiting(Agent agent)
         {
             this.agent = agent;
             this.engineTime = agent.game.engineTime;
@@ -36,7 +36,7 @@ namespace GameCore.AgentAI.States.PatrolStates
         {
             if (engineTime.SecondsFrom(startTime) >= waitingTime)
             {
-                stateMachine.SetState(new PatrolStates.Moving(stateMachine, agent));
+                stateMachine.SetState(new PatrolStates.Moving(agent));
             }
         }
     }

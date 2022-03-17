@@ -42,6 +42,11 @@ namespace GameCore
             }
         }
 
+        public Vector3 GetPosition()
+        {
+            return game.GetPosition(this);
+        }
+
         public void OnCollidedWithAgent(Agent otherAgent)
         {
             if (originatorAgent.partyMember.AgentsParty.IsAliveEnemy(otherAgent))

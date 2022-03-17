@@ -37,16 +37,18 @@ namespace GameCore
         {
             var game = combat.game;
 
-            var damageDistance = .5f;
+            var damageDistance = 1.5f;
             var damageAngle = 90;
             // var agentControllers = Utils.FindColliders<AgentController>(combat.transform.position, damageDistance);
             var otherAgents = game.FindAgentsInRadius(game.GetPosition(combat.Agent), damageDistance);
+            // Debug.Log($"otherAgents.Count: {otherAgents.Count}");
 
             combat.InvokeMeleeAttackStarted();
 
             for (int i = 0; i < otherAgents.Count; i++)
             {
                 var otherAgent = otherAgents[i];
+                // Debug.Log($"otherAgent.agentData.name: {otherAgent.agentData.name}");
 
                 var isAliveEnemy = combat.Agent.partyMember.AgentsParty.IsAliveEnemy(otherAgent);
                 if (!isAliveEnemy) continue;
@@ -153,9 +155,17 @@ namespace GameCore
         private List<Skill> skills = new List<Skill>();
         public IReadOnlyList<Skill> Skills => skills;
 
+        private List<Skill> meleeAttackSkills = new List<Skill>();
+        public IReadOnlyList<Skill> MeleeAttackSkills => meleeAttackSkills;
+
+        private List<Skill> projectileSkills = new List<Skill>();
+        public IReadOnlyList<Skill> ProjectileSkills => projectileSkills;
+
         private float attackRate = 5f;
 
         private Skill activeSkill;
+        public Skill ActiveSkill => activeSkill;
+
         private bool attackInProgress = false;
         private float attackInProgressElapsed = 0;
 
@@ -183,6 +193,18 @@ namespace GameCore
             this.skills.AddRange(skills);
 
             activeSkill = skills[0];
+
+            for (int i = 0; i < skills.Count; i++)
+            {
+                if (skills[i] is MeleeAttackSkill)
+                {
+                    meleeAttackSkills.Add(skills[i]);
+                }
+                else if (skills[i] is ProjectileSkill)
+                {
+                    projectileSkills.Add(skills[i]);
+                }
+            }
         }
 
         public void OnUpdate(float deltaTime)
@@ -194,6 +216,8 @@ namespace GameCore
                 {
                     attackInProgressElapsed = 0;
                     attackInProgress = false;
+
+                    attackFinished?.Invoke();
                 }
             }
         }
@@ -220,6 +244,7 @@ namespace GameCore
             if (attackInProgress) return;
 
             attackInProgress = true;
+            attackStarted?.Invoke(activeSkill);
 
             // StartCoroutine(HandleAttackEnd());
 

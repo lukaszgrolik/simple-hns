@@ -22,9 +22,10 @@ namespace GameCore
         public event System.Action<DroppedItem, Vector3> itemSpawned;
         public event System.Action<DroppedItem> itemDeleted;
 
-        public void Drop(Item item, Vector3 pos)
+        public void Drop(Game game, Item item, Vector3 pos)
         {
             var droppedItem = new DroppedItem(
+                game: game,
                 item: item
             );
 

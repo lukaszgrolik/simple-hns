@@ -35,7 +35,7 @@ namespace GameCore
             var circlePos = Random.insideUnitCircle * 1;
             var pos = game.GetPosition(agent) + new Vector3(circlePos.x, 0, circlePos.y);
 
-            game.itemSystem.Drop(item, pos);
+            game.itemSystem.Drop(game, item, pos);
         }
     }
 }

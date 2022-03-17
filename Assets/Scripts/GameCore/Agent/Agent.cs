@@ -138,5 +138,10 @@ namespace GameCore
                 agentAIControl.OnUpdate();
             }
         }
+
+        public Vector3 GetPosition()
+        {
+            return game.GetPosition(this);
+        }
     }
 }

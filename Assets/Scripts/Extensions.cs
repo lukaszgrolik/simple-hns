@@ -16,6 +16,11 @@ public static class ListExtensions
         return list[UnityEngine.Random.Range(0, list.Count)];
     }
 
+    public static T Random<T>(this IReadOnlyList<T> list)
+    {
+        return list[UnityEngine.Random.Range(0, list.Count)];
+    }
+
     // http://answers.unity.com/answers/1566405/view.html
     public static List<T> RandomMany<T>(this List<T> list, int number)
     {

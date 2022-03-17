@@ -24,7 +24,7 @@ namespace MonoBehaviors
             var circlePos = Random.insideUnitCircle * 3;
             var pos = agentCtrl.transform.position + new Vector3(circlePos.x, 0, circlePos.y);
 
-            agentCtrl.GameplayManager.Game.itemSystem.Drop(item, pos);
+            agentCtrl.GameplayManager.Game.itemSystem.Drop(agentCtrl.GameplayManager.Game, item, pos);
         }
 
         static public void PickClosest(AgentController agentCtrl)

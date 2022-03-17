@@ -10,14 +10,14 @@ namespace GameCore.AgentAI.States
 
         private Agent agent;
 
-        public Patrol(SM.StateMachine stateMachine, Agent agent) : base(stateMachine)
+        public Patrol(Agent agent)
         {
             this.agent = agent;
         }
 
         public override void Enter()
         {
-            patrolSM.SetState(new PatrolStates.Moving(stateMachine, agent));
+            patrolSM.SetState(new PatrolStates.Moving(agent));
         }
 
         public override void Exit()

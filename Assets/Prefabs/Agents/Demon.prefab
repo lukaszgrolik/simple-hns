@@ -145,8 +145,8 @@ GameObject:
   - component: {fileID: 5174742346496284182}
   - component: {fileID: 8726829978115120847}
   - component: {fileID: 5825739395179540360}
-  m_Layer: 8
-  m_Name: Demon 1
+  m_Layer: 0
+  m_Name: Demon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -214,7 +214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6157207553435111652}
   - component: {fileID: 3249515526546683281}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: projectile spawn point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -535,7 +535,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5108111510712322803}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}

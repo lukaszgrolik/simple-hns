@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6217608867255543487}
   - component: {fileID: 2150754256469364175}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: projectile spawn point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 795467369973721933}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -399,7 +399,7 @@ GameObject:
   - component: {fileID: 8513934410253812706}
   - component: {fileID: 7062101368646157279}
   - component: {fileID: 6157917930455822637}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
   m_Icon: {fileID: 0}

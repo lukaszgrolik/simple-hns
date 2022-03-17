@@ -33,7 +33,13 @@ public static class Utils {
 
     public static List<T> FindColliders<T>(Vector3 pos, float radius)
     {
+        // Debug.Log($"FindColliders radius: {radius}");
         var colls = Physics.OverlapSphere(pos, radius);
+
+        // for (int i = 0; i < colls.Length; i++)
+        // {
+        //     Debug.Log($"colls[i].name: {colls[i].name}");
+        // }
 
         return GetBehaviorsList<T>(colls);
     }

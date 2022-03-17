@@ -69,6 +69,17 @@ namespace MonoBehaviors
             {
                 gameplayManager.GameUI.ToggleEquipmentPanel();
             }
+            else if (Input.GetKeyUp(KeyCode.M))
+            {
+                if (agentCtrl.Agent.movement.CurrentMovementMode == GameCore.AgentMovement.MovementMode.Walking)
+                {
+                    agentCtrl.Agent.movement.SetRunningMode();
+                }
+                else
+                {
+                    agentCtrl.Agent.movement.SetWalkingMode();
+                }
+            }
             else if (Input.GetKeyUp(KeyCode.Q))
             {
                 agentCtrl.SetActiveSkill(agentCtrl.skills[2]);
