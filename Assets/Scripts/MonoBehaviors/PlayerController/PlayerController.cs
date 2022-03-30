@@ -50,6 +50,9 @@ namespace MonoBehaviors
             //     Debug.Log($"health: {gameplayManager.SaveData.health}, level: {gameplayManager.SaveData.level}");
             // }
 
+            //
+            // START HELPERS
+            //
             if (Input.GetKey(KeyCode.D))
             {
                 if (Input.GetKeyUp(KeyCode.Alpha1))
@@ -61,6 +64,13 @@ namespace MonoBehaviors
             {
                 PlayerControllerUtils.PickClosest(agentCtrl);
             }
+            else if (Input.GetKeyUp(KeyCode.H))
+            {
+                agentCtrl.Agent.health.Heal();
+            }
+            //
+            // END HELPERS
+            //
             else if (Input.GetKeyUp(KeyCode.U))
             {
                 gameplayManager.GameUI.ToggleQuestsPanel();

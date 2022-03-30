@@ -38,6 +38,13 @@ namespace GameCore
             }
         }
 
+        public void Heal()
+        {
+            currentPoints = maxPoints;
+
+            healthChanged?.Invoke(agent);
+        }
+
         void Die()
         {
             died?.Invoke(agent);
