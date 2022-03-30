@@ -30,6 +30,9 @@ public class PathGenerator : MonoBehaviour
 {
     [SerializeField] private Transform container;
     [SerializeField] private List<GameObject> prefabs;
+    [SerializeField] private float objectGap = 1f;
+    [SerializeField] private float posDeviance = .25f;
+    [SerializeField] private float sizeDeviance = .2f;
     [SerializeField] private Gradient gradient;
 
     public void UpdateFields(
@@ -45,9 +48,7 @@ public class PathGenerator : MonoBehaviour
 
     public void Generate()
     {
-        var objectDist = 1f;
-        var posDeviance = .25f;
-        var sizeDeviance = .2f;
+        Clear();
 
         var i = 0;
         var lineFrom = Vector3.zero;
@@ -60,11 +61,11 @@ public class PathGenerator : MonoBehaviour
                 var lineTo = point.position;
 
                 var pathFragmentDist = Vector3.Distance(lineFrom, lineTo);
-                var objectsCount = Mathf.FloorToInt(pathFragmentDist / objectDist);
+                var objectsCount = Mathf.FloorToInt(pathFragmentDist / objectGap);
 
                 for (int j = 0; j < objectsCount; j++)
                 {
-                    var basePos = lineFrom + (lineTo - lineFrom).normalized * objectDist * j;
+                    var basePos = lineFrom + (lineTo - lineFrom).normalized * objectGap * j;
                     var randomCirclePos = (Random.insideUnitCircle * posDeviance).ToVector3();
                     var pos = basePos + randomCirclePos;
                     var rot = Quaternion.Euler(0, Random.Range(0f, 360f), 0);
