@@ -27,9 +27,11 @@ namespace MonoBehaviors
         public override Vector3 GetProjectileSpawnPosition(GameCore.Agent agent)
         {
             var agentCtrl = gameplayManager.dict_agent_agentCtrl[agent];
-            var projSpawnPoint = agentCtrl.GetComponentInChildren<AgentProjectileSpawnPoint>();
+            // var projSpawnPoint = agentCtrl.GetComponentInChildren<AgentProjectileSpawnPoint>();
+            var projSpawnPos = agentCtrl.transform.position + Vector3.up * 1f;
 
-            return projSpawnPoint.transform.position;
+            // return projSpawnPoint.transform.position;
+            return projSpawnPos;
         }
 
         public override List<GameCore.Agent> FindAgentsInRadius(Vector3 pos, float radius)

@@ -31,25 +31,44 @@ namespace GameCore.AgentAI.States
 
             public override void Enter()
             {
-                agent.movement.arrived += OnAgentArrived;
+                // agent.movement.arrived += OnAgentArrived;
 
                 // adjust position ...
+                // @todo handle when straight line from enemy agent is obstructed (selected pos is blocked)
+
+                var agentPos = agent.GetPosition();
+                var enemyAgentPos = enemyAgent.GetPosition();
+                var dir = (agentPos - enemyAgentPos).normalized;
+                var targetPos = Vector3.zero;
 
                 if (agent.combat.ActiveSkill is MeleeAttackSkill)
                 {
                     // get under 1.5f
+
+                    targetPos = enemyAgentPos + dir * 1f;
                 }
                 else if (agent.combat.ActiveSkill is ProjectileSkill)
                 {
                     // get between 10f and 4f
+
+                    targetPos = enemyAgentPos + dir * 7f;
+                }
+                else
+                {
+                    throw new System.Exception($"unhandled skill type: ${agent.combat.ActiveSkill}");
                 }
 
-                agent.movement.SetDestination();
+                agent.movement.SetDestination(targetPos);
+            }
+
+            public override void Exit()
+            {
+                // agent.movement.arrived -= OnAgentArrived;
             }
 
             void OnAgentArrived()
             {
-                stateMachine.Restart();
+                // stateMachine.Restart();
             }
         }
 
@@ -66,12 +85,20 @@ namespace GameCore.AgentAI.States
 
             public override void Enter()
             {
-                agent.combat.attackFinished += OnAttackFinished;
+                // agent.combat.attackFinished += OnAttackFinished;
+                // @todo handle attack broken
+
+                agent.combat.Attack(enemyAgent);
+            }
+
+            public override void Exit()
+            {
+                // agent.combat.attackFinished -= OnAttackFinished;
             }
 
             void OnAttackFinished()
             {
-                stateMachine.Restart();
+                // stateMachine.Restart();
             }
         }
     }
@@ -94,6 +121,22 @@ namespace GameCore.AgentAI.States
 
             public override void Enter()
             {
+                agent.movement.arrived += OnAgentArrived;
+                agent.combat.attackFinished += OnAttackFinished;
+
+                SelectAction();
+            }
+
+            public override void Exit()
+            {
+                agent.movement.arrived -= OnAgentArrived;
+                agent.combat.attackFinished -= OnAttackFinished;
+
+                engageSM.Exit();
+            }
+
+            void SelectAction()
+            {
                 var dist = Vector3.Distance(agent.GetPosition(), enemyAgent.GetPosition());
 
                 if (
@@ -109,9 +152,14 @@ namespace GameCore.AgentAI.States
                 }
             }
 
-            public override void Exit()
+            void OnAgentArrived()
             {
-                engageSM.Exit();
+                SelectAction();
+            }
+
+            void OnAttackFinished()
+            {
+                SelectAction();
             }
 
             void OnAgentTargetOutsideAttackRange()
@@ -151,7 +199,12 @@ namespace GameCore.AgentAI.States
         }
     }
 
-    class BetterCombat : SM.State
+    public interface ITemp_AgentAICombat
+    {
+        void OnAliveEnemiesChanged(List<Agent> aliveEnemyAgents);
+    }
+
+    class BetterCombat : SM.State, ITemp_AgentAICombat
     {
         private readonly Agent agent;
         private readonly EngineTime engineTime;
@@ -227,7 +280,7 @@ namespace GameCore.AgentAI.States
         // }
     }
 
-    class Combat : SM.State, IAgentAITickableState
+    class Combat : SM.State, IAgentAITickableState, ITemp_AgentAICombat
     {
         private readonly Agent agent;
         private readonly EngineTime engineTime;
@@ -271,6 +324,11 @@ namespace GameCore.AgentAI.States
 
                 agent.combat.Attack(enemy);
             }
+        }
+
+        public void OnAliveEnemiesChanged(List<Agent> aliveEnemyAgents)
+        {
+
         }
     }
 }

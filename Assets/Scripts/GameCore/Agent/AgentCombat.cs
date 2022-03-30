@@ -169,6 +169,8 @@ namespace GameCore
         private bool attackInProgress = false;
         private float attackInProgressElapsed = 0;
 
+        public event System.Action<Skill> attackStarted;
+        public event System.Action attackFinished;
         public event System.Action meleeAttackStarted;
         public event System.Action castingStarted;
 

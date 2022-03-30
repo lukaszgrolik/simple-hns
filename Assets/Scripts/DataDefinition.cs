@@ -126,7 +126,7 @@ namespace DataDefinition
             float walkingSpeed = 3f,
             float runningSpeed = 6f,
             float speedDeviation = 0f,
-            float sightRadius = 7f,
+            float sightRadius = 10f,
             float sightRadiusDeviation = 0f,
             List<Skill> skills = null
         )

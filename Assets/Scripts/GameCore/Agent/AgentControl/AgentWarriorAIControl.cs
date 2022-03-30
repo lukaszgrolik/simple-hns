@@ -40,13 +40,13 @@ namespace GameCore
             // Debug.Log($"aliveEnemies.Count: {agent.agentDetection.aliveEnemies.Count}");
             if (agent.agentDetection.aliveEnemies.Count > 0)
             {
-                if (sm.State is AgentAI.States.Combat combatState)
+                if (sm.State is AgentAI.States.ITemp_AgentAICombat combatState)
                 {
                     combatState.OnAliveEnemiesChanged(agent.agentDetection.aliveEnemies);
                 }
                 else
                 {
-                    sm.SetState(new AgentAI.States.Combat(agent));
+                    sm.SetState(new AgentAI.States.BetterCombat(agent));
                 }
             }
             else
