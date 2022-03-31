@@ -5,7 +5,8 @@ using UnityEngine;
 namespace MonoBehaviors
 {
     public class CameraFollow : MonoBehaviour {
-        [HideInInspector] private float smoothSpeed = 10f;
+        [SerializeField] private bool smoothEnabled = true;
+        [SerializeField] private float smoothSpeed = 10f;
         // [HideInInspector] private Vector3 offset = new Vector3(0, 25, -25);
 
         private GameplayManager gameplayManager;
@@ -24,6 +25,11 @@ namespace MonoBehaviors
             offset = new Vector3(-side, height, -side);
         }
 
+        public void SetSmoothEnabled(bool value)
+        {
+            smoothEnabled = value;
+        }
+
         float GetIsometricOffset(float angle, float height) {
             return height / Mathf.Tan(angle * Mathf.PI / 180) / Mathf.Sqrt(2);
         }
@@ -31,10 +37,19 @@ namespace MonoBehaviors
         void LateUpdate() {
             if (!target) return;
 
-            var desiredPos = target.position + offset;
-            var smoothedPos = Vector3.Lerp(gameplayManager.Cam.transform.position, desiredPos, smoothSpeed * Time.deltaTime);
+            var targetPos = target.position + offset;
+            var endPos = Vector3.zero;
 
-            gameplayManager.Cam.transform.position = smoothedPos;
+            if (smoothEnabled)
+            {
+                endPos = Vector3.Lerp(gameplayManager.Cam.transform.position, targetPos, smoothSpeed * Time.deltaTime);
+            }
+            else
+            {
+                endPos = targetPos;
+            }
+
+            gameplayManager.Cam.transform.position = endPos;
             // Camera.main.transform.position = desiredPos;
         }
     }

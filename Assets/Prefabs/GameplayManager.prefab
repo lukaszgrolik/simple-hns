@@ -106,6 +106,7 @@ GameObject:
   - component: {fileID: 1357027792395845136}
   - component: {fileID: 1357027792395845137}
   - component: {fileID: 1357027792395845142}
+  - component: {fileID: 3346534721623760094}
   m_Layer: 0
   m_Name: GameplayManager
   m_TagString: Untagged
@@ -219,6 +220,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 824c0d71724a2c540b4eec1a51ec7e62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smoothSpeed: 10
+--- !u!114 &3346534721623760094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1357027792395845138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc7481288f4ffa74382862634851e9dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameplayManager: {fileID: 1357027792395845136}
+  playerController: {fileID: 1357027792395845137}
+  cameraFollow: {fileID: 1357027792395845142}
+  waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1357027792437311056
 GameObject:
   m_ObjectHideFlags: 0

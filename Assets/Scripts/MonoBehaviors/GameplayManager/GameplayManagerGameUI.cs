@@ -11,6 +11,9 @@ namespace MonoBehaviors
         private GameUI gameUI;
         private PlayerController playerController;
 
+        private CameraFollow cameraFollow;
+        public CameraFollow CameraFollow => cameraFollow;
+
         private AgentController controlledAgent;
 
         public GameplayManagerGameUI(
@@ -29,6 +32,8 @@ namespace MonoBehaviors
 
         public void Setup()
         {
+            this.cameraFollow = gameplayManager.GetComponent<CameraFollow>();
+
             this.gameUI.Setup(gameplayManager);
         }
 
@@ -36,12 +41,11 @@ namespace MonoBehaviors
         public void Init()
         {
             playerController = gameplayManager.GetComponent<PlayerController>();
-            playerController.Setup(gameplayManager);
+            playerController.Setup(gameplayManager, this);
 
             playerController.MouseHover.agentMouseEntered += OnPlayerAgentMouseEntered;
             playerController.MouseHover.agentMouseLeft += OnPlayerAgentMouseLeft;
 
-            var cameraFollow = gameplayManager.GetComponent<CameraFollow>();
             cameraFollow.Setup(gameplayManager, controlledAgent.transform);
 
             var ctrlAgentHealth = controlledAgent.Agent.health;

@@ -17,6 +17,7 @@ namespace MonoBehaviors
         public GameCore.Agent Agent => agent;
 
         private AgentAnimation agentAnimation;
+        private AgentMovement agentMovement;
 
         // private AgentMovement agentMovement;
         // public AgentMovement Movement => agentMovement;
@@ -78,7 +79,7 @@ namespace MonoBehaviors
             );
 
             var navMeshAgent = GetComponent<NavMeshAgent>();
-            var agentMovement = new AgentMovement(
+            this.agentMovement = new AgentMovement(
                 agentController: this,
                 navMeshAgent: navMeshAgent
             );
@@ -98,6 +99,7 @@ namespace MonoBehaviors
             }
         }
 
+        public IEnumerator ForceUpdatePosition(Vector3 pos, CameraFollow cameraFollow) { return agentMovement.ForceUpdatePosition(pos, cameraFollow); }
         public void SetDestination(Vector3 pos) { agent.movement.SetDestination(pos); }
         public void CancelMovement() {}
         public void MarkArrived() { agent.movement.MarkArrived(); }

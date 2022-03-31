@@ -8,13 +8,18 @@ namespace MonoBehaviors
     public class PlayerController : MonoBehaviour
     {
         private GameplayManager gameplayManager;
+        private GameplayManagerGameUI gameplayManagerGameUI;
 
         private PlayerControllerMouseHover mouseHover;
         public PlayerControllerMouseHover MouseHover => mouseHover;
 
-        public void Setup(GameplayManager gameplayManager)
+        public event System.Action waypointModeOn;
+        public event System.Action waypointModeOff;
+
+        public void Setup(GameplayManager gameplayManager, GameplayManagerGameUI gameplayManagerGameUI)
         {
             this.gameplayManager = gameplayManager;
+            this.gameplayManagerGameUI = gameplayManagerGameUI;
             this.mouseHover = new PlayerControllerMouseHover(gameplayManager);
         }
 
@@ -68,6 +73,14 @@ namespace MonoBehaviors
             {
                 agentCtrl.Agent.health.Heal();
             }
+            else if (Input.GetKeyDown(KeyCode.T))
+            {
+                waypointModeOn?.Invoke();
+            }
+            else if (Input.GetKeyUp(KeyCode.T))
+            {
+                waypointModeOff?.Invoke();
+            }
             //
             // END HELPERS
             //
@@ -107,6 +120,18 @@ namespace MonoBehaviors
                     agentCtrl.SetActiveSkill(agentCtrl.skills[0]);
                     agentCtrl.Attack(mouseHover.GroundHitPoint.With(y: 0));
                 }
+                //
+                // HELPERS START
+                //
+                if (Input.GetMouseButtonDown(1))
+                {
+                    StartCoroutine(
+                        agentCtrl.ForceUpdatePosition(mouseHover.GroundHitPoint, gameplayManagerGameUI.CameraFollow)
+                    );
+                }
+                //
+                // HELPERS END
+                //
             }
             else if (Input.GetMouseButton(0))
             {

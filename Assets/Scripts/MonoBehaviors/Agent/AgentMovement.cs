@@ -7,8 +7,6 @@ namespace MonoBehaviors
 {
     public class AgentMovement
     {
-
-
         private AgentController agentController;
         private NavMeshAgent navMeshAgent;
 
@@ -42,6 +40,27 @@ namespace MonoBehaviors
 
         //     navMeshAgent.SetDestination(dest);
         // }
+
+        void SetNavMeshAgentEnabled(bool value)
+        {
+            navMeshAgent.enabled = value;
+        }
+
+        public IEnumerator ForceUpdatePosition(Vector3 target, CameraFollow cameraFollow)
+        {
+            agentController.Agent.movement.Cancel();
+
+            SetNavMeshAgentEnabled(false);
+            cameraFollow.SetSmoothEnabled(false);
+
+            agentController.transform.position = target.With(y: agentController.transform.position.y);
+
+            SetNavMeshAgentEnabled(true);
+
+            yield return new WaitForEndOfFrame();
+
+            cameraFollow.SetSmoothEnabled(true);
+        }
 
         void OnSpeedChanged(float speed)
         {
