@@ -21,6 +21,10 @@ namespace MonoBehaviors
             KeyCode.F6,
             KeyCode.F7,
             KeyCode.F8,
+            KeyCode.F9,
+            KeyCode.F10,
+            KeyCode.F11,
+            KeyCode.F12,
         };
 
         void Awake()
@@ -37,7 +41,11 @@ namespace MonoBehaviors
             {
                 if (Input.GetKeyUp(keys[i]))
                 {
-                    StartCoroutine(gameplayManager.ControlledAgent.ForceUpdatePosition(waypoints[i].position, cameraFollow));
+                    var wp = waypoints[i];
+                    if (wp.gameObject.activeInHierarchy)
+                    {
+                        StartCoroutine(gameplayManager.ControlledAgent.ForceUpdatePosition(wp.position, cameraFollow));
+                    }
                 }
             }
         }
