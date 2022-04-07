@@ -60,6 +60,18 @@ namespace MonoBehaviors
             enabled = false;
         }
 
+#if UNITY_EDITOR
+        void OnDrawGizmos()
+        {
+            foreach (Transform wp in waypoints)
+            {
+                if (wp.gameObject.activeInHierarchy == false) continue;
 
+                Gizmos.color = Color.red;
+                Gizmos.DrawSphere(wp.position, .25f);
+                Gizmos.DrawLine(wp.position, wp.position + Vector3.up * 3f);
+            }
+        }
+#endif
     }
 }
