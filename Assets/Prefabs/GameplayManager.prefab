@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &968122505886376131
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 512745163607420296}
+  m_Layer: 0
+  m_Name: projectile explosions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &512745163607420296
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 968122505886376131}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1357027791398898571}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1357027790916187752
 GameObject:
   m_ObjectHideFlags: 0
@@ -61,6 +91,7 @@ Transform:
   - {fileID: 1357027792749416235}
   - {fileID: 1357027792393686349}
   - {fileID: 1530957445345716598}
+  - {fileID: 512745163607420296}
   m_Father: {fileID: 1357027792395845143}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -158,10 +189,12 @@ MonoBehaviour:
   agentPrefab: {fileID: 8915420808062846081, guid: 9903841f7d63ae041928e2187c6cb502, type: 3}
   droppedItemPrefab: {fileID: 4510162277105832216, guid: 53c892dc452faad4d8a359e1e794eee8, type: 3}
   projectilePrefab: {fileID: 3856364832943531748, guid: 84dd2addaae0fb741a2861878bd51ef2, type: 3}
+  projectileExplosionPrefab: {fileID: 2663152996481554851, guid: 08d5e127d9d1a014db109a65af667ced, type: 3}
   movementTargetContainer: {fileID: 1357027790916187759}
   agentsContainer: {fileID: 1357027792749416235}
   droppedItemsContainer: {fileID: 1530957445345716598}
   projectilesContainer: {fileID: 1357027792393686349}
+  projectileExplosionsContainer: {fileID: 512745163607420296}
   controlledAgentObject: {fileID: 0}
   projectileModelPrefabs:
   - projectileType: 0
@@ -220,6 +253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 824c0d71724a2c540b4eec1a51ec7e62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smoothEnabled: 1
   smoothSpeed: 10
 --- !u!114 &3346534721623760094
 MonoBehaviour:

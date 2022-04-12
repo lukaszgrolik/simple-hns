@@ -12,6 +12,7 @@ namespace GameCore
         public readonly DataDefinition.Skill_CastProjectile projectileSkillData;
 
         // public event System.Action disappeared;
+        public event System.Action exploded;
 
         private float timeElapsed = 0;
 
@@ -71,13 +72,20 @@ namespace GameCore
             if (projectileSkillData.splashRadius > 0)
             {
                 DamageRadius();
-                Disappear();
             }
+
+            Disappear();
         }
 
         void Disappear()
         {
             // disappeared?.Invoke();
+
+            if (projectileSkillData.splashRadius > 0)
+            {
+                exploded?.Invoke();
+            }
+
             game.DeleteProjectile(this);
         }
 

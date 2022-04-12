@@ -22,13 +22,13 @@ namespace MonoBehaviors
             ),
             [SkillType.FireBolt] = new DataDefinition.Skill_CastProjectile(
                 name: "Fire bolt",
-                speed: 20,
+                speed: 15,
                 damage: 20,
                 damageDeviation: .25f
             ),
             [SkillType.FireBall] = new DataDefinition.Skill_CastProjectile(
                 name: "Fire ball",
-                speed: 30,
+                speed: 20,
                 damage: 32,
                 damageDeviation: .25f,
                 splashRadius: 2

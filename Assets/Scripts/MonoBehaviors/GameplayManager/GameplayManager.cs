@@ -87,6 +87,9 @@ namespace MonoBehaviors
         [SerializeField] private GameObject projectilePrefab;
         public GameObject ProjectilePrefab => projectilePrefab;
 
+        [SerializeField] private GameObject projectileExplosionPrefab;
+        public GameObject ProjectileExplosionPrefab => projectileExplosionPrefab;
+
         [Header("Containers")]
 
         [SerializeField] private Transform movementTargetContainer;
@@ -100,6 +103,9 @@ namespace MonoBehaviors
 
         [SerializeField] private Transform projectilesContainer;
         public Transform ProjectilesContainer => projectilesContainer;
+
+        [SerializeField] private Transform projectileExplosionsContainer;
+        public Transform ProjectileExplosionsContainer => projectileExplosionsContainer;
 
         [Space(20)]
 

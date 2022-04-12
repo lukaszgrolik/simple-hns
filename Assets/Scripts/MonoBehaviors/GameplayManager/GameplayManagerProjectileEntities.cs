@@ -61,10 +61,13 @@ namespace MonoBehaviors
             var projectileModelObj = GameObject.Instantiate(projectileModelPrefab, projectileMB.transform);
 
             var spriteModel = projectileModelObj.GetComponentInChildren<SpriteModel>();
-            if (spriteModel == null) throw new System.Exception($"projectile SpriteModel not found: {projectileType}");
+            // if (spriteModel == null) throw new System.Exception($"projectile SpriteModel not found: {projectileType}");
 
-            // @todo magic number
-            spriteModel.transform.rotation = Quaternion.Euler(37.5f, 45f, 0f);
+            if (spriteModel != null)
+            {
+                // @todo magic number
+                spriteModel.transform.rotation = Quaternion.Euler(37.5f, 45f, 0f);
+            }
 
             return (projectileObject, projectileMB);
         }

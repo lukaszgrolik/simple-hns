@@ -18,9 +18,9 @@ namespace MonoBehaviors
         {
             this.gameplayManager = gameplayManager;
             // this.originatorAgentCtrl = originatorAgentCtrl;
-            this.projectile = projectile;
 
-            // projectile.disappeared += OnProjectileDisappeared;
+            this.projectile = projectile;
+            projectile.exploded += OnProjectileExploded;
 
             var rb = GetComponent<Rigidbody>();
             rb.velocity = transform.forward * projectile.projectileSkillData.speed;
@@ -43,13 +43,18 @@ namespace MonoBehaviors
             {
                 projectile.OnCollidedWithAgent(otherAgent.Agent);
             }
-
-            // projectile.OnCollidedWithProp();
+            else
+            {
+                projectile.OnCollidedWithProp();
+            }
         }
 
-        // void OnProjectileDisappeared()
-        // {
+        void OnProjectileExploded()
+        {
+            var psObj = Instantiate(gameplayManager.ProjectileExplosionPrefab, transform.position, Quaternion.identity, gameplayManager.ProjectileExplosionsContainer);
+            var ps = psObj.GetComponent<ParticleSystem>();
 
-        // }
+            Destroy(psObj, ps.main.duration);
+        }
     }
 }
