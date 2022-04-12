@@ -103,6 +103,7 @@ namespace MonoBehaviors
         public void SetDestination(Vector3 pos) { agent.movement.SetDestination(pos); }
         public void CancelMovement() {}
         public void MarkArrived() { agent.movement.MarkArrived(); }
+        public void SetRunningMode() { agent.movement.SetRunningMode(); }
 
         public IReadOnlyList<GameCore.Skill> skills => agent.combat.Skills;
         public void SetActiveSkill(GameCore.Skill skill) { agent.combat.SetActiveSkill(skill); }

@@ -108,7 +108,8 @@ namespace GameCore
 
             var combat = new GameCore.AgentCombat(
                 game: this,
-                movement: agentMovement
+                movement: agentMovement,
+                attackRate: agentData.attackRate
             );
             var combatSkills = new List<Skill>();
 

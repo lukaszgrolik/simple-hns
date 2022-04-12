@@ -118,17 +118,19 @@ namespace DataDefinition
         public readonly float sightRadius;
         public readonly float sightRadiusDeviation;
         public readonly List<Skill> skills;
+        public readonly float attackRate;
 
         public Agent(
             string name,
-            float health = 100f,
+            float health = 10f,
             float healthDeviation = 0,
             float walkingSpeed = 3f,
             float runningSpeed = 6f,
             float speedDeviation = 0f,
             float sightRadius = 10f,
             float sightRadiusDeviation = 0f,
-            List<Skill> skills = null
+            List<Skill> skills = null,
+            float attackRate = 1f
         )
         {
             this.name = name;
@@ -140,6 +142,7 @@ namespace DataDefinition
             this.sightRadius = sightRadius;
             this.sightRadiusDeviation = sightRadiusDeviation;
             this.skills = skills != null ? skills : new List<Skill>();
+            this.attackRate = attackRate;
         }
     }
 

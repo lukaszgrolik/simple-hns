@@ -55,6 +55,8 @@ namespace MonoBehaviors
 
             ctrlAgentHealth.healthChanged += OnControlledAgentHealthPointsChanged;
             ctrlAgentHealth.died += OnControlledAgentDied;
+
+            controlledAgent.SetRunningMode();
         }
 
         void OnControlledAgentHealthPointsChanged(GameCore.Agent agent)

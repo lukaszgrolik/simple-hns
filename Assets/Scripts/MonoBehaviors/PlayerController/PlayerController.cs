@@ -103,12 +103,12 @@ namespace MonoBehaviors
                     agentCtrl.Agent.movement.SetWalkingMode();
                 }
             }
-            else if (Input.GetKeyUp(KeyCode.Q))
+            else if (Input.GetKey(KeyCode.Q))
             {
                 agentCtrl.SetActiveSkill(agentCtrl.skills[2]);
                 agentCtrl.Attack(mouseHover.GroundHitPoint.With(y: 0));
             }
-            else if (Input.GetKeyUp(KeyCode.W))
+            else if (Input.GetKey(KeyCode.W))
             {
                 agentCtrl.SetActiveSkill(agentCtrl.skills[3]);
                 agentCtrl.Attack(mouseHover.GroundHitPoint.With(y: 0));

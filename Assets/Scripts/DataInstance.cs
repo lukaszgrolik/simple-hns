@@ -10,7 +10,8 @@ namespace MonoBehaviors
         FireBall,
         EnergyBolt,
         TreeWall,
-        SummonButterflies
+        SummonButterflies,
+        SkeletonFireBolt,
     }
 
     public class DataStore
@@ -24,6 +25,12 @@ namespace MonoBehaviors
                 name: "Fire bolt",
                 speed: 15,
                 damage: 20,
+                damageDeviation: .25f
+            ),
+            [SkillType.SkeletonFireBolt] = new DataDefinition.Skill_CastProjectile(
+                name: "Skeleton Fire bolt",
+                speed: 15,
+                damage: 5,
                 damageDeviation: .25f
             ),
             [SkillType.FireBall] = new DataDefinition.Skill_CastProjectile(
@@ -60,6 +67,7 @@ namespace MonoBehaviors
             projectiles.Add(ProjectileType.FireBolt, skills[SkillType.FireBolt] as DataDefinition.Skill_CastProjectile);
             projectiles.Add(ProjectileType.FireBall, skills[SkillType.FireBall] as DataDefinition.Skill_CastProjectile);
             projectiles.Add(ProjectileType.EnergyBolt, skills[SkillType.EnergyBolt] as DataDefinition.Skill_CastProjectile);
+            projectiles.Add(ProjectileType.SkeletonFireBolt, skills[SkillType.SkeletonFireBolt] as DataDefinition.Skill_CastProjectile);
 
             agents.Add(AgentType.Butterfly, new DataDefinition.Agent(
                 name: "Butterfly",
@@ -78,13 +86,21 @@ namespace MonoBehaviors
 
             agents.Add(AgentType.Hero, new DataDefinition.Agent(
                 name: "Hero",
+                health: 150,
+                // healthDeviation: .3f,
+                walkingSpeed: 3,
+                runningSpeed: 6,
+                // speedDeviation: .15f,
+                // sightRadius: 5,
+                // sightRadiusDeviation: .15f,
                 skills: new List<DataDefinition.Skill>()
                 {
                     skills[SkillType.DefaultMelee],
                     skills[SkillType.FireBolt],
                     skills[SkillType.FireBall],
                     skills[SkillType.EnergyBolt],
-                }
+                },
+                attackRate: 5f
             ));
 
             agents.Add(AgentType.Warden, new DataDefinition.Agent(
@@ -99,11 +115,41 @@ namespace MonoBehaviors
 
             agents.Add(AgentType.Demon, new DataDefinition.Agent(
                 name: "Demon",
+                health: 50,
+                healthDeviation: .2f,
                 skills: new List<DataDefinition.Skill>()
                 {
                     skills[SkillType.DefaultMelee],
                 }
             ));
+            agents.Add(AgentType.Demon_Orange, new DataDefinition.Agent(
+                name: "Demon",
+                health: 50,
+                healthDeviation: .2f,
+                skills: new List<DataDefinition.Skill>()
+                {
+                    skills[SkillType.DefaultMelee],
+                }
+            ));
+            agents.Add(AgentType.Demon_Blue, new DataDefinition.Agent(
+                name: "Demon",
+                health: 50,
+                healthDeviation: .2f,
+                skills: new List<DataDefinition.Skill>()
+                {
+                    skills[SkillType.DefaultMelee],
+                }
+            ));
+            agents.Add(AgentType.Demon_Black, new DataDefinition.Agent(
+                name: "Demon",
+                health: 50,
+                healthDeviation: .2f,
+                skills: new List<DataDefinition.Skill>()
+                {
+                    skills[SkillType.DefaultMelee],
+                }
+            ));
+
             agents.Add(AgentType.Warrior, new DataDefinition.Agent("Warrior"));
             agents.Add(AgentType.HoodedWarrior, new DataDefinition.Agent(
                 name: "Hooded Warrior",
@@ -113,6 +159,7 @@ namespace MonoBehaviors
                     skills[SkillType.FireBolt],
                 }
             ));
+
             agents.Add(AgentType.Zombie, new DataDefinition.Agent(
                 name: "Zombie",
                 health: 10,
@@ -127,8 +174,39 @@ namespace MonoBehaviors
                     skills[SkillType.DefaultMelee],
                 }
             ));
+            agents.Add(AgentType.Zombie_Desert, new DataDefinition.Agent(
+                name: "Zombie",
+                health: 10,
+                healthDeviation: .3f,
+                walkingSpeed: 3,
+                runningSpeed: 5,
+                speedDeviation: .15f,
+                sightRadius: 5,
+                sightRadiusDeviation: .15f,
+                skills: new List<DataDefinition.Skill>()
+                {
+                    skills[SkillType.DefaultMelee],
+                }
+            ));
+            agents.Add(AgentType.Zombie_Snow, new DataDefinition.Agent(
+                name: "Zombie",
+                health: 10,
+                healthDeviation: .3f,
+                walkingSpeed: 3,
+                runningSpeed: 5,
+                speedDeviation: .15f,
+                sightRadius: 5,
+                sightRadiusDeviation: .15f,
+                skills: new List<DataDefinition.Skill>()
+                {
+                    skills[SkillType.DefaultMelee],
+                }
+            ));
+
             agents.Add(AgentType.Skeleton, new DataDefinition.Agent(
                 name: "Skeleton",
+                health: 50,
+                healthDeviation: .2f,
                 skills: new List<DataDefinition.Skill>()
                 {
                     skills[SkillType.DefaultMelee],
@@ -136,17 +214,21 @@ namespace MonoBehaviors
             ));
             agents.Add(AgentType.SkeletonArcher, new DataDefinition.Agent(
                 name: "Skeleton Archer",
+                health: 50,
+                healthDeviation: .2f,
                 skills: new List<DataDefinition.Skill>()
                 {
                     skills[SkillType.DefaultMelee],
-                    skills[SkillType.FireBolt],
+                    skills[SkillType.SkeletonFireBolt],
                 }
             ));
             agents.Add(AgentType.SkeletonMage, new DataDefinition.Agent(
                 name: "Skeleton Mage",
+                health: 50,
+                healthDeviation: .2f,
                 skills: new List<DataDefinition.Skill>()
                 {
-                    skills[SkillType.FireBolt],
+                    skills[SkillType.SkeletonFireBolt],
                 }
             ));
             agents.Add(AgentType.Bulbfrog, new DataDefinition.Agent("Bulbfrog"));

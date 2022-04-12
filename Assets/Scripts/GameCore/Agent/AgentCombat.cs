@@ -161,7 +161,7 @@ namespace GameCore
         private List<Skill> projectileSkills = new List<Skill>();
         public IReadOnlyList<Skill> ProjectileSkills => projectileSkills;
 
-        private float attackRate = 5f;
+        private float attackRate;
 
         private Skill activeSkill;
         public Skill ActiveSkill => activeSkill;
@@ -176,11 +176,14 @@ namespace GameCore
 
         public AgentCombat(
             Game game,
-            AgentMovement movement
+            AgentMovement movement,
+            float attackRate
         )
         {
             this.game = game;
             this.movement = movement;
+
+            this.attackRate = attackRate;
 
             // var skills = new List<Skill>(){
             //     new MeleeAttackSkill(this),

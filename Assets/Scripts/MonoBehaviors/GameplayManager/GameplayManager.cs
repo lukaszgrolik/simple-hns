@@ -11,6 +11,7 @@ namespace MonoBehaviors
         FireBolt,
         FireBall,
         EnergyBolt,
+        SkeletonFireBolt,
     }
 
     [System.Serializable]
@@ -30,6 +31,11 @@ namespace MonoBehaviors
         Butterfly,
         Crab,
         WalkingShroom,
+        Demon_Orange,
+        Demon_Blue,
+        Demon_Black,
+        Zombie_Desert,
+        Zombie_Snow,
     }
 
     [System.Serializable]
