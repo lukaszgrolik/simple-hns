@@ -11,6 +11,7 @@ namespace GameCore
         }
 
         private AgentHealth agentHealth;
+        private AgentStun agentStun;
 
         private float walkingSpeed;
         private float runningSpeed;
@@ -36,15 +37,19 @@ namespace GameCore
 
         public AgentMovement(
             AgentHealth agentHealth,
+            AgentStun agentStun,
             float walkingSpeed,
             float runningSpeed
         )
         {
             this.agentHealth = agentHealth;
+            this.agentStun = agentStun;
+
             this.walkingSpeed = walkingSpeed;
             this.runningSpeed = runningSpeed;
 
             agentHealth.died += OnAgentDied;
+            agentStun.stunned += OnAgentStunned;
 
             currentMovementMode = MovementMode.Walking;
             currentSpeed = walkingSpeed;
@@ -68,6 +73,8 @@ namespace GameCore
 
         public void SetDestination(Vector3 pos)
         {
+            if (agentStun.IsStunned) return;
+
             currentDestination = pos;
             isChangingDestination = true;
 
@@ -97,6 +104,11 @@ namespace GameCore
             Cancel();
 
             disabled?.Invoke();
+        }
+
+        void OnAgentStunned()
+        {
+            Cancel();
         }
     }
 }

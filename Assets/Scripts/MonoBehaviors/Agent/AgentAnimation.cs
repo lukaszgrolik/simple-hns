@@ -17,6 +17,7 @@ namespace MonoBehaviors
             Attack,
             Casting,
             Death,
+            Stun,
         }
 
         private IEnumerator waitCoroutine;
@@ -36,6 +37,8 @@ namespace MonoBehaviors
 
             agent.health.died += OnAgentDied;
 
+            agent.stun.stunned += OnAgentStunned;
+
             agent.movement.destinationChanged += OnAgentDestinationChanged;
             agent.movement.stopped += OnAgentStopped;
 
@@ -50,6 +53,11 @@ namespace MonoBehaviors
         void OnAgentDied(GameCore.Agent agent)
         {
             PlayClip(AnimState.Death);
+        }
+
+        void OnAgentStunned()
+        {
+            PlayClip(AnimState.Stun);
         }
 
         void OnAgentDestinationChanged(Vector3 pos)

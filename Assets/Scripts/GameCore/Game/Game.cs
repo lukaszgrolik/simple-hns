@@ -100,15 +100,22 @@ namespace GameCore
             var agentHealth = new GameCore.AgentHealth(
                 maxPoints: Utils.RandomValueWithDeviation(agentData.health, agentData.healthDeviation)
             );
+            var agentStun = new GameCore.AgentStun(
+                agentHealth: agentHealth,
+                canBeStunned: agentData.canBeStunned,
+                stunTime: agentData.stunTime
+            );
             var agentMovement = new GameCore.AgentMovement(
                 agentHealth: agentHealth,
+                agentStun: agentStun,
                 walkingSpeed: Utils.RandomValueWithDeviation(agentData.walkingSpeed, agentData.speedDeviation),
                 runningSpeed: Utils.RandomValueWithDeviation(agentData.runningSpeed, agentData.speedDeviation)
             );
 
             var combat = new GameCore.AgentCombat(
                 game: this,
-                movement: agentMovement,
+                agentStun: agentStun,
+                agentMovement: agentMovement,
                 attackRate: agentData.attackRate
             );
             var combatSkills = new List<Skill>();
@@ -141,6 +148,7 @@ namespace GameCore
                 ),
                 equipment: new GameCore.AgentEquipment(),
                 health: agentHealth,
+                stun: agentStun,
                 drop: new GameCore.AgentDrop(
                     health: agentHealth
                 ),

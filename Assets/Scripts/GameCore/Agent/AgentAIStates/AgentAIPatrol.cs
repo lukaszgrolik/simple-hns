@@ -18,10 +18,14 @@ namespace GameCore.AgentAI.States
         public override void Enter()
         {
             patrolSM.SetState(new PatrolStates.Moving(agent));
+
+            agent.stun.stunEnded += OnAgentStunEnded;
         }
 
         public override void Exit()
         {
+            agent.stun.stunEnded -= OnAgentStunEnded;
+
             patrolSM.Exit();
         }
 
@@ -31,6 +35,11 @@ namespace GameCore.AgentAI.States
             {
                 state.OnUpdate();
             }
+        }
+
+        void OnAgentStunEnded()
+        {
+            patrolSM.SetState(new PatrolStates.Moving(agent));
         }
     }
 }

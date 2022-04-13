@@ -121,6 +121,7 @@ namespace GameCore.AgentAI.States
 
             public override void Enter()
             {
+                agent.stun.stunEnded += OnAgentStunEnded;
                 agent.movement.arrived += OnAgentArrived;
                 agent.combat.attackFinished += OnAttackFinished;
 
@@ -129,6 +130,7 @@ namespace GameCore.AgentAI.States
 
             public override void Exit()
             {
+                agent.stun.stunEnded -= OnAgentStunEnded;
                 agent.movement.arrived -= OnAgentArrived;
                 agent.combat.attackFinished -= OnAttackFinished;
 
@@ -150,6 +152,11 @@ namespace GameCore.AgentAI.States
                 {
                     engageSM.SetState(new EngageStates.UseSkill(agent, enemyAgent));
                 }
+            }
+
+            void OnAgentStunEnded()
+            {
+                SelectAction();
             }
 
             void OnAgentArrived()

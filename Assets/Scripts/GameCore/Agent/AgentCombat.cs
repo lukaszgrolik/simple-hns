@@ -150,7 +150,8 @@ namespace GameCore
     public class AgentCombat : AgentComponent
     {
         public readonly Game game;
-        public readonly AgentMovement movement;
+        public readonly AgentStun agentStun;
+        public readonly AgentMovement agentMovement;
 
         private List<Skill> skills = new List<Skill>();
         public IReadOnlyList<Skill> Skills => skills;
@@ -176,12 +177,14 @@ namespace GameCore
 
         public AgentCombat(
             Game game,
-            AgentMovement movement,
+            AgentStun agentStun,
+            AgentMovement agentMovement,
             float attackRate
         )
         {
             this.game = game;
-            this.movement = movement;
+            this.agentStun = agentStun;
+            this.agentMovement = agentMovement;
 
             this.attackRate = attackRate;
 
@@ -246,6 +249,7 @@ namespace GameCore
 
         public void Attack(Vector3 pos)
         {
+            if (agentStun.IsStunned) return;
             if (attackInProgress) return;
 
             attackInProgress = true;
@@ -253,7 +257,7 @@ namespace GameCore
 
             // StartCoroutine(HandleAttackEnd());
 
-            movement.Cancel();
+            agentMovement.Cancel();
 
             activeSkill.Trigger(pos);
         }

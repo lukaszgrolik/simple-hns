@@ -88,6 +88,7 @@ namespace MonoBehaviors
                 name: "Hero",
                 health: 150,
                 // healthDeviation: .3f,
+                canBeStunned: false,
                 walkingSpeed: 3,
                 runningSpeed: 6,
                 // speedDeviation: .15f,

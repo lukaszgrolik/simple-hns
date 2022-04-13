@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 662457297786407632, guid: ffbf2e3311f02ea499097c42254ee4f0, type: 3}
       propertyPath: m_Name
-      value: Skeleton
+      value: Skeleton_Mage
       objectReference: {fileID: 0}
     - target: {fileID: 5174742346496284182, guid: ffbf2e3311f02ea499097c42254ee4f0, type: 3}
       propertyPath: m_RootOrder
@@ -54,6 +54,14 @@ PrefabInstance:
     - target: {fileID: 5174742346496284182, guid: ffbf2e3311f02ea499097c42254ee4f0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5321508561803281761, guid: ffbf2e3311f02ea499097c42254ee4f0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8670185000570499895, guid: ffbf2e3311f02ea499097c42254ee4f0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ffbf2e3311f02ea499097c42254ee4f0, type: 3}

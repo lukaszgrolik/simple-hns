@@ -72,6 +72,7 @@ namespace GameCore
         public readonly AgentGroupMember groupMember;
         public readonly AgentEquipment equipment;
         public readonly AgentHealth health;
+        public readonly AgentStun stun;
         public readonly AgentDrop drop;
         public readonly AgentMovement movement;
         public readonly AgentPartyMember partyMember;
@@ -86,6 +87,7 @@ namespace GameCore
             AgentGroupMember groupMember,
             AgentEquipment equipment,
             AgentHealth health,
+            AgentStun stun,
             AgentDrop drop,
             AgentMovement movement,
             AgentPartyMember partyMember,
@@ -104,6 +106,9 @@ namespace GameCore
 
             this.health = health;
             health.SetAgent(this);
+
+            this.stun = stun;
+            stun.SetAgent(this);
 
             this.drop = drop;
 
@@ -131,6 +136,7 @@ namespace GameCore
 
         public void OnUpdate(float deltaTime)
         {
+            stun.OnUpdate(deltaTime);
             combat.OnUpdate(deltaTime);
 
             if (control is IAgentControlTickable agentAIControl)
