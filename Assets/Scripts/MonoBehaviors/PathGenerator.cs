@@ -4,9 +4,11 @@ using UnityEngine;
 
 #if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 namespace MonoBehaviors
 {
+#if UNITY_EDITOR
     [CustomEditor(typeof(PathGenerator))]
     public class PathGeneratorEditor : Editor
     {
@@ -26,7 +28,7 @@ namespace MonoBehaviors
             if (GUILayout.Button("Clear")) script.Clear();
         }
     }
-    #endif
+#endif
 
     public class PathGenerator : MonoBehaviour
     {
