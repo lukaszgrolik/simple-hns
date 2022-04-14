@@ -13,7 +13,7 @@ namespace GameCore
 
         void OnAgentDied(Agent agent)
         {
-            DropItems(agent);
+            // DropItems(agent);
         }
 
         void DropItems(Agent agent)
