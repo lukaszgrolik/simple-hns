@@ -9,6 +9,16 @@ namespace GameCore
         public readonly DataDefinition.Item itemData;
         private Vector2 size = Vector2.zero;
 
+        private float plusLife;
+        private float enhancedDamage;
+        private float increasedAttackRate;
+        // private float increasedCastRate;
+        private float increasedMovementSpeed;
+        private float lifeStolenPerHit;
+        private float lifeStolenPerKill;
+        private float lifeRegeneration;
+        private float plusMagicFind;
+
         public Item(DataDefinition.Item itemData)
         {
             this.itemData = itemData;

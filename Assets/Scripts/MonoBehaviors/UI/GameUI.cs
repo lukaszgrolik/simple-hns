@@ -7,78 +7,6 @@ using TMPro;
 
 namespace MonoBehaviors
 {
-    public class PlayerHealthUI
-    {
-        private Image playerHealthImage;
-        private TMP_Text playerHealthText;
-
-        public PlayerHealthUI(
-            Image playerHealthImage,
-            TMP_Text playerHealthText
-        )
-        {
-            this.playerHealthImage = playerHealthImage;
-            this.playerHealthText = playerHealthText;
-        }
-
-        public void SetPlayerHealth(float currentPoints, float maxPoints)
-        {
-            playerHealthImage.fillAmount = currentPoints / maxPoints;
-            playerHealthText.text = $"{currentPoints}/{maxPoints}";
-        }
-    }
-
-    public class EnemyHealthUI
-    {
-        private GameObject enemyHealthObject;
-        private TMP_Text enemyNameText;
-        private Image enemyHealthImage;
-
-        public EnemyHealthUI(
-            GameObject enemyHealthObject,
-            TMP_Text enemyNameText,
-            Image enemyHealthImage
-        )
-        {
-            this.enemyHealthObject = enemyHealthObject;
-            this.enemyNameText = enemyNameText;
-            this.enemyHealthImage = enemyHealthImage;
-        }
-
-        public void ShowEnemyHealth(string name, float currentPoints, float maxPoints)
-        {
-            enemyNameText.text = name;
-            UpdateEnemyHealth(currentPoints, maxPoints);
-
-            enemyHealthObject.SetActive(true);
-        }
-
-        public void HideEnemyHealth()
-        {
-            enemyHealthObject.SetActive(false);
-        }
-
-        public void UpdateEnemyHealth(float currentPoints, float maxPoints)
-        {
-            enemyHealthImage.fillAmount = currentPoints / maxPoints;
-        }
-    }
-
-    public class PlayerDeathUI
-    {
-        public PlayerDeathUI(
-            Button restartButton
-        )
-        {
-            restartButton.onClick.AddListener(OnRestartButtonClick);
-        }
-
-        void OnRestartButtonClick()
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        }
-    }
-
     public class GameUI : MonoBehaviour
     {
         private GameplayManager gameplayManager;
@@ -96,6 +24,9 @@ namespace MonoBehaviors
         [Header("Player health")]
         [SerializeField] private Image playerHealthImage;
         [SerializeField] private TMP_Text playerHealthText;
+
+        private PlayerExpBarUI playerExpBarUI;
+        public PlayerExpBarUI PlayerExpBarUI => playerExpBarUI;
 
         [Header("Enemy health")]
         [SerializeField] private GameObject enemyHealthObject;
@@ -128,6 +59,10 @@ namespace MonoBehaviors
                 playerHealthImage,
                 playerHealthText
             );
+
+            this.playerExpBarUI = GetComponentInChildren<PlayerExpBarUI>();
+            playerExpBarUI.Setup();
+
             this.enemyHealthUI = new EnemyHealthUI(
                 enemyHealthObject,
                 enemyNameText,

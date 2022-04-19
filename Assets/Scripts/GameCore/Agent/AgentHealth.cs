@@ -2,71 +2,11 @@ using UnityEngine;
 
 namespace GameCore
 {
-    public class AgentStun : AgentComponent
-    {
-        private AgentHealth agentHealth;
+    // x; //
+    // public class AgentHealthRegen
+    // {
 
-        private bool canBeStunned;
-        private float stunTime;
-
-        private bool isStunned = false;
-        public bool IsStunned => isStunned;
-
-        public event System.Action stunned;
-        public event System.Action stunEnded;
-
-        private float elapsedStunTime = 0f;
-
-        public AgentStun(
-            AgentHealth agentHealth,
-            bool canBeStunned = false,
-            float stunTime = 0f
-        )
-        {
-            this.canBeStunned = canBeStunned;
-            this.stunTime = stunTime;
-
-            agentHealth.healthDecreased += OnAgentHealthDecreased;
-        }
-
-        public void OnUpdate(float deltaTime)
-        {
-            if (agent.health.isAlive && canBeStunned && isStunned)
-            {
-                elapsedStunTime += deltaTime;
-                Debug.Log($"elapsedStunTime: {elapsedStunTime} ({stunTime})");
-
-                if (elapsedStunTime >= stunTime)
-                {
-                    elapsedStunTime = 0;
-
-                    EndStun();
-                }
-            }
-        }
-
-        void Stun()
-        {
-            isStunned = true;
-
-            stunned?.Invoke();
-        }
-
-        void EndStun()
-        {
-            isStunned = false;
-
-            stunEnded?.Invoke();
-        }
-
-        void OnAgentHealthDecreased()
-        {
-            if (canBeStunned && agent.health.CurrentPoints > 0)
-            {
-                Stun();
-            }
-        }
-    }
+    // }
 
     public class AgentHealth : AgentComponent
     {
@@ -79,6 +19,9 @@ namespace GameCore
         public bool isAlive => currentPoints > 0;
         public bool isDead => isAlive == false;
 
+        private Agent killedBy;
+        public Agent KilledBy => killedBy;
+
         public event System.Action healthDecreased;
         public event System.Action<GameCore.Agent> healthChanged;
 
@@ -88,10 +31,17 @@ namespace GameCore
         {
             this.maxPoints = maxPoints;
 
-            currentPoints = maxPoints;
+            currentPoints = GetTotalMaxPoints();
         }
 
-        public void TakeDamage(float damagePoints)
+        float GetTotalMaxPoints()
+        {
+            // x; // sum from agent card and equipped items
+            // return maxPoints + agent.agentCard.plusLife + agent.agentEquipment.plusLife;
+            return maxPoints;
+        }
+
+        public void TakeDamage(float damagePoints, Agent attacker)
         {
             currentPoints -= damagePoints;
             if (currentPoints < 0) currentPoints = 0;
@@ -102,19 +52,21 @@ namespace GameCore
 
             if (currentPoints == 0)
             {
-                Die();
+                Die(attacker);
             }
         }
 
         public void Heal()
         {
-            currentPoints = maxPoints;
+            currentPoints = GetTotalMaxPoints();
 
             healthChanged?.Invoke(agent);
         }
 
-        void Die()
+        void Die(Agent attacker)
         {
+            killedBy = attacker;
+
             died?.Invoke(agent);
         }
     }

@@ -59,7 +59,7 @@ namespace GameCore
 
                 if (angle <= damageAngle)
                 {
-                    otherAgent.health.TakeDamage(5);
+                    otherAgent.health.TakeDamage(5, combat.Agent);
                 }
             }
         }
@@ -147,6 +147,24 @@ namespace GameCore
         }
     }
 
+    public class AgentHealthCombat
+    {
+        public AgentHealthCombat(
+            AgentHealth agentHealth,
+            AgentCombat agentCombat
+        )
+        {
+            agentHealth.died += OnAgentDied;
+        }
+
+        void OnAgentDied(Agent agent)
+        {
+            var killer = agent.health.KilledBy;
+
+            killer.combat.InvokeEnemyKilled(agent);
+        }
+    }
+
     public class AgentCombat : AgentComponent
     {
         public readonly Game game;
@@ -174,6 +192,8 @@ namespace GameCore
         public event System.Action attackFinished;
         public event System.Action meleeAttackStarted;
         public event System.Action castingStarted;
+        // public event System.Action<Agent> enemyDamaged;
+        public event System.Action<Agent> enemyKilled;
 
         public AgentCombat(
             Game game,
@@ -238,6 +258,11 @@ namespace GameCore
         public void InvokeCastingStarted()
         {
             castingStarted?.Invoke();
+        }
+
+        public void InvokeEnemyKilled(Agent agent)
+        {
+            enemyKilled?.Invoke(agent);
         }
 
         public void SetActiveSkill(Skill skill)

@@ -27,6 +27,8 @@ namespace GameCore
     {
         public readonly EngineTime engineTime = new EngineTime();
 
+        public readonly GameAgentLeveling agentLeveling = new GameAgentLeveling();
+
         private readonly List<AgentsGroup> agentsGroups = new List<AgentsGroup>();
 
         private readonly List<Agent> agents = new List<Agent>();
@@ -97,6 +99,7 @@ namespace GameCore
             GameCore.AgentControl agentControl
         )
         {
+            var agentLevel = new AgentLevel();
             var agentHealth = new GameCore.AgentHealth(
                 maxPoints: Utils.RandomValueWithDeviation(agentData.health, agentData.healthDeviation)
             );
@@ -146,6 +149,8 @@ namespace GameCore
                 groupMember: new AgentGroupMember(
                     agentsGroup: agentsGroup
                 ),
+                agentLevel: agentLevel,
+                agentCard: new AgentCard(),
                 equipment: new GameCore.AgentEquipment(),
                 health: agentHealth,
                 stun: agentStun,
@@ -161,6 +166,14 @@ namespace GameCore
                     sightRadius: Utils.RandomValueWithDeviation(agentData.sightRadius, agentData.sightRadiusDeviation)
                 ),
                 combat: combat,
+                agentHealthCombat: new AgentHealthCombat(
+                    agentHealth: agentHealth,
+                    agentCombat: combat
+                ),
+                agentCombatLevel: new AgentCombatLevel(
+                    agentCombat: combat,
+                    agentLevel: agentLevel
+                ),
                 control: agentControl,
                 agentData: agentData
             );

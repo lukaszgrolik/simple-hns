@@ -70,6 +70,8 @@ namespace GameCore
         public readonly Game game;
 
         public readonly AgentGroupMember groupMember;
+        public readonly AgentLevel agentLevel;
+        public readonly AgentCard agentCard;
         public readonly AgentEquipment equipment;
         public readonly AgentHealth health;
         public readonly AgentStun stun;
@@ -78,6 +80,8 @@ namespace GameCore
         public readonly AgentPartyMember partyMember;
         public readonly AgentDetection agentDetection;
         public readonly AgentCombat combat;
+        public readonly AgentHealthCombat agentHealthCombat;
+        public readonly AgentCombatLevel agentCombatLevel;
         public readonly AgentControl control;
 
         public readonly DataDefinition.Agent agentData;
@@ -85,6 +89,8 @@ namespace GameCore
         public Agent(
             Game game,
             AgentGroupMember groupMember,
+            AgentLevel agentLevel,
+            AgentCard agentCard,
             AgentEquipment equipment,
             AgentHealth health,
             AgentStun stun,
@@ -93,6 +99,8 @@ namespace GameCore
             AgentPartyMember partyMember,
             AgentDetection agentDetection,
             AgentCombat combat,
+            AgentHealthCombat agentHealthCombat,
+            AgentCombatLevel agentCombatLevel,
             AgentControl control,
             DataDefinition.Agent agentData
         )
@@ -100,6 +108,11 @@ namespace GameCore
             this.game = game;
 
             this.groupMember = groupMember;
+
+            this.agentLevel = agentLevel;
+            agentLevel.SetAgent(this);
+
+            this.agentCard = agentCard;
 
             this.equipment = equipment;
             equipment.SetAgent(this);
@@ -122,6 +135,8 @@ namespace GameCore
 
             this.combat = combat;
             combat.SetAgent(this);
+            this.agentHealthCombat = agentHealthCombat;
+            this.agentCombatLevel = agentCombatLevel;
 
             this.control = control;
             control.SetAgent(this);

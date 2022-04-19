@@ -93,7 +93,7 @@ namespace GameCore
         {
             var damage = Utils.RandomValueWithDeviation(projectileSkillData.damage, projectileSkillData.damageDeviation);
 
-            otherAgent.health.TakeDamage(damage);
+            otherAgent.health.TakeDamage(damage, originatorAgent);
         }
 
         void DamageRadius()
@@ -107,7 +107,7 @@ namespace GameCore
 
                 if (originatorAgent.partyMember.AgentsParty.IsAliveEnemy(otherAgent))
                 {
-                    agents[i].health.TakeDamage(damage);
+                    agents[i].health.TakeDamage(damage, originatorAgent);
                 }
             }
         }

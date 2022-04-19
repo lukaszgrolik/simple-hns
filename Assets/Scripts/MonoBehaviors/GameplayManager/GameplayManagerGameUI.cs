@@ -48,7 +48,15 @@ namespace MonoBehaviors
 
             cameraFollow.Setup(gameplayManager, controlledAgent.transform);
 
+            //
+            //
+            //
+
+            // @todo refactor - move to health UI, death UI - use SetPlayer logic instead
+
             var ctrlAgentHealth = controlledAgent.Agent.health;
+
+            gameUI.PlayerExpBarUI.SetPlayer(controlledAgent.Agent);
 
             gameUI.PlayerHealthUI.SetPlayerHealth(ctrlAgentHealth.CurrentPoints, ctrlAgentHealth.MaxPoints);
             gameUI.EnemyHealthUI.HideEnemyHealth();
@@ -56,6 +64,7 @@ namespace MonoBehaviors
             ctrlAgentHealth.healthChanged += OnControlledAgentHealthPointsChanged;
             ctrlAgentHealth.died += OnControlledAgentDied;
 
+            // @todo move - this is not UI logic
             controlledAgent.SetRunningMode();
         }
 

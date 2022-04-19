@@ -17,8 +17,27 @@ namespace GameCore
 
         public readonly List<Item> carriedItems = new List<Item>();
 
+        private float plusLife = 0;
+        private float enhancedDamage = 0;
+        private float increasedAttackRate = 0;
+        // private float increasedCastRate = 0;
+        private float increasedMovementSpeed = 0;
+        private float lifeStolenPerHit = 0;
+        private float lifeStolenPerKill = 0;
+        private float lifeRegeneration = 0;
+        private float plusMagicFind = 0;
+
         public event System.Action<DroppedItem> itemPicked;
         public event System.Action<Item> itemDropped;
+
+        public AgentEquipment()
+        {
+            // foreach (var wornItem in wornItems)
+            // {
+            //     x; // list all stats
+            //     plusLife += wornItem.plusLife;
+            // }
+        }
 
         public void Drop(Item item)
         {
@@ -47,6 +66,18 @@ namespace GameCore
             carriedItems.Add(droppedItem.item);
 
             itemPicked?.Invoke(droppedItem);
+        }
+
+        public void EquipItem(Item item)
+        {
+            // x; // list all stats
+            // plusLife += item.plusLife;
+        }
+
+        public void UnequipItem(Item item)
+        {
+            // x; // list all stats
+            // plusLife -= item.plusLife;
         }
     }
 }
