@@ -205,6 +205,8 @@ MonoBehaviour:
     prefab: {fileID: 1381819029475718378, guid: ae80c6f13d3819b4e836527a8f56d96d, type: 3}
   - projectileType: 3
     prefab: {fileID: 1381819029475718378, guid: b9ed7d9870bf5534292e6850772720b0, type: 3}
+  - projectileType: 4
+    prefab: {fileID: 1381819029475718378, guid: ae80c6f13d3819b4e836527a8f56d96d, type: 3}
   agentModelPrefabs:
   - agentType: 0
     prefab: {fileID: 8513934410253812705, guid: 8fbd32458ee3d7246850a632d7ac741c, type: 3}
@@ -230,6 +232,10 @@ MonoBehaviour:
     prefab: {fileID: 662457297786407632, guid: ffbf2e3311f02ea499097c42254ee4f0, type: 3}
   - agentType: 9
     prefab: {fileID: 586744763125949516, guid: a8d36164c2d2da04a87607c23b5a5cea, type: 3}
+  - agentType: 3
+    prefab: {fileID: 1221666499200683070, guid: abfe654e3ed3a574e8ec857fa00170dd, type: 3}
+  - agentType: 19
+    prefab: {fileID: 894214951593187258, guid: ddc74f99a02b46a49bfb5a8bcad51ca8, type: 3}
   itemModelPrefabs:
   - itemType: 0
     prefab: {fileID: 7131333464891160427, guid: 2c9440ba6729231449074ec5db622616, type: 3}

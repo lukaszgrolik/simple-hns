@@ -12,6 +12,7 @@ namespace MonoBehaviors
         FireBall,
         EnergyBolt,
         SkeletonFireBolt,
+        HoodedWarriorMageEnergyBolt,
     }
 
     [System.Serializable]
@@ -36,6 +37,7 @@ namespace MonoBehaviors
         Demon_Black,
         Zombie_Desert,
         Zombie_Snow,
+        HoodedWarriorMage,
     }
 
     [System.Serializable]

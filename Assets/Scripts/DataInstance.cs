@@ -12,6 +12,7 @@ namespace MonoBehaviors
         TreeWall,
         SummonButterflies,
         SkeletonFireBolt,
+        HoodedWarriorMageEnergyBolt,
     }
 
     public class DataStore
@@ -46,6 +47,12 @@ namespace MonoBehaviors
                 damage: 20,
                 damageDeviation: .25f
             ),
+            [SkillType.HoodedWarriorMageEnergyBolt] = new DataDefinition.Skill_CastProjectile(
+                name: "Hooded Warrior Mage Energy bolt",
+                speed: 15,
+                damage: 8.5f,
+                damageDeviation: .2f
+            ),
 
             [SkillType.TreeWall] = new DataDefinition.Skill_Custom(
                 name: "Tree wall"
@@ -68,6 +75,7 @@ namespace MonoBehaviors
             projectiles.Add(ProjectileType.FireBall, skills[SkillType.FireBall] as DataDefinition.Skill_CastProjectile);
             projectiles.Add(ProjectileType.EnergyBolt, skills[SkillType.EnergyBolt] as DataDefinition.Skill_CastProjectile);
             projectiles.Add(ProjectileType.SkeletonFireBolt, skills[SkillType.SkeletonFireBolt] as DataDefinition.Skill_CastProjectile);
+            projectiles.Add(ProjectileType.HoodedWarriorMageEnergyBolt, skills[SkillType.HoodedWarriorMageEnergyBolt] as DataDefinition.Skill_CastProjectile);
 
             agents.Add(AgentType.Butterfly, new DataDefinition.Agent(
                 name: "Butterfly",
@@ -151,13 +159,30 @@ namespace MonoBehaviors
                 }
             ));
 
-            agents.Add(AgentType.Warrior, new DataDefinition.Agent("Warrior"));
-            agents.Add(AgentType.HoodedWarrior, new DataDefinition.Agent(
-                name: "Hooded Warrior",
+            agents.Add(AgentType.Warrior, new DataDefinition.Agent(
+                name: "Possessed Warrior",
+                health: 200,
                 skills: new List<DataDefinition.Skill>()
                 {
                     skills[SkillType.DefaultMelee],
-                    skills[SkillType.FireBolt],
+                }
+            ));
+
+            agents.Add(AgentType.HoodedWarrior, new DataDefinition.Agent(
+                name: "Hooded Warrior",
+                health: 100,
+                skills: new List<DataDefinition.Skill>()
+                {
+                    skills[SkillType.DefaultMelee],
+                    // skills[SkillType.FireBolt],
+                }
+            ));
+            agents.Add(AgentType.HoodedWarriorMage, new DataDefinition.Agent(
+                name: "Hooded Warrior Mage",
+                health: 80,
+                skills: new List<DataDefinition.Skill>()
+                {
+                    skills[SkillType.HoodedWarriorMageEnergyBolt],
                 }
             ));
 
