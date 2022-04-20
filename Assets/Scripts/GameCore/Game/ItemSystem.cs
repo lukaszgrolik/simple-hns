@@ -9,19 +9,15 @@ namespace GameCore
         public readonly DataDefinition.Item itemData;
         private Vector2 size = Vector2.zero;
 
-        private float plusLife;
-        private float enhancedDamage;
-        private float increasedAttackRate;
-        // private float increasedCastRate;
-        private float increasedMovementSpeed;
-        private float lifeStolenPerHit;
-        private float lifeStolenPerKill;
-        private float lifeRegeneration;
-        private float plusMagicFind;
+        public readonly AgentAttributesCollection attrsCollection;
 
-        public Item(DataDefinition.Item itemData)
+        public Item(
+            DataDefinition.Item itemData,
+            List<GameCore.AgentAttribute> attrs = null
+        )
         {
             this.itemData = itemData;
+            this.attrsCollection = new AgentAttributesCollection(attrs);
         }
     }
 

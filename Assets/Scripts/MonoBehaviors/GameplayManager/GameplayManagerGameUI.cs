@@ -56,6 +56,7 @@ namespace MonoBehaviors
 
             var ctrlAgentHealth = controlledAgent.Agent.health;
 
+            gameUI.CharacterCardUI.SetPlayer(controlledAgent.Agent);
             gameUI.PlayerExpBarUI.SetPlayer(controlledAgent.Agent);
 
             gameUI.PlayerHealthUI.SetPlayerHealth(ctrlAgentHealth.CurrentPoints, ctrlAgentHealth.MaxPoints);

@@ -69,6 +69,11 @@ namespace MonoBehaviors
             {
                 PlayerControllerUtils.PickClosest(agentCtrl);
             }
+            else if (Input.GetKey(KeyCode.E))
+            {
+                if (Input.GetKeyUp(KeyCode.Alpha1)) PlayerControllerUtils.UnequipTestItem(agentCtrl);
+                else if (Input.GetKeyUp(KeyCode.Alpha2)) PlayerControllerUtils.EquipTestItemOfSuperStats(agentCtrl);
+            }
             else if (Input.GetKeyUp(KeyCode.H))
             {
                 agentCtrl.Agent.health.Heal();
@@ -84,6 +89,10 @@ namespace MonoBehaviors
             //
             // END HELPERS
             //
+            else if (Input.GetKeyUp(KeyCode.Y))
+            {
+                gameplayManager.GameUI.ToggleCharacterCardPanel();
+            }
             else if (Input.GetKeyUp(KeyCode.U))
             {
                 gameplayManager.GameUI.ToggleQuestsPanel();

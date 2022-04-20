@@ -37,5 +37,37 @@ namespace MonoBehaviors
                 agentCtrl.Agent.equipment.Pick(droppedItems_closest[0].DroppedItem);
             }
         }
+
+        static public void EquipTestItemOfSuperStats(AgentController agentCtrl)
+        {
+            if (agentCtrl.Agent.equipment.IsSlotFree(GameCore.AgentEquipment.WornItemSlot.Test) == false) return;
+
+            var item = new GameCore.Item(
+                itemData: new DataDefinition.Item(
+                    name: "Super item",
+                    category: new DataDefinition.ItemCategory(
+                        name: "Some category"
+                    )
+                ),
+                attrs: new List<GameCore.AgentAttribute>(){
+                    new GameCore.AgentAttribute_PlusLife(200),
+                    new GameCore.AgentAttribute_IncreasedMovementSpeed(100),
+                    new GameCore.AgentAttribute_IncreasedAttackRate(200),
+                    new GameCore.AgentAttribute_EnhancedDamage(500),
+                    new GameCore.AgentAttribute_LifeStolenPerHit(1),
+                    new GameCore.AgentAttribute_LifeStolenPerKill(10),
+                    new GameCore.AgentAttribute_LifeRegen(60),
+                }
+            );
+
+            agentCtrl.Agent.equipment.EquipItem(GameCore.AgentEquipment.WornItemSlot.Test, item);
+        }
+
+        static public void UnequipTestItem(AgentController agentCtrl)
+        {
+            if (agentCtrl.Agent.equipment.IsSlotFree(GameCore.AgentEquipment.WornItemSlot.Test)) return;
+
+            agentCtrl.Agent.equipment.UnequipItem(GameCore.AgentEquipment.WornItemSlot.Test);
+        }
     }
 }

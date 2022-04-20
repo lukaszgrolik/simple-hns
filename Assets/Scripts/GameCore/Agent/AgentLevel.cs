@@ -70,14 +70,14 @@ namespace GameCore
         {
             currentExp += expPoints;
 
-            expChanged?.Invoke(agent);
-
             var levelByExp = agent.game.agentLeveling.GetCurrentLevelByExp(currentExp);
 
             if (levelByExp > currentLevel)
             {
                 LevelUp(levelByExp);
             }
+
+            expChanged?.Invoke(agent);
         }
 
         void LevelUp(int newLevel)

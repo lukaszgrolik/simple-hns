@@ -11,32 +11,31 @@ namespace GameCore
             Helm,
             HandRight,
             HandLeft,
+            Test
         }
 
-        public readonly Dictionary<WornItemSlot, Item> wornItems = new Dictionary<WornItemSlot, Item>();
+        public readonly Dictionary<WornItemSlot, Item> wornItems;
+        public readonly List<Item> carriedItems;
 
-        public readonly List<Item> carriedItems = new List<Item>();
-
-        private float plusLife = 0;
-        private float enhancedDamage = 0;
-        private float increasedAttackRate = 0;
-        // private float increasedCastRate = 0;
-        private float increasedMovementSpeed = 0;
-        private float lifeStolenPerHit = 0;
-        private float lifeStolenPerKill = 0;
-        private float lifeRegeneration = 0;
-        private float plusMagicFind = 0;
+        public readonly AgentAttributesCollection wornItemsAttrsCollection = new AgentAttributesCollection();
 
         public event System.Action<DroppedItem> itemPicked;
         public event System.Action<Item> itemDropped;
+        public event System.Action<Item> itemEquipped;
+        public event System.Action<Item> itemUnequipped;
 
-        public AgentEquipment()
+        public AgentEquipment(
+            Dictionary<WornItemSlot, Item> wornItems = null,
+            List<Item> carriedItems = null
+        )
         {
-            // foreach (var wornItem in wornItems)
-            // {
-            //     x; // list all stats
-            //     plusLife += wornItem.plusLife;
-            // }
+            this.wornItems = wornItems != null ? wornItems : new Dictionary<WornItemSlot, Item>();
+            this.carriedItems = carriedItems != null ? carriedItems : new List<Item>();
+
+            foreach (var wornItem in this.wornItems)
+            {
+                wornItemsAttrsCollection.Add(wornItem.Value.attrsCollection);
+            }
         }
 
         public void Drop(Item item)
@@ -68,16 +67,48 @@ namespace GameCore
             itemPicked?.Invoke(droppedItem);
         }
 
-        public void EquipItem(Item item)
+        public bool IsSlotFree(WornItemSlot slot)
         {
-            // x; // list all stats
-            // plusLife += item.plusLife;
+            if (wornItems.TryGetValue(slot, out var equippedItem))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
-        public void UnequipItem(Item item)
+        public void EquipItem(WornItemSlot slot, Item item)
         {
-            // x; // list all stats
-            // plusLife -= item.plusLife;
+            if (wornItems.TryGetValue(slot, out var equippedItem))
+            {
+                Debug.Log("slot is occupied");
+            }
+            else
+            {
+                wornItems.Add(slot, item);
+
+                wornItemsAttrsCollection.Add(item.attrsCollection);
+
+                itemEquipped?.Invoke(item);
+            }
+        }
+
+        public void UnequipItem(WornItemSlot slot)
+        {
+            if (wornItems.TryGetValue(slot, out var item) == false)
+            {
+                Debug.Log("slot is unoccupied");
+            }
+            else
+            {
+                wornItems.Remove(slot);
+
+                wornItemsAttrsCollection.Remove(item.attrsCollection);
+
+                itemUnequipped?.Invoke(item);
+            }
         }
     }
 }

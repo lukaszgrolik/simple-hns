@@ -37,10 +37,10 @@ namespace GameCore
         public readonly ItemSystem itemSystem;
         public readonly QuestSystem questSystem;
 
-        private List<GameCore.AgentsParty> agentsParties;
-        public List<GameCore.AgentsParty> AgentsParties => agentsParties;
-        private List<GameCore.AgentsParty> enemyParties;
-        public List<GameCore.AgentsParty> EnemyParties => enemyParties;
+        private List<AgentsParty> agentsParties;
+        public List<AgentsParty> AgentsParties => agentsParties;
+        private List<AgentsParty> enemyParties;
+        public List<AgentsParty> EnemyParties => enemyParties;
 
         public event System.Action<Projectile, Vector3, Quaternion> projectileSpawned;
         public event System.Action<Projectile> projectileDeleted;
@@ -58,8 +58,8 @@ namespace GameCore
         }
 
         public void InitAgentsParties(
-            List<GameCore.AgentsParty> agentsParties,
-            List<GameCore.AgentsParty> enemyParties
+            List<AgentsParty> agentsParties,
+            List<AgentsParty> enemyParties
         )
         {
             this.agentsParties = agentsParties;
@@ -87,35 +87,37 @@ namespace GameCore
                 projectiles[i].OnUpdate(deltaTime);
         }
 
-        public GameCore.AgentsGroup CreateAgentsGroup()
+        public AgentsGroup CreateAgentsGroup()
         {
             return new AgentsGroup(this);
         }
 
-        public GameCore.Agent CreateAgent(
+        public Agent CreateAgent(
             DataDefinition.Agent agentData,
             AgentsGroup agentsGroup,
-            GameCore.AgentsParty agentsParty,
-            GameCore.AgentControl agentControl
+            AgentsParty agentsParty,
+            AgentControl agentControl
         )
         {
             var agentLevel = new AgentLevel();
-            var agentHealth = new GameCore.AgentHealth(
+            var agentCard = new AgentCard();
+            var agentEquipment = new AgentEquipment();
+            var agentHealth = new AgentHealth(
                 maxPoints: Utils.RandomValueWithDeviation(agentData.health, agentData.healthDeviation)
             );
-            var agentStun = new GameCore.AgentStun(
+            var agentStun = new AgentStun(
                 agentHealth: agentHealth,
                 canBeStunned: agentData.canBeStunned,
                 stunTime: agentData.stunTime
             );
-            var agentMovement = new GameCore.AgentMovement(
+            var agentMovement = new AgentMovement(
                 agentHealth: agentHealth,
                 agentStun: agentStun,
                 walkingSpeed: Utils.RandomValueWithDeviation(agentData.walkingSpeed, agentData.speedDeviation),
                 runningSpeed: Utils.RandomValueWithDeviation(agentData.runningSpeed, agentData.speedDeviation)
             );
 
-            var combat = new GameCore.AgentCombat(
+            var combat = new AgentCombat(
                 game: this,
                 agentStun: agentStun,
                 agentMovement: agentMovement,
@@ -144,25 +146,29 @@ namespace GameCore
                     combatSkills.Add(new SummonSkill(combat, skill as DataDefinition.Skill_SummonAgent));
             }
 
-            var agent = new GameCore.Agent(
+            var agent = new Agent(
                 game: this,
                 groupMember: new AgentGroupMember(
                     agentsGroup: agentsGroup
                 ),
                 agentLevel: agentLevel,
-                agentCard: new AgentCard(),
-                equipment: new GameCore.AgentEquipment(),
+                agentCard: agentCard,
+                equipment: agentEquipment,
+                agentCardEquipment: new AgentCardEquipment(
+                    agentCard: agentCard,
+                    agentEquipment: agentEquipment
+                ),
                 health: agentHealth,
                 stun: agentStun,
-                drop: new GameCore.AgentDrop(
+                drop: new AgentDrop(
                     health: agentHealth
                 ),
                 movement: agentMovement,
-                partyMember: new GameCore.AgentPartyMember(
+                partyMember: new AgentPartyMember(
                     game: this,
                     agentsParty: agentsParty
                 ),
-                agentDetection: new GameCore.AgentDetection(
+                agentDetection: new AgentDetection(
                     sightRadius: Utils.RandomValueWithDeviation(agentData.sightRadius, agentData.sightRadiusDeviation)
                 ),
                 combat: combat,

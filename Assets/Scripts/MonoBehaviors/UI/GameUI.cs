@@ -37,6 +37,9 @@ namespace MonoBehaviors
         [SerializeField] private GameObject playerDeathPanel;
         [SerializeField] private Button restartButton;
 
+        private CharacterCardUI characterCardUI;
+        public CharacterCardUI CharacterCardUI => characterCardUI;
+
         [Header("Quests")]
         [SerializeField] private GameObject questsPanel;
         [SerializeField] private GameObject questItemPrefab;
@@ -71,6 +74,10 @@ namespace MonoBehaviors
             this.playerDeathUI = new PlayerDeathUI(
                 restartButton
             );
+
+            this.characterCardUI = GetComponentInChildren<CharacterCardUI>(includeInactive: true);
+            characterCardUI.Setup();
+
             this.questsUI = new QuestsUI(
                 questItemPrefab,
                 questsContainer
@@ -94,6 +101,11 @@ namespace MonoBehaviors
         public void ShowPlayerDeathPanel()
         {
             playerDeathPanel.SetActive(true);
+        }
+
+        public void ToggleCharacterCardPanel()
+        {
+            characterCardUI.Toggle();
         }
 
         public void ToggleQuestsPanel()

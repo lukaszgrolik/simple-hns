@@ -73,6 +73,7 @@ namespace GameCore
         public readonly AgentLevel agentLevel;
         public readonly AgentCard agentCard;
         public readonly AgentEquipment equipment;
+        public readonly AgentCardEquipment agentCardEquipment;
         public readonly AgentHealth health;
         public readonly AgentStun stun;
         public readonly AgentDrop drop;
@@ -92,6 +93,7 @@ namespace GameCore
             AgentLevel agentLevel,
             AgentCard agentCard,
             AgentEquipment equipment,
+            AgentCardEquipment agentCardEquipment,
             AgentHealth health,
             AgentStun stun,
             AgentDrop drop,
@@ -116,6 +118,8 @@ namespace GameCore
 
             this.equipment = equipment;
             equipment.SetAgent(this);
+
+            this.agentCardEquipment = agentCardEquipment;
 
             this.health = health;
             health.SetAgent(this);
