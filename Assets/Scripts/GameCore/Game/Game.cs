@@ -34,6 +34,7 @@ namespace GameCore
         private readonly List<Agent> agents = new List<Agent>();
         private readonly List<Projectile> projectiles = new List<Projectile>();
 
+        public readonly LocationSystem locationSystem;
         public readonly ItemSystem itemSystem;
         public readonly QuestSystem questSystem;
 
@@ -42,19 +43,31 @@ namespace GameCore
         private List<AgentsParty> enemyParties;
         public List<AgentsParty> EnemyParties => enemyParties;
 
+        private Agent playerAgent;
+        public Agent PlayerAgent => playerAgent;
+
         public event System.Action<Projectile, Vector3, Quaternion> projectileSpawned;
         public event System.Action<Projectile> projectileDeleted;
 
         public event System.Action<Agent, Vector3, Quaternion> agentSpawned;
 
-        public Game(
-            List<Quest> quests
-        )
+        public event System.Action<Location> playerEnteredLocation;
+
+        public Game()
         {
+            this.locationSystem = new LocationSystem();
             this.itemSystem = new ItemSystem();
-            this.questSystem = new QuestSystem(
-                quests: quests
-            );
+            this.questSystem = new QuestSystem();
+
+            locationSystem.locationEnteredByAgent += OnLocationEnteredByAgent;
+        }
+
+        void OnLocationEnteredByAgent(Location loc, Agent agent)
+        {
+            if (agent == playerAgent)
+            {
+                playerEnteredLocation?.Invoke(loc);
+            }
         }
 
         public void InitAgentsParties(
@@ -70,6 +83,21 @@ namespace GameCore
             }
 
             this.enemyParties = enemyParties;
+        }
+
+        public void SetPlayerAgent(Agent agent)
+        {
+            this.playerAgent = agent;
+        }
+
+        public void SetLocations(List<Location> locations)
+        {
+            this.locationSystem.SetLocations(locations);
+        }
+
+        public void SetQuests(List<Quest> quests)
+        {
+            this.questSystem.SetQuests(quests);
         }
 
         abstract public Vector3 GetPosition(ITransformScript script);

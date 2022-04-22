@@ -14,8 +14,9 @@ namespace MonoBehaviors
         public void Setup(GameCore.Quest quest)
         {
             statusText.text = quest.Status.ToString();
-            titleText.text = quest.Title;
-            descriptionText.text = quest.Description;
+            titleText.text = quest.data.title;
+            // descriptionText.text = quest.data.description;
+            descriptionText.text = "some desc";
         }
 
         public void UpdateQuest(GameCore.Quest quest)

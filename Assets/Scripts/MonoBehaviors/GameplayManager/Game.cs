@@ -10,10 +10,7 @@ namespace MonoBehaviors
         private GameplayManager gameplayManager;
 
         public Game(
-            GameplayManager gameplayManager,
-            List<GameCore.Quest> quests
-        ) : base(
-            quests
+            GameplayManager gameplayManager
         )
         {
             this.gameplayManager = gameplayManager;

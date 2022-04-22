@@ -120,6 +120,15 @@ namespace MonoBehaviors
         [SerializeField] private GameObject controlledAgentObject;
         public GameObject ControlledAgentObject => controlledAgentObject;
 
+        // [System.Serializable]
+        // public class Location
+        // {
+        //     private Collider boundaryCollider;
+        //     private List<Transform> entryPoints;
+        // }
+
+        // [SerializeField] private List<Location> locations;
+
         [System.Serializable]
         public class ProjectileModelPrefab
         {
@@ -186,6 +195,9 @@ namespace MonoBehaviors
         public readonly Dictionary<GameObject, DroppedItemMB> dict_object_droppedItemMB = new Dictionary<GameObject, DroppedItemMB>();
         // public IReadOnlyDictionary<GameObject, DroppedItemMB> Dict_object_droppedItemMB => dict_object_droppedItemMB;
 
+        public readonly Dictionary<LocationMB, GameCore.Location> dict_locMb_loc = new Dictionary<LocationMB, GameCore.Location>();
+        public readonly Dictionary<DataDefinition.Location, GameCore.Location> dict_locData_loc = new Dictionary<DataDefinition.Location, GameCore.Location>();
+
         private AgentController controlledAgent;
         public AgentController ControlledAgent => controlledAgent;
 
@@ -194,6 +206,15 @@ namespace MonoBehaviors
 
         private Game game;
         public Game Game => game;
+
+        void Awake()
+        {
+            var locationMBs = FindObjectsOfType<LocationMB>();
+            foreach (var locMB in locationMBs)
+            {
+                locMB.gameObject.SetActive(false);
+            }
+        }
 
         void Start()
         {
@@ -249,36 +270,16 @@ namespace MonoBehaviors
             Load();
 
             this.game = new Game(
-                gameplayManager: this,
-                quests: new List<GameCore.Quest>(){
-                    new GameCore.Quest(
-                        title: "First quest",
-                        description: "some desc",
-                        tasks: new List<GameCore.QuestTask>(){
-                            new GameCore.QuestTaskKillEnemies()
-                        }
-                    ),
-                    new GameCore.Quest(
-                        title: "Second quest",
-                        description: "some desc",
-                        tasks: new List<GameCore.QuestTask>(){
-                            new GameCore.QuestTaskKillEnemies()
-                        }
-                    ),
-                    new GameCore.Quest(
-                        title: "Third quest",
-                        description: "some desc",
-                        tasks: new List<GameCore.QuestTask>(){
-                            new GameCore.QuestTaskKillEnemies()
-                        }
-                    )
-                }
+                gameplayManager: this
             );
             game.itemSystem.itemSpawned += droppedItemEntities.OnDroppedItemSpawned;
             game.itemSystem.itemDeleted += droppedItemEntities.OnDroppedItemDeleted;
             game.projectileSpawned += projectileEntities.OnProjectileSpawned;
             game.projectileDeleted += projectileEntities.OnProjectileDeleted;
             game.agentSpawned += agentEntities.OnAgentSpawned;
+            game.playerEnteredLocation += (loc) => {
+                Debug.Log($"player entering location: {loc.data.name}");
+            };
 
             this.game.InitAgentsParties(
                 agentsParties: new List<GameCore.AgentsParty>(){
@@ -291,6 +292,34 @@ namespace MonoBehaviors
                     monsterParty,
                 }
             );
+
+            Debug.Log("x");
+
+            var locationMBs = FindObjectsOfType<LocationMB>(includeInactive: true);
+            var locations = new List<GameCore.Location>();
+            foreach (var locMB in locationMBs)
+            {
+                locMB.Setup(this);
+
+                // Debug.Log($"locMB.LocationDataHandle: {locMB.LocationDataHandle}");
+                var locData = dataStore.dict_locHandle_locData[locMB.LocationDataHandle];
+                // Debug.Log($"locData: {locData.name}");
+                var loc = new GameCore.Location(
+                    locationSystem: game.locationSystem,
+                    data: locData
+                );
+
+                locations.Add(loc);
+                dict_locMb_loc.Add(locMB, loc);
+                dict_locData_loc.Add(locData, loc);
+            }
+
+            game.SetLocations(locations);
+
+            foreach (var locMB in locationMBs)
+            {
+                locMB.gameObject.SetActive(true);
+            }
 
             var agentSpawners = FindObjectsOfType<AgentSpawner>();
             foreach (var agentSpawner in agentSpawners)
@@ -316,11 +345,25 @@ namespace MonoBehaviors
                 if (controlledAgentObject == sceneAgent.gameObject)
                 {
                     controlledAgent = dict_agent_agentCtrl[agent];
+                    game.SetPlayerAgent(agent);
                     gameplayManagerGameUI.SetControlledAgent(controlledAgent);
                 }
 
                 Destroy(sceneAgent.gameObject);
             }
+
+            var quests = new List<GameCore.Quest>();
+            foreach (var questData in dataStore.quests)
+            {
+                var quest = new GameCore.Quest(
+                    data: questData,
+                    game: game
+                );
+
+                quests.Add(quest);
+            }
+
+            game.SetQuests(quests);
 
             gameplayManagerGameUI.Init();
 
@@ -328,10 +371,41 @@ namespace MonoBehaviors
             //
             //
 
-            var firstQuest = game.questSystem.quests[0];
-            var firstTask = firstQuest.tasks[0] as GameCore.QuestTaskKillEnemies;
-            firstTask.AddAgents(controlledAgent.Agent.partyMember.AgentsParty.enemies);
-            firstQuest.Start();
+            // var firstQuest = game.questSystem.quests[0];
+            // var firstTask = firstQuest.tasks[0] as GameCore.QuestTask_KillAllInLocation;
+            // firstTask.AddAgents(controlledAgent.Agent.partyMember.AgentsParty.enemies);
+            // firstQuest.Start();
+            // Debug.Log("A");
+            // foreach (var quest in game.questSystem.quests)
+            // {
+            //     foreach (var task in quest.tasks)
+            //     {
+            //         if (task is GameCore.QuestTask_EnterLocation task_enterLoc)
+            //         {
+            //             var location = dict_locData_loc[task_enterLoc.data.location];
+            //             task_enterLoc.SetLocation(location);
+            //         }
+            //         else if (task is GameCore.QuestTask_KillAllInLocation task_killAll)
+            //         {
+            //             var location = dict_locData_loc[task_killAll.data.location];
+            //             task_killAll.SetLocation(location);
+
+            //             var agents = new List<GameCore.Agent>();
+            //             foreach (var locAgent in location.Agents)
+            //             {
+            //                 if (controlledAgent.Agent.partyMember.AgentsParty.IsEnemy(locAgent))
+            //                 {
+            //                     agents.Add(locAgent);
+            //                 }
+            //             }
+
+            //             task_killAll.AddAgents(agents);
+            //         }
+            //     }
+
+            //     quest.Start();
+            // }
+            // Debug.Log("B");
         }
 
         void Update()

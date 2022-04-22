@@ -86,6 +86,18 @@ namespace MonoBehaviors
             {
                 waypointModeOff?.Invoke();
             }
+            if (Input.GetKeyUp(KeyCode.L))
+            {
+                var lines = new List<string>();
+                foreach (var loc in gameplayManager.Game.locationSystem.locations)
+                {
+                    var agents = gameplayManager.Game.locationSystem.agentStore.GetAgentsInLocation(loc);
+
+                    lines.Add($"{loc}: {agents.Count}");
+                }
+
+                Debug.Log(string.Join(" | ", lines));
+            }
             //
             // END HELPERS
             //

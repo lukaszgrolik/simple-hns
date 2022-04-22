@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace MonoBehaviors
 {
@@ -13,6 +14,30 @@ namespace MonoBehaviors
         SummonButterflies,
         SkeletonFireBolt,
         HoodedWarriorMageEnergyBolt,
+    }
+
+    namespace DataHandle
+    {
+        public enum Location
+        {
+            Forest1,
+            Forest2,
+            Muddy,
+            Cave,
+            PinetreesForest,
+            HighlandForest,
+            HighlandFields,
+            HighlandPassage,
+            Desert,
+            Canyon,
+            GrassyDunes,
+            Snowy,
+        }
+
+        public enum Quest
+        {
+
+        }
     }
 
     public class DataStore
@@ -65,9 +90,14 @@ namespace MonoBehaviors
 
         public readonly Dictionary<AgentType, DataDefinition.Agent> agents = new Dictionary<AgentType, DataDefinition.Agent>();
 
-        public Dictionary<DataDefinition.Skill, SkillType> skillTypes = new Dictionary<DataDefinition.Skill, SkillType>();
-        public Dictionary<DataDefinition.Skill_CastProjectile, ProjectileType> projectileTypes = new Dictionary<DataDefinition.Skill_CastProjectile, ProjectileType>();
-        public Dictionary<DataDefinition.Agent, AgentType> agentTypes = new Dictionary<DataDefinition.Agent, AgentType>();
+        public readonly List<DataDefinition.Location> locations = new List<DataDefinition.Location>();
+        public readonly List<DataDefinition.Quest> quests = new List<DataDefinition.Quest>();
+
+        public readonly Dictionary<DataDefinition.Skill, SkillType> skillTypes = new Dictionary<DataDefinition.Skill, SkillType>();
+        public readonly Dictionary<DataDefinition.Skill_CastProjectile, ProjectileType> projectileTypes = new Dictionary<DataDefinition.Skill_CastProjectile, ProjectileType>();
+        public readonly Dictionary<DataDefinition.Agent, AgentType> agentTypes = new Dictionary<DataDefinition.Agent, AgentType>();
+
+        public readonly Dictionary<DataHandle.Location, DataDefinition.Location> dict_locHandle_locData = new Dictionary<DataHandle.Location, DataDefinition.Location>();
 
         public DataStore()
         {
@@ -116,8 +146,8 @@ namespace MonoBehaviors
                 name: "Warden",
                 skills: new List<DataDefinition.Skill>()
                 {
-                    skills[SkillType.DefaultMelee],
-                    skills[SkillType.FireBolt],
+                    // skills[SkillType.DefaultMelee],
+                    // skills[SkillType.FireBolt],
                 }
             ));
             // agents.Add(AgentType.Smith, new DataDefinition.Agent("Smith");
@@ -272,6 +302,102 @@ namespace MonoBehaviors
             agents.Add(AgentType.Crab, new DataDefinition.Agent("Crab"));
             agents.Add(AgentType.WalkingShroom, new DataDefinition.Agent("Walking Shroom"));
 
+            // agents.Add(AgentType.ForestMonster, new DataDefinition.Agent("Forest Monster"));
+            // agents.Add(AgentType.MuddyMonster, new DataDefinition.Agent("Muddy Monster"));
+
+            System.Func<DataHandle.Location, DataDefinition.Location, DataDefinition.Location> createLocation = (DataHandle.Location locDataHandle, DataDefinition.Location locData) => {
+                locations.Add(locData);
+                dict_locHandle_locData.Add(locDataHandle, locData);
+
+                return locData;
+            };
+
+            var loc_forest1 = createLocation(DataHandle.Location.Forest1, new DataDefinition.Location("Forest 1"));
+            var loc_forest2 = createLocation(DataHandle.Location.Forest2, new DataDefinition.Location("Forest 2"));
+            var loc_muddy = createLocation(DataHandle.Location.Muddy, new DataDefinition.Location("Muddy"));
+            var loc_desert = createLocation(DataHandle.Location.Desert, new DataDefinition.Location("Desert"));
+
+            // var specialAgent_warden = new DataDefinition.SpecialAgent("Warden");
+            // var specialAgent_chief = new DataDefinition.SpecialAgent("Chief");
+            // var specialAgent_forestMonster = new DataDefinition.SpecialAgent("Forest Monster");
+            // var specialAgent_muddyMonster = new DataDefinition.SpecialAgent("Muddy Monster");
+
+            // var specialItem_scroll = new DataDefinition.SpecialItem("Scroll of Souls");
+            // var specialItem_book = new DataDefinition.SpecialItem("Book of Souls");
+            // var specialItem_swordOfSouls = new DataDefinition.SpecialItem("Sword of Souls");
+
+            quests.Add(new DataDefinition.Quest(
+                title: "Kill all enemies in the specified location",
+                // description: "some desc",
+                tasks: new List<DataDefinition.QuestTask>(){
+                    new DataDefinition.QuestTask_EnterLocation(
+                        info: "Find forest1",
+                        location: loc_forest1
+                    ),
+                    new DataDefinition.QuestTask_KillAllInLocation(
+                        location: loc_forest1,
+                        infoFn: (remainingAgents) => {
+                            return remainingAgents.Count > 10 ? "Kill all enemies in the forest" : $"Remaining enemies: {remainingAgents.Count}";
+                        }
+                    )
+                }
+            ));
+            // quests.Add(new DataDefinition.Quest(
+            //     title: "Kill specified enemy (in a separate location/level)",
+            //     // description: "some desc",
+            //     tasks: new List<DataDefinition.QuestTask>(){
+            //         new DataDefinition.QuestTask_EnterLocation(
+            //             info: "Find the enemy in forest2",
+            //             location: loc_forest2
+            //         ),
+            //         new DataDefinition.QuestTask_KillEnemy(
+            //             agent: specialAgent_forestMonster
+            //         )
+            //     }
+            // ));
+            // quests.Add(new DataDefinition.Quest(
+            //     title: "Kill specified enemy (in an open field)",
+            //     // description: "some desc",
+            //     tasks: new List<DataDefinition.QuestTask>(){
+            //         new DataDefinition.QuestTask_EnterAgentProximity(
+            //             info: "Look for the monster in Muddy Fields",
+            //             agent: specialAgent_muddyMonster
+            //         ),
+            //         new DataDefinition.QuestTask_KillEnemy(
+            //             agent: specialAgent_muddyMonster
+            //         )
+            //     }
+            // ));
+            // quests.Add(new DataDefinition.Quest(
+            //     title: "Find specified item in some location",
+            //     // description: "some desc",
+            //     tasks: new List<DataDefinition.QuestTask>(){
+            //         new DataDefinition.QuestTask_CollectItem(
+            //             info: "Look for the Sword of Souls in Muddy Fields",
+            //             item: specialItem_swordOfSouls
+            //         )
+            //     }
+            // ));
+            // quests.Add(new DataDefinition.Quest(
+            //     title: "Find specified items",
+            //     description: "some desc",
+            //     tasks: new List<DataDefinition.QuestTask>(){
+            //         new DataDefinition.QuestTask_CollectItem(
+            //             item:
+            //         )
+            //     }
+            // ));
+            quests.Add(new DataDefinition.Quest(
+                title: "The Mystery Sandy Realm",
+                // description: "some desc",
+                tasks: new List<DataDefinition.QuestTask>(){
+                    new DataDefinition.QuestTask_EnterLocation(
+                        info: "Discover Desert",
+                        location: loc_desert
+                    )
+                }
+            ));
+
             //
             //
             //
@@ -342,6 +468,10 @@ namespace DataInstance
 
     class ItemCategories
     {
+        public static readonly DataDefinition.ItemCategory potion = new DataDefinition.ItemCategory("Potion");
+        public static readonly DataDefinition.ItemCategory scroll = new DataDefinition.ItemCategory("Scroll");
+        public static readonly DataDefinition.ItemCategory book = new DataDefinition.ItemCategory("Book");
+
         public static readonly DataDefinition.ItemCategory weapon = new DataDefinition.ItemCategory("Weapon");
         public static readonly DataDefinition.ItemCategory sword = new DataDefinition.ItemCategory("Sword", ItemCategories.weapon);
         public static readonly DataDefinition.ItemCategory axe = new DataDefinition.ItemCategory("Axe", ItemCategories.weapon);

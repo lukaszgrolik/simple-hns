@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 5174742346496284182}
   - component: {fileID: 8726829978115120847}
   - component: {fileID: 5825739395179540360}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: HoodedWarrior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
