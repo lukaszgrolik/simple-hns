@@ -13,6 +13,8 @@ namespace MonoBehaviors
         EnergyBolt,
         SkeletonFireBolt,
         HoodedWarriorMageEnergyBolt,
+        ButterflyEnergyBolt,
+        BulbfrogEnergyBolt,
     }
 
     [System.Serializable]

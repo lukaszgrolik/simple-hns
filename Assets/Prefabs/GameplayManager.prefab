@@ -207,6 +207,10 @@ MonoBehaviour:
     prefab: {fileID: 1381819029475718378, guid: b9ed7d9870bf5534292e6850772720b0, type: 3}
   - projectileType: 4
     prefab: {fileID: 1381819029475718378, guid: ae80c6f13d3819b4e836527a8f56d96d, type: 3}
+  - projectileType: 5
+    prefab: {fileID: 1381819029475718378, guid: ae80c6f13d3819b4e836527a8f56d96d, type: 3}
+  - projectileType: 6
+    prefab: {fileID: 1381819029475718378, guid: ae80c6f13d3819b4e836527a8f56d96d, type: 3}
   agentModelPrefabs:
   - agentType: 0
     prefab: {fileID: 8513934410253812705, guid: 8fbd32458ee3d7246850a632d7ac741c, type: 3}
@@ -220,8 +224,12 @@ MonoBehaviour:
     prefab: {fileID: 4508603327352984885, guid: 32d64f6f5931af84893fc16c0871c9ec, type: 3}
   - agentType: 16
     prefab: {fileID: 4508603327352984885, guid: 720edad5b24eceb40a3e7963bcb1876d, type: 3}
+  - agentType: 3
+    prefab: {fileID: 1221666499200683070, guid: abfe654e3ed3a574e8ec857fa00170dd, type: 3}
   - agentType: 4
     prefab: {fileID: 662457297786407632, guid: c99f0791bb7fb4741bac435aa4af0b8e, type: 3}
+  - agentType: 19
+    prefab: {fileID: 894214951593187258, guid: ddc74f99a02b46a49bfb5a8bcad51ca8, type: 3}
   - agentType: 10
     prefab: {fileID: 662457297786407632, guid: 8594d4466100d754482efd75eb13a9af, type: 3}
   - agentType: 17
@@ -232,10 +240,14 @@ MonoBehaviour:
     prefab: {fileID: 662457297786407632, guid: ffbf2e3311f02ea499097c42254ee4f0, type: 3}
   - agentType: 9
     prefab: {fileID: 586744763125949516, guid: a8d36164c2d2da04a87607c23b5a5cea, type: 3}
-  - agentType: 3
-    prefab: {fileID: 1221666499200683070, guid: abfe654e3ed3a574e8ec857fa00170dd, type: 3}
-  - agentType: 19
-    prefab: {fileID: 894214951593187258, guid: ddc74f99a02b46a49bfb5a8bcad51ca8, type: 3}
+  - agentType: 6
+    prefab: {fileID: 662457297786407632, guid: e68a6f860566904409e4bdb61b96300f, type: 3}
+  - agentType: 11
+    prefab: {fileID: 662457297786407632, guid: 524a683f22444584ba6953bddc63c05d, type: 3}
+  - agentType: 5
+    prefab: {fileID: 662457297786407632, guid: 55f3632c44334c14f9d91ba6f32868a6, type: 3}
+  - agentType: 13
+    prefab: {fileID: 662457297786407632, guid: 241a0e86d208f5b46b7fe4f4ae8584e0, type: 3}
   itemModelPrefabs:
   - itemType: 0
     prefab: {fileID: 7131333464891160427, guid: 2c9440ba6729231449074ec5db622616, type: 3}

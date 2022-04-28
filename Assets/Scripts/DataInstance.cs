@@ -14,6 +14,10 @@ namespace MonoBehaviors
         SummonButterflies,
         SkeletonFireBolt,
         HoodedWarriorMageEnergyBolt,
+        EntDefaultMelee,
+        ButterflyEnergyBolt,
+        BulbfrogEnergyBolt,
+        WalkingShroomDefaultMelee,
     }
 
     namespace DataHandle
@@ -47,6 +51,17 @@ namespace MonoBehaviors
             [SkillType.DefaultMelee] = new DataDefinition.Skill_Melee(
                 name: "Default melee"
             ),
+            [SkillType.EntDefaultMelee] = new DataDefinition.Skill_Melee(
+                name: "Ent Default melee",
+                damage: 25,
+                damageDeviation: .2f
+            ),
+            [SkillType.WalkingShroomDefaultMelee] = new DataDefinition.Skill_Melee(
+                name: "Walking Shroom Default melee",
+                damage: 18,
+                damageDeviation: .2f
+            ),
+
             [SkillType.FireBolt] = new DataDefinition.Skill_CastProjectile(
                 name: "Fire bolt",
                 speed: 15,
@@ -66,6 +81,7 @@ namespace MonoBehaviors
                 damageDeviation: .25f,
                 splashRadius: 2
             ),
+
             [SkillType.EnergyBolt] = new DataDefinition.Skill_CastProjectile(
                 name: "Energy bolt",
                 speed: 25,
@@ -78,12 +94,22 @@ namespace MonoBehaviors
                 damage: 8.5f,
                 damageDeviation: .2f
             ),
+            [SkillType.ButterflyEnergyBolt] = new DataDefinition.Skill_CastProjectile(
+                name: "Butterfly Energy bolt",
+                speed: 10,
+                damage: 5f,
+                damageDeviation: .1f
+            ),
+            [SkillType.BulbfrogEnergyBolt] = new DataDefinition.Skill_CastProjectile(
+                name: "Bulbfrog Energy bolt",
+                speed: 12,
+                damage: 13f,
+                damageDeviation: .2f
+            ),
 
             [SkillType.TreeWall] = new DataDefinition.Skill_Custom(
                 name: "Tree wall"
             ),
-
-
         };
 
         public readonly Dictionary<ProjectileType, DataDefinition.Skill_CastProjectile> projectiles = new Dictionary<ProjectileType, DataDefinition.Skill_CastProjectile>();
@@ -106,13 +132,21 @@ namespace MonoBehaviors
             projectiles.Add(ProjectileType.EnergyBolt, skills[SkillType.EnergyBolt] as DataDefinition.Skill_CastProjectile);
             projectiles.Add(ProjectileType.SkeletonFireBolt, skills[SkillType.SkeletonFireBolt] as DataDefinition.Skill_CastProjectile);
             projectiles.Add(ProjectileType.HoodedWarriorMageEnergyBolt, skills[SkillType.HoodedWarriorMageEnergyBolt] as DataDefinition.Skill_CastProjectile);
+            projectiles.Add(ProjectileType.ButterflyEnergyBolt, skills[SkillType.ButterflyEnergyBolt] as DataDefinition.Skill_CastProjectile);
+            projectiles.Add(ProjectileType.BulbfrogEnergyBolt, skills[SkillType.BulbfrogEnergyBolt] as DataDefinition.Skill_CastProjectile);
 
             agents.Add(AgentType.Butterfly, new DataDefinition.Agent(
                 name: "Butterfly",
+                health: 10,
+                healthDeviation: .2f,
+                walkingSpeed: 3,
+                runningSpeed: 7,
                 skills: new List<DataDefinition.Skill>()
                 {
-                    skills[SkillType.DefaultMelee],
-                    skills[SkillType.FireBolt],
+                    skills[SkillType.ButterflyEnergyBolt],
+                    // skills[SkillType.EntEnergyBolt],
+                    // skills[SkillType.EntTreeWall],
+                    // skills[SkillType.EntSummonButterflies],
                 }
             ));
 
@@ -287,20 +321,46 @@ namespace MonoBehaviors
                     skills[SkillType.SkeletonFireBolt],
                 }
             ));
-            agents.Add(AgentType.Bulbfrog, new DataDefinition.Agent("Bulbfrog"));
             agents.Add(AgentType.Ent, new DataDefinition.Agent(
                 name: "Ent",
+                health: 200,
+                healthDeviation: .2f,
+                walkingSpeed: 2,
+                runningSpeed: 4,
                 skills: new List<DataDefinition.Skill>()
                 {
-                    skills[SkillType.DefaultMelee],
-                    skills[SkillType.EnergyBolt],
-                    skills[SkillType.TreeWall],
-                    skills[SkillType.SummonButterflies],
+                    skills[SkillType.EntDefaultMelee],
+                    // skills[SkillType.EntEnergyBolt],
+                    // skills[SkillType.EntTreeWall],
+                    // skills[SkillType.EntSummonButterflies],
+                }
+            ));
+
+            agents.Add(AgentType.Bulbfrog, new DataDefinition.Agent(
+                name: "Bulbfrog",
+                health: 125,
+                healthDeviation: .2f,
+                walkingSpeed: 2,
+                runningSpeed: 4,
+                skills: new List<DataDefinition.Skill>()
+                {
+                    skills[SkillType.BulbfrogEnergyBolt],
+                }
+            ));
+
+            agents.Add(AgentType.WalkingShroom, new DataDefinition.Agent(
+                name: "Walking Shroom",
+                health: 150,
+                healthDeviation: .2f,
+                walkingSpeed: 4,
+                runningSpeed: 6,
+                skills: new List<DataDefinition.Skill>()
+                {
+                    skills[SkillType.WalkingShroomDefaultMelee],
                 }
             ));
 
             agents.Add(AgentType.Crab, new DataDefinition.Agent("Crab"));
-            agents.Add(AgentType.WalkingShroom, new DataDefinition.Agent("Walking Shroom"));
 
             // agents.Add(AgentType.ForestMonster, new DataDefinition.Agent("Forest Monster"));
             // agents.Add(AgentType.MuddyMonster, new DataDefinition.Agent("Muddy Monster"));
