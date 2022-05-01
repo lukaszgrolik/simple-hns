@@ -11,7 +11,8 @@ namespace GameCore
             Helm,
             HandRight,
             HandLeft,
-            Test
+            Test1,
+            Test2,
         }
 
         public readonly Dictionary<WornItemSlot, Item> wornItems;

@@ -71,8 +71,13 @@ namespace MonoBehaviors
             }
             else if (Input.GetKey(KeyCode.E))
             {
-                if (Input.GetKeyUp(KeyCode.Alpha1)) PlayerControllerUtils.UnequipTestItem(agentCtrl);
-                else if (Input.GetKeyUp(KeyCode.Alpha2)) PlayerControllerUtils.EquipTestItemOfSuperStats(agentCtrl);
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                         if (Input.GetKeyUp(KeyCode.Alpha1)) PlayerControllerUtils.UnequipTestItem(agentCtrl, GameCore.AgentEquipment.WornItemSlot.Test1);
+                    else if (Input.GetKeyUp(KeyCode.Alpha2)) PlayerControllerUtils.UnequipTestItem(agentCtrl, GameCore.AgentEquipment.WornItemSlot.Test2);
+                }
+                else if (Input.GetKeyUp(KeyCode.Alpha1)) PlayerControllerUtils.EquipTestItem_WithGoodStats(agentCtrl);
+                else if (Input.GetKeyUp(KeyCode.Alpha2)) PlayerControllerUtils.EquipTestItem_WithSuperStats(agentCtrl);
             }
             else if (Input.GetKeyUp(KeyCode.H))
             {

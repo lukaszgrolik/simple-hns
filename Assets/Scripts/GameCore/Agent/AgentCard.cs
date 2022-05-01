@@ -11,13 +11,15 @@ namespace GameCore
 
         public abstract string Label { get; }
 
-        private int value;
+        protected int value;
         public int Value => value;
 
         public AgentAttribute(int value)
         {
             this.value = value;
         }
+
+        public abstract AgentAttribute Clone();
 
         public void Increment(AgentAttribute agentAttribute)
         {
@@ -40,6 +42,8 @@ namespace GameCore
         public override string Label => "life";
 
         public AgentAttribute_PlusLife(int value) : base(value) {}
+
+        public override AgentAttribute Clone() { return new AgentAttribute_PlusLife(value); }
     }
 
     public class AgentAttribute_IncreasedMovementSpeed : AgentAttribute
@@ -47,6 +51,8 @@ namespace GameCore
         public override string Label => "increased movement speed";
 
         public AgentAttribute_IncreasedMovementSpeed(int value) : base(value) {}
+
+        public override AgentAttribute Clone() { return new AgentAttribute_IncreasedMovementSpeed(value); }
     }
 
     public class AgentAttribute_IncreasedAttackRate : AgentAttribute
@@ -54,6 +60,8 @@ namespace GameCore
         public override string Label => "increased attack rate";
 
         public AgentAttribute_IncreasedAttackRate(int value) : base(value) {}
+
+        public override AgentAttribute Clone() { return new AgentAttribute_IncreasedAttackRate(value); }
     }
 
     public class AgentAttribute_EnhancedDamage : AgentAttribute
@@ -61,6 +69,8 @@ namespace GameCore
         public override string Label => "enhanced damage";
 
         public AgentAttribute_EnhancedDamage(int value) : base(value) {}
+
+        public override AgentAttribute Clone() { return new AgentAttribute_EnhancedDamage(value); }
     }
 
     public class AgentAttribute_LifeRegen : AgentAttribute
@@ -68,6 +78,8 @@ namespace GameCore
         public override string Label => "life regeneration";
 
         public AgentAttribute_LifeRegen(int value) : base(value) {}
+
+        public override AgentAttribute Clone() { return new AgentAttribute_LifeRegen(value); }
     }
 
     public class AgentAttribute_LifeStolenPerHit : AgentAttribute
@@ -75,6 +87,8 @@ namespace GameCore
         public override string Label => "life stolen per hit";
 
         public AgentAttribute_LifeStolenPerHit(int value) : base(value) {}
+
+        public override AgentAttribute Clone() { return new AgentAttribute_LifeStolenPerHit(value); }
     }
 
     public class AgentAttribute_LifeStolenPerKill : AgentAttribute
@@ -82,6 +96,8 @@ namespace GameCore
         public override string Label => "life stolen per kill";
 
         public AgentAttribute_LifeStolenPerKill(int value) : base(value) {}
+
+        public override AgentAttribute Clone() { return new AgentAttribute_LifeStolenPerKill(value); }
     }
 
     public class AgentAttributesCollection
@@ -102,7 +118,15 @@ namespace GameCore
         {
             // @todo validate duplicates?
 
-            if (attrs != null) attributes.AddRange(attrs);
+            if (attrs != null) AddClonedAttributes(attrs);
+        }
+
+        void AddClonedAttributes(List<AgentAttribute> attrs)
+        {
+            for (int i = 0; i < attrs.Count; i++)
+            {
+                attributes.Add(attrs[i].Clone());
+            }
         }
 
         public void Add(AgentAttributesCollection attrsColl)
@@ -128,39 +152,39 @@ namespace GameCore
                 }
                 else
                 {
-                    attributes.Add(attrToAdd);
+                    attributes.Add(attrToAdd.Clone());
                 }
             }
         }
 
-        public void Remove(AgentAttributesCollection attrsColl)
+        public void Remove(AgentAttributesCollection valuesToSubtractColl)
         {
             var attrsToRemove = new List<GameCore.AgentAttribute>();
 
-            for (int i = 0; i < attrsColl.attributes.Count; i++)
+            for (int i = 0; i < valuesToSubtractColl.attributes.Count; i++)
             {
-                var attrToRemove = attrsColl.attributes[i];
+                var valueToSubtract = valuesToSubtractColl.attributes[i];
 
                 GameCore.AgentAttribute foundAttr = null;
 
                 for (int j = 0; j < attributes.Count; j++)
                 {
-                    if (attributes[i].GetType() == attrToRemove.GetType())
+                    if (attributes[j].GetType() == valueToSubtract.GetType())
                     {
-                        foundAttr = attributes[i];
+                        foundAttr = attributes[j];
                         break;
                     }
                 }
 
                 if (foundAttr != null)
                 {
-                    if (attrToRemove.Value >= foundAttr.Value)
+                    if (valueToSubtract.Value >= foundAttr.Value)
                     {
                         attrsToRemove.Add(foundAttr);
                     }
                     else
                     {
-                        foundAttr.Decrement(attrToRemove);
+                        foundAttr.Decrement(valueToSubtract);
                     }
                 }
             }
@@ -174,17 +198,15 @@ namespace GameCore
         public void Replace(AgentAttributesCollection attrsColl)
         {
             attributes.Clear();
-            attributes.AddRange(attrsColl.attributes);
+            AddClonedAttributes(attrsColl.attributes);
         }
 
-        public AgentAttributesCollection SumWith(AgentAttributesCollection attrsColl)
+        static public AgentAttributesCollection Sum(AgentAttributesCollection attrsCollA, AgentAttributesCollection attrsCollB)
         {
-            var attrs = new List<AgentAttribute>(attributes);
-            attrs.AddRange(attrsColl.attributes);
-
             var coll = new AgentAttributesCollection(
-                attrs: attrs
+                attrs: attrsCollA.attributes
             );
+            coll.Add(attrsCollB);
 
             return coll;
         }
@@ -223,7 +245,7 @@ namespace GameCore
 
         void UpdateCombinedAttrs()
         {
-            agentCard.combinedAttrsCollection.Replace(agentCard.attrsCollection.SumWith(agentEquipment.wornItemsAttrsCollection));
+            agentCard.combinedAttrsCollection.Replace(AgentAttributesCollection.Sum(agentCard.attrsCollection, agentEquipment.wornItemsAttrsCollection));
 
             combinedAttrsChanged?.Invoke();
         }

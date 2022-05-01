@@ -376,6 +376,7 @@ namespace MonoBehaviors
             var loc_forest2 = createLocation(DataHandle.Location.Forest2, new DataDefinition.Location("Forest 2"));
             var loc_muddy = createLocation(DataHandle.Location.Muddy, new DataDefinition.Location("Muddy"));
             var loc_desert = createLocation(DataHandle.Location.Desert, new DataDefinition.Location("Desert"));
+            var loc_snowy = createLocation(DataHandle.Location.Snowy, new DataDefinition.Location("Snowy"));
 
             // var specialAgent_warden = new DataDefinition.SpecialAgent("Warden");
             // var specialAgent_chief = new DataDefinition.SpecialAgent("Chief");
