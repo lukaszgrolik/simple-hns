@@ -14,15 +14,15 @@ namespace AgentAttributesCollectionTest
         public void adds_non_existing_attrs_and_sums_values_of_existing_ones()
         {
             var attrsCollectionA = new AgentAttributesCollection(
-                new List<GameCore.AgentAttribute>(){
-                    new GameCore.AgentAttribute_PlusLife(20),
-                    new GameCore.AgentAttribute_IncreasedMovementSpeed(10),
+                new List<AgentAttribute>(){
+                    new AgentAttribute_PlusLife(20),
+                    new AgentAttribute_IncreasedMovementSpeed(10),
                 }
             );
             var attrsCollectionB = new AgentAttributesCollection(
-                new List<GameCore.AgentAttribute>(){
-                    new GameCore.AgentAttribute_IncreasedMovementSpeed(5),
-                    new GameCore.AgentAttribute_LifeRegen(6),
+                new List<AgentAttribute>(){
+                    new AgentAttribute_IncreasedMovementSpeed(5),
+                    new AgentAttribute_LifeRegen(6),
                 }
             );
 
@@ -44,15 +44,15 @@ namespace AgentAttributesCollectionTest
         public void removes_attr_if_value_to_subtract_is_GTE_current_value()
         {
             var attrsCollection = new AgentAttributesCollection(
-                new List<GameCore.AgentAttribute>(){
-                    new GameCore.AgentAttribute_PlusLife(20),
-                    new GameCore.AgentAttribute_IncreasedMovementSpeed(10),
-                    new GameCore.AgentAttribute_LifeRegen(6),
+                new List<AgentAttribute>(){
+                    new AgentAttribute_PlusLife(20),
+                    new AgentAttribute_IncreasedMovementSpeed(10),
+                    new AgentAttribute_LifeRegen(6),
                 }
             );
             var attrValuesToSubtract = new AgentAttributesCollection(
-                new List<GameCore.AgentAttribute>(){
-                    new GameCore.AgentAttribute_IncreasedMovementSpeed(10),
+                new List<AgentAttribute>(){
+                    new AgentAttribute_IncreasedMovementSpeed(10),
                 }
             );
 
@@ -69,15 +69,15 @@ namespace AgentAttributesCollectionTest
         public void subtracts_and_does_not_remove_attr_if_value_to_subtract_is_LT_current_value()
         {
             var attrsCollection = new AgentAttributesCollection(
-                new List<GameCore.AgentAttribute>(){
-                    new GameCore.AgentAttribute_PlusLife(20),
-                    new GameCore.AgentAttribute_IncreasedMovementSpeed(10),
-                    new GameCore.AgentAttribute_LifeRegen(6),
+                new List<AgentAttribute>(){
+                    new AgentAttribute_PlusLife(20),
+                    new AgentAttribute_IncreasedMovementSpeed(10),
+                    new AgentAttribute_LifeRegen(6),
                 }
             );
             var attrValuesToSubtract = new AgentAttributesCollection(
-                new List<GameCore.AgentAttribute>(){
-                    new GameCore.AgentAttribute_IncreasedMovementSpeed(2),
+                new List<AgentAttribute>(){
+                    new AgentAttribute_IncreasedMovementSpeed(2),
                 }
             );
 
@@ -99,15 +99,15 @@ namespace AgentAttributesCollectionTest
         public void removes_all_existing_attributes_and_adds_all_the_given_ones()
         {
             var attrsCollectionA = new AgentAttributesCollection(
-                new List<GameCore.AgentAttribute>(){
-                    new GameCore.AgentAttribute_PlusLife(20),
-                    new GameCore.AgentAttribute_IncreasedMovementSpeed(10),
-                    new GameCore.AgentAttribute_LifeRegen(6),
+                new List<AgentAttribute>(){
+                    new AgentAttribute_PlusLife(20),
+                    new AgentAttribute_IncreasedMovementSpeed(10),
+                    new AgentAttribute_LifeRegen(6),
                 }
             );
             var attrsCollectionB = new AgentAttributesCollection(
-                new List<GameCore.AgentAttribute>(){
-                    new GameCore.AgentAttribute_IncreasedMovementSpeed(10),
+                new List<AgentAttribute>(){
+                    new AgentAttribute_IncreasedMovementSpeed(10),
                 }
             );
 
@@ -125,15 +125,15 @@ namespace AgentAttributesCollectionTest
         public void creates_non_existing_attrs_and_adds_existing_ones()
         {
             var attrsCollectionA = new AgentAttributesCollection(
-                new List<GameCore.AgentAttribute>(){
-                    new GameCore.AgentAttribute_PlusLife(20),
-                    new GameCore.AgentAttribute_IncreasedMovementSpeed(10),
+                new List<AgentAttribute>(){
+                    new AgentAttribute_PlusLife(20),
+                    new AgentAttribute_IncreasedMovementSpeed(10),
                 }
             );
             var attrsCollectionB = new AgentAttributesCollection(
-                new List<GameCore.AgentAttribute>(){
-                    new GameCore.AgentAttribute_IncreasedMovementSpeed(5),
-                    new GameCore.AgentAttribute_LifeRegen(6),
+                new List<AgentAttribute>(){
+                    new AgentAttribute_IncreasedMovementSpeed(5),
+                    new AgentAttribute_LifeRegen(6),
                 }
             );
 

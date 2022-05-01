@@ -53,7 +53,7 @@ namespace GameCore
             {
                 carriedItems.Remove(item);
 
-                agent.game.itemSystem.Drop(agent.game, item, agent.game.GetPosition(agent));
+                agent.game.itemSystem.Drop(item, agent.game.GetPosition(agent));
 
                 itemDropped?.Invoke(item);
             }

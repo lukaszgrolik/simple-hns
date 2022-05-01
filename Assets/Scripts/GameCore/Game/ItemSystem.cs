@@ -13,7 +13,7 @@ namespace GameCore
 
         public Item(
             DataDefinition.Item itemData,
-            List<GameCore.AgentAttribute> attrs = null
+            List<AgentAttribute> attrs = null
         )
         {
             this.itemData = itemData;
@@ -23,17 +23,26 @@ namespace GameCore
 
     public class ItemSystem
     {
+        private Game game;
+
         public readonly List<DroppedItem> droppedItems = new List<DroppedItem>();
 
         public event System.Action<DroppedItem, Vector3> itemSpawned;
         public event System.Action<DroppedItem> itemDeleted;
 
-        public void Drop(Game game, Item item, Vector3 pos)
+        public ItemSystem(Game game)
+        {
+            this.game = game;
+        }
+
+        public void Drop(Item item, Vector3 pos)
         {
             var droppedItem = new DroppedItem(
                 game: game,
                 item: item
             );
+
+            Debug.Log($"item dropped: {item.attrsCollection.attributes.Count} attrs - {item.attrsCollection.ToString()}");
 
             droppedItems.Add(droppedItem);
 

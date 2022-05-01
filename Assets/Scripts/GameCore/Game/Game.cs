@@ -56,7 +56,7 @@ namespace GameCore
         public Game()
         {
             this.locationSystem = new LocationSystem();
-            this.itemSystem = new ItemSystem();
+            this.itemSystem = new ItemSystem(game: this);
             this.questSystem = new QuestSystem();
 
             locationSystem.locationEnteredByAgent += OnLocationEnteredByAgent;

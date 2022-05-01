@@ -10,12 +10,12 @@ namespace MonoBehaviors
         static public void DropRandom(AgentController agentCtrl)
         {
             var itemDataList = new List<DataDefinition.Item>(){
-                        DataInstance.Items.handAxe,
-                        DataInstance.Items.shortStaff,
-                        DataInstance.Items.shortSword,
-                        DataInstance.Items.skullCap,
-                        DataInstance.Items.smallShield,
-                    };
+                DataInstance.Items.handAxe,
+                DataInstance.Items.shortStaff,
+                DataInstance.Items.shortSword,
+                DataInstance.Items.skullCap,
+                DataInstance.Items.smallShield,
+            };
             var itemData = itemDataList.Random();
             var item = new GameCore.Item(
                 itemData: itemData
@@ -24,7 +24,7 @@ namespace MonoBehaviors
             var circlePos = Random.insideUnitCircle * 3;
             var pos = agentCtrl.transform.position + new Vector3(circlePos.x, 0, circlePos.y);
 
-            agentCtrl.GameplayManager.Game.itemSystem.Drop(agentCtrl.GameplayManager.Game, item, pos);
+            agentCtrl.GameplayManager.Game.itemSystem.Drop(item, pos);
         }
 
         static public void PickClosest(AgentController agentCtrl)
